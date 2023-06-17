@@ -17,7 +17,7 @@ export function handleDepositInstantiated(event: DepositInstantiated): void {
   const idx = getTotalEntityIndex(totalLogIndex, 0);
   const id = toPaddedHexString(idx);
 
-  // make DepositEvent entity (for syncing SDK and offchain actors )
+  // make DepositEvent entity (for syncing SDK and offchain actors)
 
   const depositEvent = new DepositEvent(id);
   depositEvent.type = "Instantiated";
@@ -68,10 +68,10 @@ export function handleDepositCompleted(event: DepositCompleted): void {
     event.params.gasCompensation
   );
 
-  const depositEvent = DepositEvent.load(hash.toHexString())!;
-  
-  depositEvent.type = "Completed";
-  depositEvent.save();
+  const depositRequest = DepositRequest.load(hash.toHexString())!;
+
+  depositRequest.status = "Completed";
+  depositRequest.save();
 }
 
 export function handleDepositRetrieved(event: DepositRetrieved): void {
@@ -86,7 +86,7 @@ export function handleDepositRetrieved(event: DepositRetrieved): void {
     event.params.gasCompensation
   );
 
-  const depositEvent = DepositEvent.load(hash.toHexString())!;
-  depositEvent.type = "Retrieved";
-  depositEvent.save();
+  const depositRequest = DepositRequest.load(hash.toHexString())!;
+  depositRequest.status = "Retrieved";
+  depositRequest.save();
 }
