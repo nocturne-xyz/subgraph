@@ -69,6 +69,7 @@ export function handleDepositCompleted(event: DepositCompleted): void {
   );
 
   const depositEvent = DepositEvent.load(hash.toHexString())!;
+  
   depositEvent.type = "Completed";
   depositEvent.save();
 }
@@ -85,7 +86,7 @@ export function handleDepositRetrieved(event: DepositRetrieved): void {
     event.params.gasCompensation
   );
 
-  const depositEvent = DepositEvent.load(hash.toString())!;
+  const depositEvent = DepositEvent.load(hash.toHexString())!;
   depositEvent.type = "Retrieved";
   depositEvent.save();
 }
