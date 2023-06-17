@@ -4,6 +4,7 @@ import {
   DepositRetrieved,
 } from "../generated/DepositManager/DepositManager";
 import { DepositEvent, DepositRequest } from "../generated/schema";
+import { hashDepositRequest } from "./eip712Hash";
 import {
   toPaddedHexString,
   getTotalLogIndex,
@@ -32,7 +33,17 @@ export function handleDepositInstantiated(event: DepositInstantiated): void {
 
   // make DepositRequest entity
 
-  const depositRequest = new DepositRequest(id);
+  const hash = hashDepositRequest(
+    event.params.spender,
+    event.params.encodedAsset.encodedAssetAddr,
+    event.params.encodedAsset.encodedAssetId,
+    event.params.value,
+    event.params.depositAddr.h1,
+    event.params.depositAddr.h2,
+    event.params.nonce,
+    event.params.gasCompensation
+  );
+  const depositRequest = new DepositRequest(hash.toHexString());
   depositRequest.status = "Pending";
   depositRequest.spender = event.params.spender;
   depositRequest.encodedAssetAddr = event.params.encodedAsset.encodedAssetAddr;
@@ -46,31 +57,35 @@ export function handleDepositInstantiated(event: DepositInstantiated): void {
 }
 
 export function handleDepositCompleted(event: DepositCompleted): void {
-  const totalLogIndex = getTotalLogIndex(event);
-  const idx = getTotalEntityIndex(totalLogIndex, 0);
-  const id = toPaddedHexString(idx);
+  const hash = hashDepositRequest(
+    event.params.spender,
+    event.params.encodedAsset.encodedAssetAddr,
+    event.params.encodedAsset.encodedAssetId,
+    event.params.value,
+    event.params.depositAddr.h1,
+    event.params.depositAddr.h2,
+    event.params.nonce,
+    event.params.gasCompensation
+  );
 
-  const depositEvent = DepositEvent.load(id);
-  if (depositEvent === null) {
-    // should never happen
-    return;
-  }
-
+  const depositEvent = DepositEvent.load(hash.toHexString())!;
   depositEvent.type = "Completed";
   depositEvent.save();
 }
 
 export function handleDepositRetrieved(event: DepositRetrieved): void {
-  const totalLogIndex = getTotalLogIndex(event);
-  const idx = getTotalEntityIndex(totalLogIndex, 0);
-  const id = toPaddedHexString(idx);
+  const hash = hashDepositRequest(
+    event.params.spender,
+    event.params.encodedAsset.encodedAssetAddr,
+    event.params.encodedAsset.encodedAssetId,
+    event.params.value,
+    event.params.depositAddr.h1,
+    event.params.depositAddr.h2,
+    event.params.nonce,
+    event.params.gasCompensation
+  );
 
-  const depositEvent = DepositEvent.load(id);
-  if (depositEvent === null) {
-    // should never happen
-    return;
-  }
-
+  const depositEvent = DepositEvent.load(hash.toString())!;
   depositEvent.type = "Retrieved";
   depositEvent.save();
 }
