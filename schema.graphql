@@ -25,6 +25,10 @@ enum DepositRequestStatus {
 
 type DepositRequest @entity(immutable: false) {
   id: ID!
+  createdAtTotalEntityIndex: BigInt!
+  instantiationTxHash: Bytes!
+  completionTxHash: Bytes
+  retrievalTxHash: Bytes
   status: DepositRequestStatus!
   spender: Bytes!
   encodedAssetAddr: BigInt!

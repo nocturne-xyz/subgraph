@@ -211,6 +211,66 @@ export class DepositRequest extends Entity {
     this.set("id", Value.fromString(value));
   }
 
+  get createdAtTotalEntityIndex(): BigInt {
+    let value = this.get("createdAtTotalEntityIndex");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set createdAtTotalEntityIndex(value: BigInt) {
+    this.set("createdAtTotalEntityIndex", Value.fromBigInt(value));
+  }
+
+  get instantiationTxHash(): Bytes {
+    let value = this.get("instantiationTxHash");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set instantiationTxHash(value: Bytes) {
+    this.set("instantiationTxHash", Value.fromBytes(value));
+  }
+
+  get completionTxHash(): Bytes | null {
+    let value = this.get("completionTxHash");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set completionTxHash(value: Bytes | null) {
+    if (!value) {
+      this.unset("completionTxHash");
+    } else {
+      this.set("completionTxHash", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get retrievalTxHash(): Bytes | null {
+    let value = this.get("retrievalTxHash");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set retrievalTxHash(value: Bytes | null) {
+    if (!value) {
+      this.unset("retrievalTxHash");
+    } else {
+      this.set("retrievalTxHash", Value.fromBytes(<Bytes>value));
+    }
+  }
+
   get status(): string {
     let value = this.get("status");
     if (!value || value.kind == ValueKind.NULL) {
