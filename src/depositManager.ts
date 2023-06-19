@@ -45,6 +45,8 @@ export function handleDepositInstantiated(event: DepositInstantiated): void {
   );
   const depositRequest = new DepositRequest(hash.toHexString());
   depositRequest.status = "Pending";
+  depositRequest.createdAtTotalEntityIndex = idx;
+  depositRequest.instantiationTxHash = event.transaction.hash;
   depositRequest.spender = event.params.spender;
   depositRequest.encodedAssetAddr = event.params.encodedAsset.encodedAssetAddr;
   depositRequest.encodedAssetId = event.params.encodedAsset.encodedAssetId;
@@ -71,6 +73,7 @@ export function handleDepositCompleted(event: DepositCompleted): void {
   const depositRequest = DepositRequest.load(hash.toHexString())!;
 
   depositRequest.status = "Completed";
+  depositRequest.completionTxHash = event.transaction.hash;
   depositRequest.save();
 }
 
@@ -88,5 +91,6 @@ export function handleDepositRetrieved(event: DepositRetrieved): void {
 
   const depositRequest = DepositRequest.load(hash.toHexString())!;
   depositRequest.status = "Retrieved";
+  depositRequest.retrievalTxHash = event.transaction.hash;
   depositRequest.save();
 }
