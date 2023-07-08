@@ -253,6 +253,19 @@
   },
   {
     "inputs": [],
+    "name": "COMPRESSED_STEALTH_ADDRESS_TYPEHASH",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "DEPOSIT_REQUEST_TYPEHASH",
     "outputs": [
       {
@@ -267,19 +280,6 @@
   {
     "inputs": [],
     "name": "ENCODED_ASSET_TYPEHASH",
-    "outputs": [
-      {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "STEALTH_ADDRESS_TYPEHASH",
     "outputs": [
       {
         "internalType": "bytes32",

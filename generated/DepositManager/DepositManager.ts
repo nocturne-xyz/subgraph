@@ -368,6 +368,29 @@ export class DepositManager extends ethereum.SmartContract {
     return new DepositManager("DepositManager", address);
   }
 
+  COMPRESSED_STEALTH_ADDRESS_TYPEHASH(): Bytes {
+    let result = super.call(
+      "COMPRESSED_STEALTH_ADDRESS_TYPEHASH",
+      "COMPRESSED_STEALTH_ADDRESS_TYPEHASH():(bytes32)",
+      []
+    );
+
+    return result[0].toBytes();
+  }
+
+  try_COMPRESSED_STEALTH_ADDRESS_TYPEHASH(): ethereum.CallResult<Bytes> {
+    let result = super.tryCall(
+      "COMPRESSED_STEALTH_ADDRESS_TYPEHASH",
+      "COMPRESSED_STEALTH_ADDRESS_TYPEHASH():(bytes32)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBytes());
+  }
+
   DEPOSIT_REQUEST_TYPEHASH(): Bytes {
     let result = super.call(
       "DEPOSIT_REQUEST_TYPEHASH",
@@ -405,29 +428,6 @@ export class DepositManager extends ethereum.SmartContract {
     let result = super.tryCall(
       "ENCODED_ASSET_TYPEHASH",
       "ENCODED_ASSET_TYPEHASH():(bytes32)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  STEALTH_ADDRESS_TYPEHASH(): Bytes {
-    let result = super.call(
-      "STEALTH_ADDRESS_TYPEHASH",
-      "STEALTH_ADDRESS_TYPEHASH():(bytes32)",
-      []
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_STEALTH_ADDRESS_TYPEHASH(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "STEALTH_ADDRESS_TYPEHASH",
-      "STEALTH_ADDRESS_TYPEHASH():(bytes32)",
       []
     );
     if (result.reverted) {

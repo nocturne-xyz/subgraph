@@ -87,33 +87,29 @@ export class JoinSplitProcessed__Params {
     return this._event.parameters[5].value.toBigInt();
   }
 
-  get encSenderCanonAddrC1(): BigInt {
+  get senderCommitment(): BigInt {
     return this._event.parameters[6].value.toBigInt();
-  }
-
-  get encSenderCanonAddrC2(): BigInt {
-    return this._event.parameters[7].value.toBigInt();
   }
 
   get encodedAsset(): JoinSplitProcessedEncodedAssetStruct {
     return changetype<JoinSplitProcessedEncodedAssetStruct>(
-      this._event.parameters[8].value.toTuple()
+      this._event.parameters[7].value.toTuple()
     );
   }
 
   get publicSpend(): BigInt {
-    return this._event.parameters[9].value.toBigInt();
+    return this._event.parameters[8].value.toBigInt();
   }
 
   get newNoteAEncrypted(): JoinSplitProcessedNewNoteAEncryptedStruct {
     return changetype<JoinSplitProcessedNewNoteAEncryptedStruct>(
-      this._event.parameters[10].value.toTuple()
+      this._event.parameters[9].value.toTuple()
     );
   }
 
   get newNoteBEncrypted(): JoinSplitProcessedNewNoteBEncryptedStruct {
     return changetype<JoinSplitProcessedNewNoteBEncryptedStruct>(
-      this._event.parameters[11].value.toTuple()
+      this._event.parameters[10].value.toTuple()
     );
   }
 }
@@ -493,38 +489,34 @@ export class Handler__executeActionsInputOpJoinSplitsStruct extends ethereum.Tup
     return this[4].toBigInt();
   }
 
-  get encSenderCanonAddrC1(): BigInt {
+  get senderCommitment(): BigInt {
     return this[5].toBigInt();
   }
 
-  get encSenderCanonAddrC2(): BigInt {
-    return this[6].toBigInt();
-  }
-
   get proof(): Array<BigInt> {
-    return this[7].toBigIntArray();
+    return this[6].toBigIntArray();
   }
 
   get encodedAsset(): Handler__executeActionsInputOpJoinSplitsEncodedAssetStruct {
     return changetype<
       Handler__executeActionsInputOpJoinSplitsEncodedAssetStruct
-    >(this[8].toTuple());
+    >(this[7].toTuple());
   }
 
   get publicSpend(): BigInt {
-    return this[9].toBigInt();
+    return this[8].toBigInt();
   }
 
   get newNoteAEncrypted(): Handler__executeActionsInputOpJoinSplitsNewNoteAEncryptedStruct {
     return changetype<
       Handler__executeActionsInputOpJoinSplitsNewNoteAEncryptedStruct
-    >(this[10].toTuple());
+    >(this[9].toTuple());
   }
 
   get newNoteBEncrypted(): Handler__executeActionsInputOpJoinSplitsNewNoteBEncryptedStruct {
     return changetype<
       Handler__executeActionsInputOpJoinSplitsNewNoteBEncryptedStruct
-    >(this[11].toTuple());
+    >(this[10].toTuple());
   }
 }
 
@@ -753,38 +745,34 @@ export class Handler__handleOperationInputOpJoinSplitsStruct extends ethereum.Tu
     return this[4].toBigInt();
   }
 
-  get encSenderCanonAddrC1(): BigInt {
+  get senderCommitment(): BigInt {
     return this[5].toBigInt();
   }
 
-  get encSenderCanonAddrC2(): BigInt {
-    return this[6].toBigInt();
-  }
-
   get proof(): Array<BigInt> {
-    return this[7].toBigIntArray();
+    return this[6].toBigIntArray();
   }
 
   get encodedAsset(): Handler__handleOperationInputOpJoinSplitsEncodedAssetStruct {
     return changetype<
       Handler__handleOperationInputOpJoinSplitsEncodedAssetStruct
-    >(this[8].toTuple());
+    >(this[7].toTuple());
   }
 
   get publicSpend(): BigInt {
-    return this[9].toBigInt();
+    return this[8].toBigInt();
   }
 
   get newNoteAEncrypted(): Handler__handleOperationInputOpJoinSplitsNewNoteAEncryptedStruct {
     return changetype<
       Handler__handleOperationInputOpJoinSplitsNewNoteAEncryptedStruct
-    >(this[10].toTuple());
+    >(this[9].toTuple());
   }
 
   get newNoteBEncrypted(): Handler__handleOperationInputOpJoinSplitsNewNoteBEncryptedStruct {
     return changetype<
       Handler__handleOperationInputOpJoinSplitsNewNoteBEncryptedStruct
-    >(this[11].toTuple());
+    >(this[10].toTuple());
   }
 }
 
@@ -1120,7 +1108,7 @@ export class Handler extends ethereum.SmartContract {
   ): Handler__executeActionsResult {
     let result = super.call(
       "executeActions",
-      "executeActions(((uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(uint256,uint256),uint256,((uint256,uint256),uint256,uint256,uint256),((uint256,uint256),uint256,uint256,uint256))[],(uint256,uint256),(uint256,uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,bool)):(bool[],bytes[])",
+      "executeActions(((uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(uint256,uint256),uint256,((uint256,uint256),uint256,uint256,uint256),((uint256,uint256),uint256,uint256,uint256))[],(uint256,uint256),(uint256,uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,bool)):(bool[],bytes[])",
       [ethereum.Value.fromTuple(op)]
     );
 
@@ -1135,7 +1123,7 @@ export class Handler extends ethereum.SmartContract {
   ): ethereum.CallResult<Handler__executeActionsResult> {
     let result = super.tryCall(
       "executeActions",
-      "executeActions(((uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(uint256,uint256),uint256,((uint256,uint256),uint256,uint256,uint256),((uint256,uint256),uint256,uint256,uint256))[],(uint256,uint256),(uint256,uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,bool)):(bool[],bytes[])",
+      "executeActions(((uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(uint256,uint256),uint256,((uint256,uint256),uint256,uint256,uint256),((uint256,uint256),uint256,uint256,uint256))[],(uint256,uint256),(uint256,uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,bool)):(bool[],bytes[])",
       [ethereum.Value.fromTuple(op)]
     );
     if (result.reverted) {
@@ -1157,7 +1145,7 @@ export class Handler extends ethereum.SmartContract {
   ): Handler__handleOperationResultOpResultStruct {
     let result = super.call(
       "handleOperation",
-      "handleOperation(((uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(uint256,uint256),uint256,((uint256,uint256),uint256,uint256,uint256),((uint256,uint256),uint256,uint256,uint256))[],(uint256,uint256),(uint256,uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,bool),uint256,address):((bool,bool,string,bool[],bytes[],uint256,uint256,uint256))",
+      "handleOperation(((uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(uint256,uint256),uint256,((uint256,uint256),uint256,uint256,uint256),((uint256,uint256),uint256,uint256,uint256))[],(uint256,uint256),(uint256,uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,bool),uint256,address):((bool,bool,string,bool[],bytes[],uint256,uint256,uint256))",
       [
         ethereum.Value.fromTuple(op),
         ethereum.Value.fromUnsignedBigInt(perJoinSplitVerifyGas),
@@ -1177,7 +1165,7 @@ export class Handler extends ethereum.SmartContract {
   ): ethereum.CallResult<Handler__handleOperationResultOpResultStruct> {
     let result = super.tryCall(
       "handleOperation",
-      "handleOperation(((uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(uint256,uint256),uint256,((uint256,uint256),uint256,uint256,uint256),((uint256,uint256),uint256,uint256,uint256))[],(uint256,uint256),(uint256,uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,bool),uint256,address):((bool,bool,string,bool[],bytes[],uint256,uint256,uint256))",
+      "handleOperation(((uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(uint256,uint256),uint256,((uint256,uint256),uint256,uint256,uint256),((uint256,uint256),uint256,uint256,uint256))[],(uint256,uint256),(uint256,uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,bool),uint256,address):((bool,bool,string,bool[],bytes[],uint256,uint256,uint256))",
       [
         ethereum.Value.fromTuple(op),
         ethereum.Value.fromUnsignedBigInt(perJoinSplitVerifyGas),
@@ -1590,37 +1578,33 @@ export class ExecuteActionsCallOpJoinSplitsStruct extends ethereum.Tuple {
     return this[4].toBigInt();
   }
 
-  get encSenderCanonAddrC1(): BigInt {
+  get senderCommitment(): BigInt {
     return this[5].toBigInt();
   }
 
-  get encSenderCanonAddrC2(): BigInt {
-    return this[6].toBigInt();
-  }
-
   get proof(): Array<BigInt> {
-    return this[7].toBigIntArray();
+    return this[6].toBigIntArray();
   }
 
   get encodedAsset(): ExecuteActionsCallOpJoinSplitsEncodedAssetStruct {
     return changetype<ExecuteActionsCallOpJoinSplitsEncodedAssetStruct>(
-      this[8].toTuple()
+      this[7].toTuple()
     );
   }
 
   get publicSpend(): BigInt {
-    return this[9].toBigInt();
+    return this[8].toBigInt();
   }
 
   get newNoteAEncrypted(): ExecuteActionsCallOpJoinSplitsNewNoteAEncryptedStruct {
     return changetype<ExecuteActionsCallOpJoinSplitsNewNoteAEncryptedStruct>(
-      this[10].toTuple()
+      this[9].toTuple()
     );
   }
 
   get newNoteBEncrypted(): ExecuteActionsCallOpJoinSplitsNewNoteBEncryptedStruct {
     return changetype<ExecuteActionsCallOpJoinSplitsNewNoteBEncryptedStruct>(
-      this[11].toTuple()
+      this[10].toTuple()
     );
   }
 }
@@ -1958,37 +1942,33 @@ export class HandleOperationCallOpJoinSplitsStruct extends ethereum.Tuple {
     return this[4].toBigInt();
   }
 
-  get encSenderCanonAddrC1(): BigInt {
+  get senderCommitment(): BigInt {
     return this[5].toBigInt();
   }
 
-  get encSenderCanonAddrC2(): BigInt {
-    return this[6].toBigInt();
-  }
-
   get proof(): Array<BigInt> {
-    return this[7].toBigIntArray();
+    return this[6].toBigIntArray();
   }
 
   get encodedAsset(): HandleOperationCallOpJoinSplitsEncodedAssetStruct {
     return changetype<HandleOperationCallOpJoinSplitsEncodedAssetStruct>(
-      this[8].toTuple()
+      this[7].toTuple()
     );
   }
 
   get publicSpend(): BigInt {
-    return this[9].toBigInt();
+    return this[8].toBigInt();
   }
 
   get newNoteAEncrypted(): HandleOperationCallOpJoinSplitsNewNoteAEncryptedStruct {
     return changetype<HandleOperationCallOpJoinSplitsNewNoteAEncryptedStruct>(
-      this[10].toTuple()
+      this[9].toTuple()
     );
   }
 
   get newNoteBEncrypted(): HandleOperationCallOpJoinSplitsNewNoteBEncryptedStruct {
     return changetype<HandleOperationCallOpJoinSplitsNewNoteBEncryptedStruct>(
-      this[11].toTuple()
+      this[10].toTuple()
     );
   }
 }

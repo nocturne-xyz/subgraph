@@ -73,13 +73,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "encSenderCanonAddrC1",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "encSenderCanonAddrC2",
+        "name": "senderCommitment",
         "type": "uint256"
       },
       {
@@ -563,12 +557,7 @@
               },
               {
                 "internalType": "uint256",
-                "name": "encSenderCanonAddrC1",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "encSenderCanonAddrC2",
+                "name": "senderCommitment",
                 "type": "uint256"
               },
               {
@@ -905,12 +894,7 @@
               },
               {
                 "internalType": "uint256",
-                "name": "encSenderCanonAddrC1",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "encSenderCanonAddrC2",
+                "name": "senderCommitment",
                 "type": "uint256"
               },
               {
