@@ -2,6 +2,7 @@
 
 ### Unreleased
 
+- update addresses after tob-16 changes
 - index `DepositCompleted` and `DepositRetrieved` events, and use them to update `DepositRequest` `status`.
 - add `DepositRequest` entity
 - add `SDKEvent` and `TreeInsertionEvent` types that unify events that SDK / subtree updater cares about
