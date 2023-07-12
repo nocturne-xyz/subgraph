@@ -59,7 +59,9 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
   const encryptedNoteA = new EncryptedNote(id);
   const newNoteAEncrypted = event.params.newNoteAEncrypted;
   encryptedNoteA.ciphertextBytes = newNoteAEncrypted.ciphertextBytes;
-  encryptedNoteA.encapsulatedSecretBytes = newNoteAEncrypted.encapsulatedSecretBytes;
+  encryptedNoteA.encapsulatedSecretBytes =
+    newNoteAEncrypted.encapsulatedSecretBytes;
+  encryptedNoteA.commitment = event.params.newNoteACommitment;
   encryptedNoteA.save();
 
   const newNoteA = new EncodedOrEncryptedNote(id);
@@ -89,7 +91,9 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
   const encryptedNoteB = new EncryptedNote(id);
   const newNoteBEncrypted = event.params.newNoteBEncrypted;
   encryptedNoteB.ciphertextBytes = newNoteBEncrypted.ciphertextBytes;
-  encryptedNoteB.encapsulatedSecretBytes = newNoteBEncrypted.encapsulatedSecretBytes;
+  encryptedNoteB.encapsulatedSecretBytes =
+    newNoteBEncrypted.encapsulatedSecretBytes;
+  encryptedNoteB.commitment = event.params.newNoteBCommitment;
   encryptedNoteB.save();
 
   const newNoteB = new EncodedOrEncryptedNote(id);

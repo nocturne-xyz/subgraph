@@ -669,6 +669,19 @@ export class EncryptedNote extends Entity {
   set encapsulatedSecretBytes(value: Bytes) {
     this.set("encapsulatedSecretBytes", Value.fromBytes(value));
   }
+
+  get commitment(): BigInt {
+    let value = this.get("commitment");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set commitment(value: BigInt) {
+    this.set("commitment", Value.fromBigInt(value));
+  }
 }
 
 export class Nullifier extends Entity {

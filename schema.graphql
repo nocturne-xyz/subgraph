@@ -61,6 +61,7 @@ type EncryptedNote @entity(immutable: true) {
   id: ID!
   ciphertextBytes: Bytes!
   encapsulatedSecretBytes: Bytes!
+  commitment: BigInt!
 }
 
 type Nullifier @entity(immutable: true) {
