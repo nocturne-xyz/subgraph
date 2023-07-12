@@ -125,62 +125,22 @@ export class JoinSplitProcessedEncodedAssetStruct extends ethereum.Tuple {
 }
 
 export class JoinSplitProcessedNewNoteAEncryptedStruct extends ethereum.Tuple {
-  get owner(): JoinSplitProcessedNewNoteAEncryptedOwnerStruct {
-    return changetype<JoinSplitProcessedNewNoteAEncryptedOwnerStruct>(
-      this[0].toTuple()
-    );
+  get ciphertextBytes(): Bytes {
+    return this[0].toBytes();
   }
 
-  get encappedKey(): BigInt {
-    return this[1].toBigInt();
-  }
-
-  get encryptedNonce(): BigInt {
-    return this[2].toBigInt();
-  }
-
-  get encryptedValue(): BigInt {
-    return this[3].toBigInt();
-  }
-}
-
-export class JoinSplitProcessedNewNoteAEncryptedOwnerStruct extends ethereum.Tuple {
-  get h1(): BigInt {
-    return this[0].toBigInt();
-  }
-
-  get h2(): BigInt {
-    return this[1].toBigInt();
+  get encapsulatedSecretBytes(): Bytes {
+    return this[1].toBytes();
   }
 }
 
 export class JoinSplitProcessedNewNoteBEncryptedStruct extends ethereum.Tuple {
-  get owner(): JoinSplitProcessedNewNoteBEncryptedOwnerStruct {
-    return changetype<JoinSplitProcessedNewNoteBEncryptedOwnerStruct>(
-      this[0].toTuple()
-    );
+  get ciphertextBytes(): Bytes {
+    return this[0].toBytes();
   }
 
-  get encappedKey(): BigInt {
-    return this[1].toBigInt();
-  }
-
-  get encryptedNonce(): BigInt {
-    return this[2].toBigInt();
-  }
-
-  get encryptedValue(): BigInt {
-    return this[3].toBigInt();
-  }
-}
-
-export class JoinSplitProcessedNewNoteBEncryptedOwnerStruct extends ethereum.Tuple {
-  get h1(): BigInt {
-    return this[0].toBigInt();
-  }
-
-  get h2(): BigInt {
-    return this[1].toBigInt();
+  get encapsulatedSecretBytes(): Bytes {
+    return this[1].toBytes();
   }
 }
 
@@ -358,31 +318,6 @@ export class Unpaused__Params {
   }
 }
 
-export class Handler___receivedAssetsResult {
-  value0: BigInt;
-  value1: BigInt;
-
-  constructor(value0: BigInt, value1: BigInt) {
-    this.value0 = value0;
-    this.value1 = value1;
-  }
-
-  toMap(): TypedMap<string, ethereum.Value> {
-    let map = new TypedMap<string, ethereum.Value>();
-    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
-    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
-    return map;
-  }
-
-  getEncodedAssetAddr(): BigInt {
-    return this.value0;
-  }
-
-  getEncodedAssetId(): BigInt {
-    return this.value1;
-  }
-}
-
 export class Handler__executeActionsResult {
   value0: Array<boolean>;
   value1: Array<Bytes>;
@@ -531,62 +466,22 @@ export class Handler__executeActionsInputOpJoinSplitsEncodedAssetStruct extends 
 }
 
 export class Handler__executeActionsInputOpJoinSplitsNewNoteAEncryptedStruct extends ethereum.Tuple {
-  get owner(): Handler__executeActionsInputOpJoinSplitsNewNoteAEncryptedOwnerStruct {
-    return changetype<
-      Handler__executeActionsInputOpJoinSplitsNewNoteAEncryptedOwnerStruct
-    >(this[0].toTuple());
+  get ciphertextBytes(): Bytes {
+    return this[0].toBytes();
   }
 
-  get encappedKey(): BigInt {
-    return this[1].toBigInt();
-  }
-
-  get encryptedNonce(): BigInt {
-    return this[2].toBigInt();
-  }
-
-  get encryptedValue(): BigInt {
-    return this[3].toBigInt();
-  }
-}
-
-export class Handler__executeActionsInputOpJoinSplitsNewNoteAEncryptedOwnerStruct extends ethereum.Tuple {
-  get h1(): BigInt {
-    return this[0].toBigInt();
-  }
-
-  get h2(): BigInt {
-    return this[1].toBigInt();
+  get encapsulatedSecretBytes(): Bytes {
+    return this[1].toBytes();
   }
 }
 
 export class Handler__executeActionsInputOpJoinSplitsNewNoteBEncryptedStruct extends ethereum.Tuple {
-  get owner(): Handler__executeActionsInputOpJoinSplitsNewNoteBEncryptedOwnerStruct {
-    return changetype<
-      Handler__executeActionsInputOpJoinSplitsNewNoteBEncryptedOwnerStruct
-    >(this[0].toTuple());
+  get ciphertextBytes(): Bytes {
+    return this[0].toBytes();
   }
 
-  get encappedKey(): BigInt {
-    return this[1].toBigInt();
-  }
-
-  get encryptedNonce(): BigInt {
-    return this[2].toBigInt();
-  }
-
-  get encryptedValue(): BigInt {
-    return this[3].toBigInt();
-  }
-}
-
-export class Handler__executeActionsInputOpJoinSplitsNewNoteBEncryptedOwnerStruct extends ethereum.Tuple {
-  get h1(): BigInt {
-    return this[0].toBigInt();
-  }
-
-  get h2(): BigInt {
-    return this[1].toBigInt();
+  get encapsulatedSecretBytes(): Bytes {
+    return this[1].toBytes();
   }
 }
 
@@ -787,62 +682,22 @@ export class Handler__handleOperationInputOpJoinSplitsEncodedAssetStruct extends
 }
 
 export class Handler__handleOperationInputOpJoinSplitsNewNoteAEncryptedStruct extends ethereum.Tuple {
-  get owner(): Handler__handleOperationInputOpJoinSplitsNewNoteAEncryptedOwnerStruct {
-    return changetype<
-      Handler__handleOperationInputOpJoinSplitsNewNoteAEncryptedOwnerStruct
-    >(this[0].toTuple());
+  get ciphertextBytes(): Bytes {
+    return this[0].toBytes();
   }
 
-  get encappedKey(): BigInt {
-    return this[1].toBigInt();
-  }
-
-  get encryptedNonce(): BigInt {
-    return this[2].toBigInt();
-  }
-
-  get encryptedValue(): BigInt {
-    return this[3].toBigInt();
-  }
-}
-
-export class Handler__handleOperationInputOpJoinSplitsNewNoteAEncryptedOwnerStruct extends ethereum.Tuple {
-  get h1(): BigInt {
-    return this[0].toBigInt();
-  }
-
-  get h2(): BigInt {
-    return this[1].toBigInt();
+  get encapsulatedSecretBytes(): Bytes {
+    return this[1].toBytes();
   }
 }
 
 export class Handler__handleOperationInputOpJoinSplitsNewNoteBEncryptedStruct extends ethereum.Tuple {
-  get owner(): Handler__handleOperationInputOpJoinSplitsNewNoteBEncryptedOwnerStruct {
-    return changetype<
-      Handler__handleOperationInputOpJoinSplitsNewNoteBEncryptedOwnerStruct
-    >(this[0].toTuple());
+  get ciphertextBytes(): Bytes {
+    return this[0].toBytes();
   }
 
-  get encappedKey(): BigInt {
-    return this[1].toBigInt();
-  }
-
-  get encryptedNonce(): BigInt {
-    return this[2].toBigInt();
-  }
-
-  get encryptedValue(): BigInt {
-    return this[3].toBigInt();
-  }
-}
-
-export class Handler__handleOperationInputOpJoinSplitsNewNoteBEncryptedOwnerStruct extends ethereum.Tuple {
-  get h1(): BigInt {
-    return this[0].toBigInt();
-  }
-
-  get h2(): BigInt {
-    return this[1].toBigInt();
+  get encapsulatedSecretBytes(): Bytes {
+    return this[1].toBytes();
   }
 }
 
@@ -992,39 +847,6 @@ export class Handler extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
-  _receivedAssets(param0: BigInt): Handler___receivedAssetsResult {
-    let result = super.call(
-      "_receivedAssets",
-      "_receivedAssets(uint256):(uint256,uint256)",
-      [ethereum.Value.fromUnsignedBigInt(param0)]
-    );
-
-    return new Handler___receivedAssetsResult(
-      result[0].toBigInt(),
-      result[1].toBigInt()
-    );
-  }
-
-  try__receivedAssets(
-    param0: BigInt
-  ): ethereum.CallResult<Handler___receivedAssetsResult> {
-    let result = super.tryCall(
-      "_receivedAssets",
-      "_receivedAssets(uint256):(uint256,uint256)",
-      [ethereum.Value.fromUnsignedBigInt(param0)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(
-      new Handler___receivedAssetsResult(
-        value[0].toBigInt(),
-        value[1].toBigInt()
-      )
-    );
-  }
-
   _subtreeBatchFillers(param0: Address): boolean {
     let result = super.call(
       "_subtreeBatchFillers",
@@ -1108,7 +930,7 @@ export class Handler extends ethereum.SmartContract {
   ): Handler__executeActionsResult {
     let result = super.call(
       "executeActions",
-      "executeActions(((uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(uint256,uint256),uint256,((uint256,uint256),uint256,uint256,uint256),((uint256,uint256),uint256,uint256,uint256))[],(uint256,uint256),(uint256,uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,bool)):(bool[],bytes[])",
+      "executeActions(((uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(uint256,uint256),uint256,(bytes,bytes),(bytes,bytes))[],(uint256,uint256),(uint256,uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,bool)):(bool[],bytes[])",
       [ethereum.Value.fromTuple(op)]
     );
 
@@ -1123,7 +945,7 @@ export class Handler extends ethereum.SmartContract {
   ): ethereum.CallResult<Handler__executeActionsResult> {
     let result = super.tryCall(
       "executeActions",
-      "executeActions(((uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(uint256,uint256),uint256,((uint256,uint256),uint256,uint256,uint256),((uint256,uint256),uint256,uint256,uint256))[],(uint256,uint256),(uint256,uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,bool)):(bool[],bytes[])",
+      "executeActions(((uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(uint256,uint256),uint256,(bytes,bytes),(bytes,bytes))[],(uint256,uint256),(uint256,uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,bool)):(bool[],bytes[])",
       [ethereum.Value.fromTuple(op)]
     );
     if (result.reverted) {
@@ -1145,7 +967,7 @@ export class Handler extends ethereum.SmartContract {
   ): Handler__handleOperationResultOpResultStruct {
     let result = super.call(
       "handleOperation",
-      "handleOperation(((uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(uint256,uint256),uint256,((uint256,uint256),uint256,uint256,uint256),((uint256,uint256),uint256,uint256,uint256))[],(uint256,uint256),(uint256,uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,bool),uint256,address):((bool,bool,string,bool[],bytes[],uint256,uint256,uint256))",
+      "handleOperation(((uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(uint256,uint256),uint256,(bytes,bytes),(bytes,bytes))[],(uint256,uint256),(uint256,uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,bool),uint256,address):((bool,bool,string,bool[],bytes[],uint256,uint256,uint256))",
       [
         ethereum.Value.fromTuple(op),
         ethereum.Value.fromUnsignedBigInt(perJoinSplitVerifyGas),
@@ -1165,7 +987,7 @@ export class Handler extends ethereum.SmartContract {
   ): ethereum.CallResult<Handler__handleOperationResultOpResultStruct> {
     let result = super.tryCall(
       "handleOperation",
-      "handleOperation(((uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(uint256,uint256),uint256,((uint256,uint256),uint256,uint256,uint256),((uint256,uint256),uint256,uint256,uint256))[],(uint256,uint256),(uint256,uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,bool),uint256,address):((bool,bool,string,bool[],bytes[],uint256,uint256,uint256))",
+      "handleOperation(((uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(uint256,uint256),uint256,(bytes,bytes),(bytes,bytes))[],(uint256,uint256),(uint256,uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,bool),uint256,address):((bool,bool,string,bool[],bytes[],uint256,uint256,uint256))",
       [
         ethereum.Value.fromTuple(op),
         ethereum.Value.fromUnsignedBigInt(perJoinSplitVerifyGas),
@@ -1181,143 +1003,6 @@ export class Handler extends ethereum.SmartContract {
         value[0].toTuple()
       )
     );
-  }
-
-  onERC1155BatchReceived(
-    param0: Address,
-    param1: Address,
-    ids: Array<BigInt>,
-    param3: Array<BigInt>,
-    param4: Bytes
-  ): Bytes {
-    let result = super.call(
-      "onERC1155BatchReceived",
-      "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes):(bytes4)",
-      [
-        ethereum.Value.fromAddress(param0),
-        ethereum.Value.fromAddress(param1),
-        ethereum.Value.fromUnsignedBigIntArray(ids),
-        ethereum.Value.fromUnsignedBigIntArray(param3),
-        ethereum.Value.fromBytes(param4)
-      ]
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_onERC1155BatchReceived(
-    param0: Address,
-    param1: Address,
-    ids: Array<BigInt>,
-    param3: Array<BigInt>,
-    param4: Bytes
-  ): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "onERC1155BatchReceived",
-      "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes):(bytes4)",
-      [
-        ethereum.Value.fromAddress(param0),
-        ethereum.Value.fromAddress(param1),
-        ethereum.Value.fromUnsignedBigIntArray(ids),
-        ethereum.Value.fromUnsignedBigIntArray(param3),
-        ethereum.Value.fromBytes(param4)
-      ]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  onERC1155Received(
-    param0: Address,
-    param1: Address,
-    id: BigInt,
-    param3: BigInt,
-    param4: Bytes
-  ): Bytes {
-    let result = super.call(
-      "onERC1155Received",
-      "onERC1155Received(address,address,uint256,uint256,bytes):(bytes4)",
-      [
-        ethereum.Value.fromAddress(param0),
-        ethereum.Value.fromAddress(param1),
-        ethereum.Value.fromUnsignedBigInt(id),
-        ethereum.Value.fromUnsignedBigInt(param3),
-        ethereum.Value.fromBytes(param4)
-      ]
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_onERC1155Received(
-    param0: Address,
-    param1: Address,
-    id: BigInt,
-    param3: BigInt,
-    param4: Bytes
-  ): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "onERC1155Received",
-      "onERC1155Received(address,address,uint256,uint256,bytes):(bytes4)",
-      [
-        ethereum.Value.fromAddress(param0),
-        ethereum.Value.fromAddress(param1),
-        ethereum.Value.fromUnsignedBigInt(id),
-        ethereum.Value.fromUnsignedBigInt(param3),
-        ethereum.Value.fromBytes(param4)
-      ]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  onERC721Received(
-    param0: Address,
-    param1: Address,
-    id: BigInt,
-    param3: Bytes
-  ): Bytes {
-    let result = super.call(
-      "onERC721Received",
-      "onERC721Received(address,address,uint256,bytes):(bytes4)",
-      [
-        ethereum.Value.fromAddress(param0),
-        ethereum.Value.fromAddress(param1),
-        ethereum.Value.fromUnsignedBigInt(id),
-        ethereum.Value.fromBytes(param3)
-      ]
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_onERC721Received(
-    param0: Address,
-    param1: Address,
-    id: BigInt,
-    param3: Bytes
-  ): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "onERC721Received",
-      "onERC721Received(address,address,uint256,bytes):(bytes4)",
-      [
-        ethereum.Value.fromAddress(param0),
-        ethereum.Value.fromAddress(param1),
-        ethereum.Value.fromUnsignedBigInt(id),
-        ethereum.Value.fromBytes(param3)
-      ]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
   }
 
   owner(): Address {
@@ -1386,29 +1071,6 @@ export class Handler extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
-  supportsInterface(interfaceId: Bytes): boolean {
-    let result = super.call(
-      "supportsInterface",
-      "supportsInterface(bytes4):(bool)",
-      [ethereum.Value.fromFixedBytes(interfaceId)]
-    );
-
-    return result[0].toBoolean();
-  }
-
-  try_supportsInterface(interfaceId: Bytes): ethereum.CallResult<boolean> {
-    let result = super.tryCall(
-      "supportsInterface",
-      "supportsInterface(bytes4):(bool)",
-      [ethereum.Value.fromFixedBytes(interfaceId)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
   totalCount(): BigInt {
@@ -1620,62 +1282,22 @@ export class ExecuteActionsCallOpJoinSplitsEncodedAssetStruct extends ethereum.T
 }
 
 export class ExecuteActionsCallOpJoinSplitsNewNoteAEncryptedStruct extends ethereum.Tuple {
-  get owner(): ExecuteActionsCallOpJoinSplitsNewNoteAEncryptedOwnerStruct {
-    return changetype<
-      ExecuteActionsCallOpJoinSplitsNewNoteAEncryptedOwnerStruct
-    >(this[0].toTuple());
+  get ciphertextBytes(): Bytes {
+    return this[0].toBytes();
   }
 
-  get encappedKey(): BigInt {
-    return this[1].toBigInt();
-  }
-
-  get encryptedNonce(): BigInt {
-    return this[2].toBigInt();
-  }
-
-  get encryptedValue(): BigInt {
-    return this[3].toBigInt();
-  }
-}
-
-export class ExecuteActionsCallOpJoinSplitsNewNoteAEncryptedOwnerStruct extends ethereum.Tuple {
-  get h1(): BigInt {
-    return this[0].toBigInt();
-  }
-
-  get h2(): BigInt {
-    return this[1].toBigInt();
+  get encapsulatedSecretBytes(): Bytes {
+    return this[1].toBytes();
   }
 }
 
 export class ExecuteActionsCallOpJoinSplitsNewNoteBEncryptedStruct extends ethereum.Tuple {
-  get owner(): ExecuteActionsCallOpJoinSplitsNewNoteBEncryptedOwnerStruct {
-    return changetype<
-      ExecuteActionsCallOpJoinSplitsNewNoteBEncryptedOwnerStruct
-    >(this[0].toTuple());
+  get ciphertextBytes(): Bytes {
+    return this[0].toBytes();
   }
 
-  get encappedKey(): BigInt {
-    return this[1].toBigInt();
-  }
-
-  get encryptedNonce(): BigInt {
-    return this[2].toBigInt();
-  }
-
-  get encryptedValue(): BigInt {
-    return this[3].toBigInt();
-  }
-}
-
-export class ExecuteActionsCallOpJoinSplitsNewNoteBEncryptedOwnerStruct extends ethereum.Tuple {
-  get h1(): BigInt {
-    return this[0].toBigInt();
-  }
-
-  get h2(): BigInt {
-    return this[1].toBigInt();
+  get encapsulatedSecretBytes(): Bytes {
+    return this[1].toBytes();
   }
 }
 
@@ -1984,62 +1606,22 @@ export class HandleOperationCallOpJoinSplitsEncodedAssetStruct extends ethereum.
 }
 
 export class HandleOperationCallOpJoinSplitsNewNoteAEncryptedStruct extends ethereum.Tuple {
-  get owner(): HandleOperationCallOpJoinSplitsNewNoteAEncryptedOwnerStruct {
-    return changetype<
-      HandleOperationCallOpJoinSplitsNewNoteAEncryptedOwnerStruct
-    >(this[0].toTuple());
+  get ciphertextBytes(): Bytes {
+    return this[0].toBytes();
   }
 
-  get encappedKey(): BigInt {
-    return this[1].toBigInt();
-  }
-
-  get encryptedNonce(): BigInt {
-    return this[2].toBigInt();
-  }
-
-  get encryptedValue(): BigInt {
-    return this[3].toBigInt();
-  }
-}
-
-export class HandleOperationCallOpJoinSplitsNewNoteAEncryptedOwnerStruct extends ethereum.Tuple {
-  get h1(): BigInt {
-    return this[0].toBigInt();
-  }
-
-  get h2(): BigInt {
-    return this[1].toBigInt();
+  get encapsulatedSecretBytes(): Bytes {
+    return this[1].toBytes();
   }
 }
 
 export class HandleOperationCallOpJoinSplitsNewNoteBEncryptedStruct extends ethereum.Tuple {
-  get owner(): HandleOperationCallOpJoinSplitsNewNoteBEncryptedOwnerStruct {
-    return changetype<
-      HandleOperationCallOpJoinSplitsNewNoteBEncryptedOwnerStruct
-    >(this[0].toTuple());
+  get ciphertextBytes(): Bytes {
+    return this[0].toBytes();
   }
 
-  get encappedKey(): BigInt {
-    return this[1].toBigInt();
-  }
-
-  get encryptedNonce(): BigInt {
-    return this[2].toBigInt();
-  }
-
-  get encryptedValue(): BigInt {
-    return this[3].toBigInt();
-  }
-}
-
-export class HandleOperationCallOpJoinSplitsNewNoteBEncryptedOwnerStruct extends ethereum.Tuple {
-  get h1(): BigInt {
-    return this[0].toBigInt();
-  }
-
-  get h2(): BigInt {
-    return this[1].toBigInt();
+  get encapsulatedSecretBytes(): Bytes {
+    return this[1].toBytes();
   }
 }
 
@@ -2148,152 +1730,6 @@ export class InitializeCall__Outputs {
 
   constructor(call: InitializeCall) {
     this._call = call;
-  }
-}
-
-export class OnERC1155BatchReceivedCall extends ethereum.Call {
-  get inputs(): OnERC1155BatchReceivedCall__Inputs {
-    return new OnERC1155BatchReceivedCall__Inputs(this);
-  }
-
-  get outputs(): OnERC1155BatchReceivedCall__Outputs {
-    return new OnERC1155BatchReceivedCall__Outputs(this);
-  }
-}
-
-export class OnERC1155BatchReceivedCall__Inputs {
-  _call: OnERC1155BatchReceivedCall;
-
-  constructor(call: OnERC1155BatchReceivedCall) {
-    this._call = call;
-  }
-
-  get value0(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-
-  get value1(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get ids(): Array<BigInt> {
-    return this._call.inputValues[2].value.toBigIntArray();
-  }
-
-  get value3(): Array<BigInt> {
-    return this._call.inputValues[3].value.toBigIntArray();
-  }
-
-  get value4(): Bytes {
-    return this._call.inputValues[4].value.toBytes();
-  }
-}
-
-export class OnERC1155BatchReceivedCall__Outputs {
-  _call: OnERC1155BatchReceivedCall;
-
-  constructor(call: OnERC1155BatchReceivedCall) {
-    this._call = call;
-  }
-
-  get value0(): Bytes {
-    return this._call.outputValues[0].value.toBytes();
-  }
-}
-
-export class OnERC1155ReceivedCall extends ethereum.Call {
-  get inputs(): OnERC1155ReceivedCall__Inputs {
-    return new OnERC1155ReceivedCall__Inputs(this);
-  }
-
-  get outputs(): OnERC1155ReceivedCall__Outputs {
-    return new OnERC1155ReceivedCall__Outputs(this);
-  }
-}
-
-export class OnERC1155ReceivedCall__Inputs {
-  _call: OnERC1155ReceivedCall;
-
-  constructor(call: OnERC1155ReceivedCall) {
-    this._call = call;
-  }
-
-  get value0(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-
-  get value1(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get id(): BigInt {
-    return this._call.inputValues[2].value.toBigInt();
-  }
-
-  get value3(): BigInt {
-    return this._call.inputValues[3].value.toBigInt();
-  }
-
-  get value4(): Bytes {
-    return this._call.inputValues[4].value.toBytes();
-  }
-}
-
-export class OnERC1155ReceivedCall__Outputs {
-  _call: OnERC1155ReceivedCall;
-
-  constructor(call: OnERC1155ReceivedCall) {
-    this._call = call;
-  }
-
-  get value0(): Bytes {
-    return this._call.outputValues[0].value.toBytes();
-  }
-}
-
-export class OnERC721ReceivedCall extends ethereum.Call {
-  get inputs(): OnERC721ReceivedCall__Inputs {
-    return new OnERC721ReceivedCall__Inputs(this);
-  }
-
-  get outputs(): OnERC721ReceivedCall__Outputs {
-    return new OnERC721ReceivedCall__Outputs(this);
-  }
-}
-
-export class OnERC721ReceivedCall__Inputs {
-  _call: OnERC721ReceivedCall;
-
-  constructor(call: OnERC721ReceivedCall) {
-    this._call = call;
-  }
-
-  get value0(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-
-  get value1(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get id(): BigInt {
-    return this._call.inputValues[2].value.toBigInt();
-  }
-
-  get value3(): Bytes {
-    return this._call.inputValues[3].value.toBytes();
-  }
-}
-
-export class OnERC721ReceivedCall__Outputs {
-  _call: OnERC721ReceivedCall;
-
-  constructor(call: OnERC721ReceivedCall) {
-    this._call = call;
-  }
-
-  get value0(): Bytes {
-    return this._call.outputValues[0].value.toBytes();
   }
 }
 

@@ -59,14 +59,8 @@ type EncodedNote @entity(immutable: true) {
 
 type EncryptedNote @entity(immutable: true) {
   id: ID!
-  ownerH1: BigInt!
-  ownerH2: BigInt!
-  encappedKey: BigInt!
-  encryptedNonce: BigInt!
-  encryptedValue: BigInt!
-  encodedAssetAddr: BigInt!
-  encodedAssetId: BigInt!
-  commitment: BigInt!
+  ciphertextBytes: Bytes!
+  encapsulatedSecretBytes: Bytes!
 }
 
 type Nullifier @entity(immutable: true) {
