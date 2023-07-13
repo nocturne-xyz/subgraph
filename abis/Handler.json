@@ -4,6 +4,31 @@
     "inputs": [
       {
         "indexed": false,
+        "internalType": "address",
+        "name": "contractAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes4",
+        "name": "selector",
+        "type": "bytes4"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "permission",
+        "type": "bool"
+      }
+    ],
+    "name": "ContractMethodPermissionSet",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
         "internalType": "uint256",
         "name": "startIndex",
         "type": "uint256"
@@ -156,6 +181,25 @@
         "type": "address"
       }
     ],
+    "name": "OwnershipTransferStarted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
     "name": "OwnershipTransferred",
     "type": "event"
   },
@@ -271,7 +315,7 @@
       {
         "indexed": false,
         "internalType": "address",
-        "name": "contractAddress",
+        "name": "token",
         "type": "address"
       },
       {
@@ -281,7 +325,7 @@
         "type": "bool"
       }
     ],
-    "name": "SupportedContractAllowlistPermissionSet",
+    "name": "TokenPermissionSet",
     "type": "event"
   },
   {
@@ -331,6 +375,19 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "_leftoverTokensHolder",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -396,12 +453,31 @@
   {
     "inputs": [
       {
+        "internalType": "uint192",
+        "name": "",
+        "type": "uint192"
+      }
+    ],
+    "name": "_supportedContractMethods",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "",
         "type": "address"
       }
     ],
-    "name": "_supportedContractAllowlist",
+    "name": "_supportedTokens",
     "outputs": [
       {
         "internalType": "bool",
@@ -423,6 +499,13 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "acceptOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -1027,12 +1110,12 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "teller",
+        "name": "subtreeUpdateVerifier",
         "type": "address"
       },
       {
         "internalType": "address",
-        "name": "subtreeUpdateVerifier",
+        "name": "leftoverTokensHolder",
         "type": "address"
       }
     ],
@@ -1076,6 +1159,19 @@
   },
   {
     "inputs": [],
+    "name": "pendingOwner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "reentrancyGuardStage",
     "outputs": [
       {
@@ -1111,6 +1207,29 @@
     "inputs": [
       {
         "internalType": "address",
+        "name": "contractAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes4",
+        "name": "selector",
+        "type": "bytes4"
+      },
+      {
+        "internalType": "bool",
+        "name": "permission",
+        "type": "bool"
+      }
+    ],
+    "name": "setContractMethodPermission",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
         "name": "filler",
         "type": "address"
       },
@@ -1129,7 +1248,20 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "contractAddress",
+        "name": "teller",
+        "type": "address"
+      }
+    ],
+    "name": "setTeller",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token",
         "type": "address"
       },
       {
@@ -1138,7 +1270,7 @@
         "type": "bool"
       }
     ],
-    "name": "setSupportedContractAllowlistPermission",
+    "name": "setTokenPermission",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
