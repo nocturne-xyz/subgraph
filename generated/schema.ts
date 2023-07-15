@@ -644,95 +644,30 @@ export class EncryptedNote extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get ownerH1(): BigInt {
-    let value = this.get("ownerH1");
+  get ciphertextBytes(): Bytes {
+    let value = this.get("ciphertextBytes");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
-      return value.toBigInt();
+      return value.toBytes();
     }
   }
 
-  set ownerH1(value: BigInt) {
-    this.set("ownerH1", Value.fromBigInt(value));
+  set ciphertextBytes(value: Bytes) {
+    this.set("ciphertextBytes", Value.fromBytes(value));
   }
 
-  get ownerH2(): BigInt {
-    let value = this.get("ownerH2");
+  get encapsulatedSecretBytes(): Bytes {
+    let value = this.get("encapsulatedSecretBytes");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
-      return value.toBigInt();
+      return value.toBytes();
     }
   }
 
-  set ownerH2(value: BigInt) {
-    this.set("ownerH2", Value.fromBigInt(value));
-  }
-
-  get encappedKey(): BigInt {
-    let value = this.get("encappedKey");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set encappedKey(value: BigInt) {
-    this.set("encappedKey", Value.fromBigInt(value));
-  }
-
-  get encryptedNonce(): BigInt {
-    let value = this.get("encryptedNonce");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set encryptedNonce(value: BigInt) {
-    this.set("encryptedNonce", Value.fromBigInt(value));
-  }
-
-  get encryptedValue(): BigInt {
-    let value = this.get("encryptedValue");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set encryptedValue(value: BigInt) {
-    this.set("encryptedValue", Value.fromBigInt(value));
-  }
-
-  get encodedAssetAddr(): BigInt {
-    let value = this.get("encodedAssetAddr");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set encodedAssetAddr(value: BigInt) {
-    this.set("encodedAssetAddr", Value.fromBigInt(value));
-  }
-
-  get encodedAssetId(): BigInt {
-    let value = this.get("encodedAssetId");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set encodedAssetId(value: BigInt) {
-    this.set("encodedAssetId", Value.fromBigInt(value));
+  set encapsulatedSecretBytes(value: Bytes) {
+    this.set("encapsulatedSecretBytes", Value.fromBytes(value));
   }
 
   get commitment(): BigInt {

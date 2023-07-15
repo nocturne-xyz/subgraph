@@ -52,22 +52,16 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
   }
 
   // unpack first new note
+
   idx = getTotalEntityIndex(totalLogIndex, 2);
   id = toPaddedHexString(idx);
 
   const encryptedNoteA = new EncryptedNote(id);
   const newNoteAEncrypted = event.params.newNoteAEncrypted;
-  encryptedNoteA.ownerH1 = newNoteAEncrypted.owner.h1;
-  encryptedNoteA.ownerH2 = newNoteAEncrypted.owner.h2;
-
-  encryptedNoteA.encappedKey = newNoteAEncrypted.encappedKey;
-  encryptedNoteA.encryptedNonce = newNoteAEncrypted.encryptedNonce;
-  encryptedNoteA.encryptedValue = newNoteAEncrypted.encryptedValue;
-
-  encryptedNoteA.encodedAssetAddr = event.params.encodedAsset.encodedAssetAddr;
-  encryptedNoteA.encodedAssetId = event.params.encodedAsset.encodedAssetId;
+  encryptedNoteA.ciphertextBytes = newNoteAEncrypted.ciphertextBytes;
+  encryptedNoteA.encapsulatedSecretBytes =
+    newNoteAEncrypted.encapsulatedSecretBytes;
   encryptedNoteA.commitment = event.params.newNoteACommitment;
-
   encryptedNoteA.save();
 
   const newNoteA = new EncodedOrEncryptedNote(id);
@@ -93,20 +87,13 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
 
   idx = getTotalEntityIndex(totalLogIndex, 3);
   id = toPaddedHexString(idx);
+
   const encryptedNoteB = new EncryptedNote(id);
-
   const newNoteBEncrypted = event.params.newNoteBEncrypted;
-  encryptedNoteB.ownerH1 = newNoteBEncrypted.owner.h1;
-  encryptedNoteB.ownerH2 = newNoteBEncrypted.owner.h2;
-
-  encryptedNoteB.encappedKey = newNoteBEncrypted.encappedKey;
-  encryptedNoteB.encryptedNonce = newNoteBEncrypted.encryptedNonce;
-  encryptedNoteB.encryptedValue = newNoteBEncrypted.encryptedValue;
-
-  encryptedNoteB.encodedAssetAddr = event.params.encodedAsset.encodedAssetAddr;
-  encryptedNoteB.encodedAssetId = event.params.encodedAsset.encodedAssetId;
+  encryptedNoteB.ciphertextBytes = newNoteBEncrypted.ciphertextBytes;
+  encryptedNoteB.encapsulatedSecretBytes =
+    newNoteBEncrypted.encapsulatedSecretBytes;
   encryptedNoteB.commitment = event.params.newNoteBCommitment;
-
   encryptedNoteB.save();
 
   const newNoteB = new EncodedOrEncryptedNote(id);
