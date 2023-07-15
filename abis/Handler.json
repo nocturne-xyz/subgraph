@@ -4,6 +4,31 @@
     "inputs": [
       {
         "indexed": false,
+        "internalType": "address",
+        "name": "contractAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes4",
+        "name": "selector",
+        "type": "bytes4"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "permission",
+        "type": "bool"
+      }
+    ],
+    "name": "ContractMethodPermissionSet",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
         "internalType": "uint256",
         "name": "startIndex",
         "type": "uint256"
@@ -73,13 +98,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "encSenderCanonAddrC1",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "encSenderCanonAddrC2",
+        "name": "senderCommitment",
         "type": "uint256"
       },
       {
@@ -109,36 +128,14 @@
       {
         "components": [
           {
-            "components": [
-              {
-                "internalType": "uint256",
-                "name": "h1",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "h2",
-                "type": "uint256"
-              }
-            ],
-            "internalType": "struct CompressedStealthAddress",
-            "name": "owner",
-            "type": "tuple"
+            "internalType": "bytes",
+            "name": "ciphertextBytes",
+            "type": "bytes"
           },
           {
-            "internalType": "uint256",
-            "name": "encappedKey",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "encryptedNonce",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "encryptedValue",
-            "type": "uint256"
+            "internalType": "bytes",
+            "name": "encapsulatedSecretBytes",
+            "type": "bytes"
           }
         ],
         "indexed": false,
@@ -149,36 +146,14 @@
       {
         "components": [
           {
-            "components": [
-              {
-                "internalType": "uint256",
-                "name": "h1",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "h2",
-                "type": "uint256"
-              }
-            ],
-            "internalType": "struct CompressedStealthAddress",
-            "name": "owner",
-            "type": "tuple"
+            "internalType": "bytes",
+            "name": "ciphertextBytes",
+            "type": "bytes"
           },
           {
-            "internalType": "uint256",
-            "name": "encappedKey",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "encryptedNonce",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "encryptedValue",
-            "type": "uint256"
+            "internalType": "bytes",
+            "name": "encapsulatedSecretBytes",
+            "type": "bytes"
           }
         ],
         "indexed": false,
@@ -188,6 +163,25 @@
       }
     ],
     "name": "JoinSplitProcessed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferStarted",
     "type": "event"
   },
   {
@@ -321,7 +315,7 @@
       {
         "indexed": false,
         "internalType": "address",
-        "name": "contractAddress",
+        "name": "token",
         "type": "address"
       },
       {
@@ -331,7 +325,7 @@
         "type": "bool"
       }
     ],
-    "name": "SupportedContractAllowlistPermissionSet",
+    "name": "TokenPermissionSet",
     "type": "event"
   },
   {
@@ -387,6 +381,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "_leftoverTokensHolder",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -427,30 +434,6 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "_receivedAssets",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "encodedAssetAddr",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "encodedAssetId",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "address",
         "name": "",
         "type": "address"
@@ -470,12 +453,31 @@
   {
     "inputs": [
       {
+        "internalType": "uint192",
+        "name": "",
+        "type": "uint192"
+      }
+    ],
+    "name": "_supportedContractMethods",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "",
         "type": "address"
       }
     ],
-    "name": "_supportedContractAllowlist",
+    "name": "_supportedTokens",
     "outputs": [
       {
         "internalType": "bool",
@@ -497,6 +499,13 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "acceptOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -563,12 +572,7 @@
               },
               {
                 "internalType": "uint256",
-                "name": "encSenderCanonAddrC1",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "encSenderCanonAddrC2",
+                "name": "senderCommitment",
                 "type": "uint256"
               },
               {
@@ -601,36 +605,14 @@
               {
                 "components": [
                   {
-                    "components": [
-                      {
-                        "internalType": "uint256",
-                        "name": "h1",
-                        "type": "uint256"
-                      },
-                      {
-                        "internalType": "uint256",
-                        "name": "h2",
-                        "type": "uint256"
-                      }
-                    ],
-                    "internalType": "struct CompressedStealthAddress",
-                    "name": "owner",
-                    "type": "tuple"
+                    "internalType": "bytes",
+                    "name": "ciphertextBytes",
+                    "type": "bytes"
                   },
                   {
-                    "internalType": "uint256",
-                    "name": "encappedKey",
-                    "type": "uint256"
-                  },
-                  {
-                    "internalType": "uint256",
-                    "name": "encryptedNonce",
-                    "type": "uint256"
-                  },
-                  {
-                    "internalType": "uint256",
-                    "name": "encryptedValue",
-                    "type": "uint256"
+                    "internalType": "bytes",
+                    "name": "encapsulatedSecretBytes",
+                    "type": "bytes"
                   }
                 ],
                 "internalType": "struct EncryptedNote",
@@ -640,36 +622,14 @@
               {
                 "components": [
                   {
-                    "components": [
-                      {
-                        "internalType": "uint256",
-                        "name": "h1",
-                        "type": "uint256"
-                      },
-                      {
-                        "internalType": "uint256",
-                        "name": "h2",
-                        "type": "uint256"
-                      }
-                    ],
-                    "internalType": "struct CompressedStealthAddress",
-                    "name": "owner",
-                    "type": "tuple"
+                    "internalType": "bytes",
+                    "name": "ciphertextBytes",
+                    "type": "bytes"
                   },
                   {
-                    "internalType": "uint256",
-                    "name": "encappedKey",
-                    "type": "uint256"
-                  },
-                  {
-                    "internalType": "uint256",
-                    "name": "encryptedNonce",
-                    "type": "uint256"
-                  },
-                  {
-                    "internalType": "uint256",
-                    "name": "encryptedValue",
-                    "type": "uint256"
+                    "internalType": "bytes",
+                    "name": "encapsulatedSecretBytes",
+                    "type": "bytes"
                   }
                 ],
                 "internalType": "struct EncryptedNote",
@@ -905,12 +865,7 @@
               },
               {
                 "internalType": "uint256",
-                "name": "encSenderCanonAddrC1",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "encSenderCanonAddrC2",
+                "name": "senderCommitment",
                 "type": "uint256"
               },
               {
@@ -943,36 +898,14 @@
               {
                 "components": [
                   {
-                    "components": [
-                      {
-                        "internalType": "uint256",
-                        "name": "h1",
-                        "type": "uint256"
-                      },
-                      {
-                        "internalType": "uint256",
-                        "name": "h2",
-                        "type": "uint256"
-                      }
-                    ],
-                    "internalType": "struct CompressedStealthAddress",
-                    "name": "owner",
-                    "type": "tuple"
+                    "internalType": "bytes",
+                    "name": "ciphertextBytes",
+                    "type": "bytes"
                   },
                   {
-                    "internalType": "uint256",
-                    "name": "encappedKey",
-                    "type": "uint256"
-                  },
-                  {
-                    "internalType": "uint256",
-                    "name": "encryptedNonce",
-                    "type": "uint256"
-                  },
-                  {
-                    "internalType": "uint256",
-                    "name": "encryptedValue",
-                    "type": "uint256"
+                    "internalType": "bytes",
+                    "name": "encapsulatedSecretBytes",
+                    "type": "bytes"
                   }
                 ],
                 "internalType": "struct EncryptedNote",
@@ -982,36 +915,14 @@
               {
                 "components": [
                   {
-                    "components": [
-                      {
-                        "internalType": "uint256",
-                        "name": "h1",
-                        "type": "uint256"
-                      },
-                      {
-                        "internalType": "uint256",
-                        "name": "h2",
-                        "type": "uint256"
-                      }
-                    ],
-                    "internalType": "struct CompressedStealthAddress",
-                    "name": "owner",
-                    "type": "tuple"
+                    "internalType": "bytes",
+                    "name": "ciphertextBytes",
+                    "type": "bytes"
                   },
                   {
-                    "internalType": "uint256",
-                    "name": "encappedKey",
-                    "type": "uint256"
-                  },
-                  {
-                    "internalType": "uint256",
-                    "name": "encryptedNonce",
-                    "type": "uint256"
-                  },
-                  {
-                    "internalType": "uint256",
-                    "name": "encryptedValue",
-                    "type": "uint256"
+                    "internalType": "bytes",
+                    "name": "encapsulatedSecretBytes",
+                    "type": "bytes"
                   }
                 ],
                 "internalType": "struct EncryptedNote",
@@ -1199,129 +1110,17 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "teller",
+        "name": "subtreeUpdateVerifier",
         "type": "address"
       },
       {
         "internalType": "address",
-        "name": "subtreeUpdateVerifier",
+        "name": "leftoverTokensHolder",
         "type": "address"
       }
     ],
     "name": "initialize",
     "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "ids",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "bytes",
-        "name": "",
-        "type": "bytes"
-      }
-    ],
-    "name": "onERC1155BatchReceived",
-    "outputs": [
-      {
-        "internalType": "bytes4",
-        "name": "",
-        "type": "bytes4"
-      }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "id",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bytes",
-        "name": "",
-        "type": "bytes"
-      }
-    ],
-    "name": "onERC1155Received",
-    "outputs": [
-      {
-        "internalType": "bytes4",
-        "name": "",
-        "type": "bytes4"
-      }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "id",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bytes",
-        "name": "",
-        "type": "bytes"
-      }
-    ],
-    "name": "onERC721Received",
-    "outputs": [
-      {
-        "internalType": "bytes4",
-        "name": "",
-        "type": "bytes4"
-      }
-    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -1353,6 +1152,19 @@
         "internalType": "bool",
         "name": "",
         "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "pendingOwner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -1395,6 +1207,29 @@
     "inputs": [
       {
         "internalType": "address",
+        "name": "contractAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes4",
+        "name": "selector",
+        "type": "bytes4"
+      },
+      {
+        "internalType": "bool",
+        "name": "permission",
+        "type": "bool"
+      }
+    ],
+    "name": "setContractMethodPermission",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
         "name": "filler",
         "type": "address"
       },
@@ -1413,7 +1248,20 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "contractAddress",
+        "name": "teller",
+        "type": "address"
+      }
+    ],
+    "name": "setTeller",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token",
         "type": "address"
       },
       {
@@ -1422,28 +1270,9 @@
         "type": "bool"
       }
     ],
-    "name": "setSupportedContractAllowlistPermission",
+    "name": "setTokenPermission",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes4",
-        "name": "interfaceId",
-        "type": "bytes4"
-      }
-    ],
-    "name": "supportsInterface",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "pure",
     "type": "function"
   },
   {

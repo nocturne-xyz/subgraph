@@ -1,8 +1,20 @@
-import { Address, BigInt, Bytes, ethereum, crypto } from "@graphprotocol/graph-ts";
+import {
+  Address,
+  BigInt,
+  Bytes,
+  ethereum,
+  crypto,
+} from "@graphprotocol/graph-ts";
 
-export const DEPOSIT_REQUEST_TYPEHASH = Bytes.fromHexString("0x9a8b76499925b1382e5e342faa019bad779d0900dfd40b53118a03adf205a6a3");
-export const ENCODED_ASSET_TYPEHASH = Bytes.fromHexString("0xa707f92ebe5bcecfbef399229bf3acedaf435815f572a1f2a716607a200753ae");
-export const STEALTH_ADDRESS_TYPEHASH = Bytes.fromHexString("0x0b8fd92970709e094f6461cb1a258bc5dad96431ceac3635ba90da7e52b8b9db");
+export const DEPOSIT_REQUEST_TYPEHASH = Bytes.fromHexString(
+  "0x9a8b76499925b1382e5e342faa019bad779d0900dfd40b53118a03adf205a6a3"
+);
+export const ENCODED_ASSET_TYPEHASH = Bytes.fromHexString(
+  "0xa707f92ebe5bcecfbef399229bf3acedaf435815f572a1f2a716607a200753ae"
+);
+export const STEALTH_ADDRESS_TYPEHASH = Bytes.fromHexString(
+  "0x0b8fd92970709e094f6461cb1a258bc5dad96431ceac3635ba90da7e52b8b9db"
+);
 
 export function hashDepositRequest(
   _spender: Address,
@@ -38,8 +50,9 @@ export function hashDepositRequest(
 }
 
 function hashAsset(encodedAssetAddr: BigInt, encodedAssetId: BigInt): Bytes {
-  const typehash = ethereum.Value.fromFixedBytes(ENCODED_ASSET_TYPEHASH); 
-  const encodedAssetAddrValue = ethereum.Value.fromUnsignedBigInt(encodedAssetAddr);
+  const typehash = ethereum.Value.fromFixedBytes(ENCODED_ASSET_TYPEHASH);
+  const encodedAssetAddrValue =
+    ethereum.Value.fromUnsignedBigInt(encodedAssetAddr);
   const encodedAssetIdValue = ethereum.Value.fromUnsignedBigInt(encodedAssetId);
 
   const struct = new ethereum.Tuple(3);
