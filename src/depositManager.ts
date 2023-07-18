@@ -11,6 +11,7 @@ import {
   getTotalEntityIndex,
 } from "./utils";
 
+
 export function handleDepositInstantiated(event: DepositInstantiated): void {
   const totalLogIndex = getTotalLogIndex(event);
   const idx = getTotalEntityIndex(totalLogIndex, 0);
