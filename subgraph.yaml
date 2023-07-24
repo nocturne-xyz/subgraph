@@ -27,7 +27,7 @@ dataSources:
           file: ./abis/Handler.json
       eventHandlers:
         - event: JoinSplitProcessed(indexed uint256,indexed
-            uint256,uint128,uint128,uint256,uint256,uint256,(uint256,uint256),uint256,(bytes,bytes),(bytes,bytes))
+            uint256,uint128,uint128,uint256,uint256,uint256,uint256,(uint256,uint256),uint256,((uint256,uint256),uint256,uint256,uint256),((uint256,uint256),uint256,uint256,uint256))
           handler: handleJoinSplit
         - event: RefundProcessed((uint256,uint256),uint256,uint256,uint256,uint256,uint128)
           handler: handleRefund
@@ -41,7 +41,7 @@ dataSources:
     network: mainnet
     source:
       abi: DepositManager
-      address: "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82"
+      address: "0x0B306BF915C4d645ff596e518fAf3F9669b97016"
       startBlock: 0
     mapping:
       kind: ethereum/events

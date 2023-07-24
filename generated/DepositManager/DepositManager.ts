@@ -196,20 +196,6 @@ export class DepositRetrievedDepositAddrStruct extends ethereum.Tuple {
   }
 }
 
-export class EIP712DomainChanged extends ethereum.Event {
-  get params(): EIP712DomainChanged__Params {
-    return new EIP712DomainChanged__Params(this);
-  }
-}
-
-export class EIP712DomainChanged__Params {
-  _event: EIP712DomainChanged;
-
-  constructor(event: EIP712DomainChanged) {
-    this._event = event;
-  }
-}
-
 export class Initialized extends ethereum.Event {
   get params(): Initialized__Params {
     return new Initialized__Params(this);
@@ -225,28 +211,6 @@ export class Initialized__Params {
 
   get version(): i32 {
     return this._event.parameters[0].value.toI32();
-  }
-}
-
-export class OwnershipTransferStarted extends ethereum.Event {
-  get params(): OwnershipTransferStarted__Params {
-    return new OwnershipTransferStarted__Params(this);
-  }
-}
-
-export class OwnershipTransferStarted__Params {
-  _event: OwnershipTransferStarted;
-
-  constructor(event: OwnershipTransferStarted) {
-    this._event = event;
-  }
-
-  get previousOwner(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get newOwner(): Address {
-    return this._event.parameters[1].value.toAddress();
   }
 }
 
@@ -399,100 +363,9 @@ export class DepositManager___erc20CapsResult {
   }
 }
 
-export class DepositManager__eip712DomainResult {
-  value0: Bytes;
-  value1: string;
-  value2: string;
-  value3: BigInt;
-  value4: Address;
-  value5: Bytes;
-  value6: Array<BigInt>;
-
-  constructor(
-    value0: Bytes,
-    value1: string,
-    value2: string,
-    value3: BigInt,
-    value4: Address,
-    value5: Bytes,
-    value6: Array<BigInt>
-  ) {
-    this.value0 = value0;
-    this.value1 = value1;
-    this.value2 = value2;
-    this.value3 = value3;
-    this.value4 = value4;
-    this.value5 = value5;
-    this.value6 = value6;
-  }
-
-  toMap(): TypedMap<string, ethereum.Value> {
-    let map = new TypedMap<string, ethereum.Value>();
-    map.set("value0", ethereum.Value.fromFixedBytes(this.value0));
-    map.set("value1", ethereum.Value.fromString(this.value1));
-    map.set("value2", ethereum.Value.fromString(this.value2));
-    map.set("value3", ethereum.Value.fromUnsignedBigInt(this.value3));
-    map.set("value4", ethereum.Value.fromAddress(this.value4));
-    map.set("value5", ethereum.Value.fromFixedBytes(this.value5));
-    map.set("value6", ethereum.Value.fromUnsignedBigIntArray(this.value6));
-    return map;
-  }
-
-  getFields(): Bytes {
-    return this.value0;
-  }
-
-  getName(): string {
-    return this.value1;
-  }
-
-  getVersion(): string {
-    return this.value2;
-  }
-
-  getChainId(): BigInt {
-    return this.value3;
-  }
-
-  getVerifyingContract(): Address {
-    return this.value4;
-  }
-
-  getSalt(): Bytes {
-    return this.value5;
-  }
-
-  getExtensions(): Array<BigInt> {
-    return this.value6;
-  }
-}
-
 export class DepositManager extends ethereum.SmartContract {
   static bind(address: Address): DepositManager {
     return new DepositManager("DepositManager", address);
-  }
-
-  COMPRESSED_STEALTH_ADDRESS_TYPEHASH(): Bytes {
-    let result = super.call(
-      "COMPRESSED_STEALTH_ADDRESS_TYPEHASH",
-      "COMPRESSED_STEALTH_ADDRESS_TYPEHASH():(bytes32)",
-      []
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_COMPRESSED_STEALTH_ADDRESS_TYPEHASH(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "COMPRESSED_STEALTH_ADDRESS_TYPEHASH",
-      "COMPRESSED_STEALTH_ADDRESS_TYPEHASH():(bytes32)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
   }
 
   DEPOSIT_REQUEST_TYPEHASH(): Bytes {
@@ -532,6 +405,29 @@ export class DepositManager extends ethereum.SmartContract {
     let result = super.tryCall(
       "ENCODED_ASSET_TYPEHASH",
       "ENCODED_ASSET_TYPEHASH():(bytes32)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBytes());
+  }
+
+  STEALTH_ADDRESS_TYPEHASH(): Bytes {
+    let result = super.call(
+      "STEALTH_ADDRESS_TYPEHASH",
+      "STEALTH_ADDRESS_TYPEHASH():(bytes32)",
+      []
+    );
+
+    return result[0].toBytes();
+  }
+
+  try_STEALTH_ADDRESS_TYPEHASH(): ethereum.CallResult<Bytes> {
+    let result = super.tryCall(
+      "STEALTH_ADDRESS_TYPEHASH",
+      "STEALTH_ADDRESS_TYPEHASH():(bytes32)",
       []
     );
     if (result.reverted) {
@@ -692,47 +588,6 @@ export class DepositManager extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
-  eip712Domain(): DepositManager__eip712DomainResult {
-    let result = super.call(
-      "eip712Domain",
-      "eip712Domain():(bytes1,string,string,uint256,address,bytes32,uint256[])",
-      []
-    );
-
-    return new DepositManager__eip712DomainResult(
-      result[0].toBytes(),
-      result[1].toString(),
-      result[2].toString(),
-      result[3].toBigInt(),
-      result[4].toAddress(),
-      result[5].toBytes(),
-      result[6].toBigIntArray()
-    );
-  }
-
-  try_eip712Domain(): ethereum.CallResult<DepositManager__eip712DomainResult> {
-    let result = super.tryCall(
-      "eip712Domain",
-      "eip712Domain():(bytes1,string,string,uint256,address,bytes32,uint256[])",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(
-      new DepositManager__eip712DomainResult(
-        value[0].toBytes(),
-        value[1].toString(),
-        value[2].toString(),
-        value[3].toBigInt(),
-        value[4].toAddress(),
-        value[5].toBytes(),
-        value[6].toBigIntArray()
-      )
-    );
-  }
-
   owner(): Address {
     let result = super.call("owner", "owner():(address)", []);
 
@@ -746,47 +601,6 @@ export class DepositManager extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
-  pendingOwner(): Address {
-    let result = super.call("pendingOwner", "pendingOwner():(address)", []);
-
-    return result[0].toAddress();
-  }
-
-  try_pendingOwner(): ethereum.CallResult<Address> {
-    let result = super.tryCall("pendingOwner", "pendingOwner():(address)", []);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-}
-
-export class AcceptOwnershipCall extends ethereum.Call {
-  get inputs(): AcceptOwnershipCall__Inputs {
-    return new AcceptOwnershipCall__Inputs(this);
-  }
-
-  get outputs(): AcceptOwnershipCall__Outputs {
-    return new AcceptOwnershipCall__Outputs(this);
-  }
-}
-
-export class AcceptOwnershipCall__Inputs {
-  _call: AcceptOwnershipCall;
-
-  constructor(call: AcceptOwnershipCall) {
-    this._call = call;
-  }
-}
-
-export class AcceptOwnershipCall__Outputs {
-  _call: AcceptOwnershipCall;
-
-  constructor(call: AcceptOwnershipCall) {
-    this._call = call;
   }
 }
 

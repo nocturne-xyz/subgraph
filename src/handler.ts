@@ -1,3 +1,4 @@
+import { BigInt } from "@graphprotocol/graph-ts";
 import {
   FilledBatchWithZeros,
   JoinSplitProcessed,
@@ -19,7 +20,6 @@ import {
   getTotalEntityIndex,
   toPaddedHexString,
 } from "./utils";
-import { BigInt } from "@graphprotocol/graph-ts";
 
 export function handleJoinSplit(event: JoinSplitProcessed): void {
   const totalLogIndex = getTotalLogIndex(event);
@@ -53,16 +53,22 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
   }
 
   // unpack first new note
-
   idx = getTotalEntityIndex(totalLogIndex, 2);
   id = toPaddedHexString(idx);
 
   const encryptedNoteA = new EncryptedNote(id);
   const newNoteAEncrypted = event.params.newNoteAEncrypted;
-  encryptedNoteA.ciphertextBytes = newNoteAEncrypted.ciphertextBytes;
-  encryptedNoteA.encapsulatedSecretBytes =
-    newNoteAEncrypted.encapsulatedSecretBytes;
+  encryptedNoteA.ownerH1 = newNoteAEncrypted.owner.h1;
+  encryptedNoteA.ownerH2 = newNoteAEncrypted.owner.h2;
+
+  encryptedNoteA.encappedKey = newNoteAEncrypted.encappedKey;
+  encryptedNoteA.encryptedNonce = newNoteAEncrypted.encryptedNonce;
+  encryptedNoteA.encryptedValue = newNoteAEncrypted.encryptedValue;
+
+  encryptedNoteA.encodedAssetAddr = event.params.encodedAsset.encodedAssetAddr;
+  encryptedNoteA.encodedAssetId = event.params.encodedAsset.encodedAssetId;
   encryptedNoteA.commitment = event.params.newNoteACommitment;
+
   encryptedNoteA.save();
 
   const newNoteA = new EncodedOrEncryptedNote(id);
@@ -88,13 +94,20 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
 
   idx = getTotalEntityIndex(totalLogIndex, 3);
   id = toPaddedHexString(idx);
-
   const encryptedNoteB = new EncryptedNote(id);
+
   const newNoteBEncrypted = event.params.newNoteBEncrypted;
-  encryptedNoteB.ciphertextBytes = newNoteBEncrypted.ciphertextBytes;
-  encryptedNoteB.encapsulatedSecretBytes =
-    newNoteBEncrypted.encapsulatedSecretBytes;
+  encryptedNoteB.ownerH1 = newNoteBEncrypted.owner.h1;
+  encryptedNoteB.ownerH2 = newNoteBEncrypted.owner.h2;
+
+  encryptedNoteB.encappedKey = newNoteBEncrypted.encappedKey;
+  encryptedNoteB.encryptedNonce = newNoteBEncrypted.encryptedNonce;
+  encryptedNoteB.encryptedValue = newNoteBEncrypted.encryptedValue;
+
+  encryptedNoteB.encodedAssetAddr = event.params.encodedAsset.encodedAssetAddr;
+  encryptedNoteB.encodedAssetId = event.params.encodedAsset.encodedAssetId;
   encryptedNoteB.commitment = event.params.newNoteBCommitment;
+
   encryptedNoteB.save();
 
   const newNoteB = new EncodedOrEncryptedNote(id);
@@ -183,8 +196,5 @@ export function handleFilledBatchWithZeros(event: FilledBatchWithZeros): void {
 
   // make SDK event for filled batch with zeros
   const sdkEvent = new SDKEvent(id);
-  sdkEvent.filledBatchWithZerosUpToMerkleIndex = startIndex
-    .plus(numZeros)
-    .minus(BigInt.fromI32(1));
-  sdkEvent.save();
+  sdkEvent.filledBatchWithZerosUpToMerkleIndex = startIndex.plus(numZeros).minus(BigInt.fromI32(1));
 }
