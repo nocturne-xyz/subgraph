@@ -1028,4 +1028,24 @@ export class SDKEvent extends Entity {
       this.set("nullifier", Value.fromString(<string>value));
     }
   }
+
+  get filledBatchWithZerosUpToMerkleIndex(): BigInt | null {
+    let value = this.get("filledBatchWithZerosUpToMerkleIndex");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set filledBatchWithZerosUpToMerkleIndex(value: BigInt | null) {
+    if (!value) {
+      this.unset("filledBatchWithZerosUpToMerkleIndex");
+    } else {
+      this.set(
+        "filledBatchWithZerosUpToMerkleIndex",
+        Value.fromBigInt(<BigInt>value)
+      );
+    }
+  }
 }
