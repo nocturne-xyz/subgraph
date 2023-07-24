@@ -1,3 +1,4 @@
+import { BigInt } from "@graphprotocol/graph-ts";
 import {
   FilledBatchWithZeros,
   JoinSplitProcessed,
@@ -19,7 +20,6 @@ import {
   getTotalEntityIndex,
   toPaddedHexString,
 } from "./utils";
-import { BigInt } from "@graphprotocol/graph-ts";
 
 export function handleJoinSplit(event: JoinSplitProcessed): void {
   const totalLogIndex = getTotalLogIndex(event);
@@ -196,8 +196,5 @@ export function handleFilledBatchWithZeros(event: FilledBatchWithZeros): void {
 
   // make SDK event for filled batch with zeros
   const sdkEvent = new SDKEvent(id);
-  sdkEvent.filledBatchWithZerosUpToMerkleIndex = startIndex
-    .plus(numZeros)
-    .minus(BigInt.fromI32(1));
-  sdkEvent.save();
+  sdkEvent.filledBatchWithZerosUpToMerkleIndex = startIndex.plus(numZeros).minus(BigInt.fromI32(1));
 }
