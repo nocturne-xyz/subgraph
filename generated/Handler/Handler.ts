@@ -10,6 +10,32 @@ import {
   BigInt
 } from "@graphprotocol/graph-ts";
 
+export class ContractMethodPermissionSet extends ethereum.Event {
+  get params(): ContractMethodPermissionSet__Params {
+    return new ContractMethodPermissionSet__Params(this);
+  }
+}
+
+export class ContractMethodPermissionSet__Params {
+  _event: ContractMethodPermissionSet;
+
+  constructor(event: ContractMethodPermissionSet) {
+    this._event = event;
+  }
+
+  get contractAddress(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get selector(): Bytes {
+    return this._event.parameters[1].value.toBytes();
+  }
+
+  get permission(): boolean {
+    return this._event.parameters[2].value.toBoolean();
+  }
+}
+
 export class FilledBatchWithZeros extends ethereum.Event {
   get params(): FilledBatchWithZeros__Params {
     return new FilledBatchWithZeros__Params(this);
@@ -188,6 +214,28 @@ export class JoinSplitProcessedNewNoteBEncryptedOwnerStruct extends ethereum.Tup
   }
 }
 
+export class OwnershipTransferStarted extends ethereum.Event {
+  get params(): OwnershipTransferStarted__Params {
+    return new OwnershipTransferStarted__Params(this);
+  }
+}
+
+export class OwnershipTransferStarted__Params {
+  _event: OwnershipTransferStarted;
+
+  constructor(event: OwnershipTransferStarted) {
+    this._event = event;
+  }
+
+  get previousOwner(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get newOwner(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+}
+
 export class OwnershipTransferred extends ethereum.Event {
   get params(): OwnershipTransferred__Params {
     return new OwnershipTransferred__Params(this);
@@ -322,20 +370,20 @@ export class SubtreeUpdate__Params {
   }
 }
 
-export class SupportedContractAllowlistPermissionSet extends ethereum.Event {
-  get params(): SupportedContractAllowlistPermissionSet__Params {
-    return new SupportedContractAllowlistPermissionSet__Params(this);
+export class TokenPermissionSet extends ethereum.Event {
+  get params(): TokenPermissionSet__Params {
+    return new TokenPermissionSet__Params(this);
   }
 }
 
-export class SupportedContractAllowlistPermissionSet__Params {
-  _event: SupportedContractAllowlistPermissionSet;
+export class TokenPermissionSet__Params {
+  _event: TokenPermissionSet;
 
-  constructor(event: SupportedContractAllowlistPermissionSet) {
+  constructor(event: TokenPermissionSet) {
     this._event = event;
   }
 
-  get contractAddress(): Address {
+  get token(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
@@ -964,6 +1012,29 @@ export class Handler extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
+  _leftoverTokensHolder(): Address {
+    let result = super.call(
+      "_leftoverTokensHolder",
+      "_leftoverTokensHolder():(address)",
+      []
+    );
+
+    return result[0].toAddress();
+  }
+
+  try__leftoverTokensHolder(): ethereum.CallResult<Address> {
+    let result = super.tryCall(
+      "_leftoverTokensHolder",
+      "_leftoverTokensHolder():(address)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
   _nullifierSet(param0: BigInt): boolean {
     let result = super.call("_nullifierSet", "_nullifierSet(uint256):(bool)", [
       ethereum.Value.fromUnsignedBigInt(param0)
@@ -1060,22 +1131,43 @@ export class Handler extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
-  _supportedContractAllowlist(param0: Address): boolean {
+  _supportedContractMethods(param0: BigInt): boolean {
     let result = super.call(
-      "_supportedContractAllowlist",
-      "_supportedContractAllowlist(address):(bool)",
+      "_supportedContractMethods",
+      "_supportedContractMethods(uint192):(bool)",
+      [ethereum.Value.fromUnsignedBigInt(param0)]
+    );
+
+    return result[0].toBoolean();
+  }
+
+  try__supportedContractMethods(param0: BigInt): ethereum.CallResult<boolean> {
+    let result = super.tryCall(
+      "_supportedContractMethods",
+      "_supportedContractMethods(uint192):(bool)",
+      [ethereum.Value.fromUnsignedBigInt(param0)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
+  _supportedTokens(param0: Address): boolean {
+    let result = super.call(
+      "_supportedTokens",
+      "_supportedTokens(address):(bool)",
       [ethereum.Value.fromAddress(param0)]
     );
 
     return result[0].toBoolean();
   }
 
-  try__supportedContractAllowlist(
-    param0: Address
-  ): ethereum.CallResult<boolean> {
+  try__supportedTokens(param0: Address): ethereum.CallResult<boolean> {
     let result = super.tryCall(
-      "_supportedContractAllowlist",
-      "_supportedContractAllowlist(address):(bool)",
+      "_supportedTokens",
+      "_supportedTokens(address):(bool)",
       [ethereum.Value.fromAddress(param0)]
     );
     if (result.reverted) {
@@ -1362,6 +1454,21 @@ export class Handler extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
+  pendingOwner(): Address {
+    let result = super.call("pendingOwner", "pendingOwner():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_pendingOwner(): ethereum.CallResult<Address> {
+    let result = super.tryCall("pendingOwner", "pendingOwner():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
   reentrancyGuardStage(): BigInt {
     let result = super.call(
       "reentrancyGuardStage",
@@ -1436,6 +1543,32 @@ export class Handler extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+}
+
+export class AcceptOwnershipCall extends ethereum.Call {
+  get inputs(): AcceptOwnershipCall__Inputs {
+    return new AcceptOwnershipCall__Inputs(this);
+  }
+
+  get outputs(): AcceptOwnershipCall__Outputs {
+    return new AcceptOwnershipCall__Outputs(this);
+  }
+}
+
+export class AcceptOwnershipCall__Inputs {
+  _call: AcceptOwnershipCall;
+
+  constructor(call: AcceptOwnershipCall) {
+    this._call = call;
+  }
+}
+
+export class AcceptOwnershipCall__Outputs {
+  _call: AcceptOwnershipCall;
+
+  constructor(call: AcceptOwnershipCall) {
+    this._call = call;
   }
 }
 
@@ -2154,11 +2287,11 @@ export class InitializeCall__Inputs {
     this._call = call;
   }
 
-  get teller(): Address {
+  get subtreeUpdateVerifier(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get subtreeUpdateVerifier(): Address {
+  get leftoverTokensHolder(): Address {
     return this._call.inputValues[1].value.toAddress();
   }
 }
@@ -2369,6 +2502,44 @@ export class RenounceOwnershipCall__Outputs {
   }
 }
 
+export class SetContractMethodPermissionCall extends ethereum.Call {
+  get inputs(): SetContractMethodPermissionCall__Inputs {
+    return new SetContractMethodPermissionCall__Inputs(this);
+  }
+
+  get outputs(): SetContractMethodPermissionCall__Outputs {
+    return new SetContractMethodPermissionCall__Outputs(this);
+  }
+}
+
+export class SetContractMethodPermissionCall__Inputs {
+  _call: SetContractMethodPermissionCall;
+
+  constructor(call: SetContractMethodPermissionCall) {
+    this._call = call;
+  }
+
+  get contractAddress(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get selector(): Bytes {
+    return this._call.inputValues[1].value.toBytes();
+  }
+
+  get permission(): boolean {
+    return this._call.inputValues[2].value.toBoolean();
+  }
+}
+
+export class SetContractMethodPermissionCall__Outputs {
+  _call: SetContractMethodPermissionCall;
+
+  constructor(call: SetContractMethodPermissionCall) {
+    this._call = call;
+  }
+}
+
 export class SetSubtreeBatchFillerPermissionCall extends ethereum.Call {
   get inputs(): SetSubtreeBatchFillerPermissionCall__Inputs {
     return new SetSubtreeBatchFillerPermissionCall__Inputs(this);
@@ -2403,24 +2574,54 @@ export class SetSubtreeBatchFillerPermissionCall__Outputs {
   }
 }
 
-export class SetSupportedContractAllowlistPermissionCall extends ethereum.Call {
-  get inputs(): SetSupportedContractAllowlistPermissionCall__Inputs {
-    return new SetSupportedContractAllowlistPermissionCall__Inputs(this);
+export class SetTellerCall extends ethereum.Call {
+  get inputs(): SetTellerCall__Inputs {
+    return new SetTellerCall__Inputs(this);
   }
 
-  get outputs(): SetSupportedContractAllowlistPermissionCall__Outputs {
-    return new SetSupportedContractAllowlistPermissionCall__Outputs(this);
+  get outputs(): SetTellerCall__Outputs {
+    return new SetTellerCall__Outputs(this);
   }
 }
 
-export class SetSupportedContractAllowlistPermissionCall__Inputs {
-  _call: SetSupportedContractAllowlistPermissionCall;
+export class SetTellerCall__Inputs {
+  _call: SetTellerCall;
 
-  constructor(call: SetSupportedContractAllowlistPermissionCall) {
+  constructor(call: SetTellerCall) {
     this._call = call;
   }
 
-  get contractAddress(): Address {
+  get teller(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class SetTellerCall__Outputs {
+  _call: SetTellerCall;
+
+  constructor(call: SetTellerCall) {
+    this._call = call;
+  }
+}
+
+export class SetTokenPermissionCall extends ethereum.Call {
+  get inputs(): SetTokenPermissionCall__Inputs {
+    return new SetTokenPermissionCall__Inputs(this);
+  }
+
+  get outputs(): SetTokenPermissionCall__Outputs {
+    return new SetTokenPermissionCall__Outputs(this);
+  }
+}
+
+export class SetTokenPermissionCall__Inputs {
+  _call: SetTokenPermissionCall;
+
+  constructor(call: SetTokenPermissionCall) {
+    this._call = call;
+  }
+
+  get token(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 
@@ -2429,10 +2630,10 @@ export class SetSupportedContractAllowlistPermissionCall__Inputs {
   }
 }
 
-export class SetSupportedContractAllowlistPermissionCall__Outputs {
-  _call: SetSupportedContractAllowlistPermissionCall;
+export class SetTokenPermissionCall__Outputs {
+  _call: SetTokenPermissionCall;
 
-  constructor(call: SetSupportedContractAllowlistPermissionCall) {
+  constructor(call: SetTokenPermissionCall) {
     this._call = call;
   }
 }
