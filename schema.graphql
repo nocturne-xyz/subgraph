@@ -91,5 +91,4 @@ type SDKEvent @entity(immutable: true) {
   id: ID!
   encodedOrEncryptedNote: EncodedOrEncryptedNote
   nullifier: Nullifier
-  filledBatchWithZerosUpToMerkleIndex: BigInt
 }
