@@ -29,6 +29,25 @@
     "inputs": [
       {
         "indexed": false,
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "permission",
+        "type": "bool"
+      }
+    ],
+    "name": "ContractPermissionSet",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
         "internalType": "uint256",
         "name": "startIndex",
         "type": "uint256"
@@ -99,30 +118,6 @@
         "indexed": false,
         "internalType": "uint256",
         "name": "senderCommitment",
-        "type": "uint256"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "encodedAssetAddr",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "encodedAssetId",
-            "type": "uint256"
-          }
-        ],
-        "indexed": false,
-        "internalType": "struct EncodedAsset",
-        "name": "encodedAsset",
-        "type": "tuple"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "publicSpend",
         "type": "uint256"
       },
       {
@@ -315,25 +310,6 @@
       {
         "indexed": false,
         "internalType": "address",
-        "name": "token",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "bool",
-        "name": "permission",
-        "type": "bool"
-      }
-    ],
-    "name": "TokenPermissionSet",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
         "name": "account",
         "type": "address"
       }
@@ -357,6 +333,32 @@
   {
     "inputs": [],
     "name": "ENTERED_HANDLE_OPERATION",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "ERC20_APPROVE_SELECTOR",
+    "outputs": [
+      {
+        "internalType": "bytes4",
+        "name": "",
+        "type": "bytes4"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "ERC_20_APPROVE_FN_DATA_LENGTH",
     "outputs": [
       {
         "internalType": "uint256",
@@ -477,7 +479,7 @@
         "type": "address"
       }
     ],
-    "name": "_supportedTokens",
+    "name": "_supportedContracts",
     "outputs": [
       {
         "internalType": "bool",
@@ -546,6 +548,99 @@
           {
             "components": [
               {
+                "components": [
+                  {
+                    "internalType": "uint256",
+                    "name": "commitmentTreeRoot",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "nullifierA",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "nullifierB",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "newNoteACommitment",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "newNoteBCommitment",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "senderCommitment",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256[8]",
+                    "name": "proof",
+                    "type": "uint256[8]"
+                  },
+                  {
+                    "components": [
+                      {
+                        "internalType": "bytes",
+                        "name": "ciphertextBytes",
+                        "type": "bytes"
+                      },
+                      {
+                        "internalType": "bytes",
+                        "name": "encapsulatedSecretBytes",
+                        "type": "bytes"
+                      }
+                    ],
+                    "internalType": "struct EncryptedNote",
+                    "name": "newNoteAEncrypted",
+                    "type": "tuple"
+                  },
+                  {
+                    "components": [
+                      {
+                        "internalType": "bytes",
+                        "name": "ciphertextBytes",
+                        "type": "bytes"
+                      },
+                      {
+                        "internalType": "bytes",
+                        "name": "encapsulatedSecretBytes",
+                        "type": "bytes"
+                      }
+                    ],
+                    "internalType": "struct EncryptedNote",
+                    "name": "newNoteBEncrypted",
+                    "type": "tuple"
+                  }
+                ],
+                "internalType": "struct JoinSplit",
+                "name": "joinSplit",
+                "type": "tuple"
+              },
+              {
+                "internalType": "uint8",
+                "name": "assetIndex",
+                "type": "uint8"
+              },
+              {
+                "internalType": "uint256",
+                "name": "publicSpend",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct PublicJoinSplit[]",
+            "name": "pubJoinSplits",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
                 "internalType": "uint256",
                 "name": "commitmentTreeRoot",
                 "type": "uint256"
@@ -583,28 +678,6 @@
               {
                 "components": [
                   {
-                    "internalType": "uint256",
-                    "name": "encodedAssetAddr",
-                    "type": "uint256"
-                  },
-                  {
-                    "internalType": "uint256",
-                    "name": "encodedAssetId",
-                    "type": "uint256"
-                  }
-                ],
-                "internalType": "struct EncodedAsset",
-                "name": "encodedAsset",
-                "type": "tuple"
-              },
-              {
-                "internalType": "uint256",
-                "name": "publicSpend",
-                "type": "uint256"
-              },
-              {
-                "components": [
-                  {
                     "internalType": "bytes",
                     "name": "ciphertextBytes",
                     "type": "bytes"
@@ -638,7 +711,7 @@
               }
             ],
             "internalType": "struct JoinSplit[]",
-            "name": "joinSplits",
+            "name": "confJoinSplits",
             "type": "tuple[]"
           },
           {
@@ -661,18 +734,59 @@
           {
             "components": [
               {
-                "internalType": "uint256",
-                "name": "encodedAssetAddr",
-                "type": "uint256"
+                "components": [
+                  {
+                    "internalType": "uint256",
+                    "name": "encodedAssetAddr",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "encodedAssetId",
+                    "type": "uint256"
+                  }
+                ],
+                "internalType": "struct EncodedAsset",
+                "name": "encodedAsset",
+                "type": "tuple"
               },
               {
                 "internalType": "uint256",
-                "name": "encodedAssetId",
+                "name": "minRefundValue",
                 "type": "uint256"
               }
             ],
-            "internalType": "struct EncodedAsset[]",
-            "name": "encodedRefundAssets",
+            "internalType": "struct TrackedAsset[]",
+            "name": "trackedJoinSplitAssets",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "components": [
+                  {
+                    "internalType": "uint256",
+                    "name": "encodedAssetAddr",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "encodedAssetId",
+                    "type": "uint256"
+                  }
+                ],
+                "internalType": "struct EncodedAsset",
+                "name": "encodedAsset",
+                "type": "tuple"
+              },
+              {
+                "internalType": "uint256",
+                "name": "minRefundValue",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct TrackedAsset[]",
+            "name": "trackedRefundAssets",
             "type": "tuple[]"
           },
           {
@@ -721,17 +835,7 @@
           },
           {
             "internalType": "uint256",
-            "name": "maxNumRefunds",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
             "name": "gasPrice",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "chainId",
             "type": "uint256"
           },
           {
@@ -761,6 +865,11 @@
         "internalType": "bytes[]",
         "name": "results",
         "type": "bytes[]"
+      },
+      {
+        "internalType": "uint256",
+        "name": "numRefundsToHandle",
+        "type": "uint256"
       }
     ],
     "stateMutability": "nonpayable",
@@ -839,6 +948,99 @@
           {
             "components": [
               {
+                "components": [
+                  {
+                    "internalType": "uint256",
+                    "name": "commitmentTreeRoot",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "nullifierA",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "nullifierB",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "newNoteACommitment",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "newNoteBCommitment",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "senderCommitment",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256[8]",
+                    "name": "proof",
+                    "type": "uint256[8]"
+                  },
+                  {
+                    "components": [
+                      {
+                        "internalType": "bytes",
+                        "name": "ciphertextBytes",
+                        "type": "bytes"
+                      },
+                      {
+                        "internalType": "bytes",
+                        "name": "encapsulatedSecretBytes",
+                        "type": "bytes"
+                      }
+                    ],
+                    "internalType": "struct EncryptedNote",
+                    "name": "newNoteAEncrypted",
+                    "type": "tuple"
+                  },
+                  {
+                    "components": [
+                      {
+                        "internalType": "bytes",
+                        "name": "ciphertextBytes",
+                        "type": "bytes"
+                      },
+                      {
+                        "internalType": "bytes",
+                        "name": "encapsulatedSecretBytes",
+                        "type": "bytes"
+                      }
+                    ],
+                    "internalType": "struct EncryptedNote",
+                    "name": "newNoteBEncrypted",
+                    "type": "tuple"
+                  }
+                ],
+                "internalType": "struct JoinSplit",
+                "name": "joinSplit",
+                "type": "tuple"
+              },
+              {
+                "internalType": "uint8",
+                "name": "assetIndex",
+                "type": "uint8"
+              },
+              {
+                "internalType": "uint256",
+                "name": "publicSpend",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct PublicJoinSplit[]",
+            "name": "pubJoinSplits",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
                 "internalType": "uint256",
                 "name": "commitmentTreeRoot",
                 "type": "uint256"
@@ -876,28 +1078,6 @@
               {
                 "components": [
                   {
-                    "internalType": "uint256",
-                    "name": "encodedAssetAddr",
-                    "type": "uint256"
-                  },
-                  {
-                    "internalType": "uint256",
-                    "name": "encodedAssetId",
-                    "type": "uint256"
-                  }
-                ],
-                "internalType": "struct EncodedAsset",
-                "name": "encodedAsset",
-                "type": "tuple"
-              },
-              {
-                "internalType": "uint256",
-                "name": "publicSpend",
-                "type": "uint256"
-              },
-              {
-                "components": [
-                  {
                     "internalType": "bytes",
                     "name": "ciphertextBytes",
                     "type": "bytes"
@@ -931,7 +1111,7 @@
               }
             ],
             "internalType": "struct JoinSplit[]",
-            "name": "joinSplits",
+            "name": "confJoinSplits",
             "type": "tuple[]"
           },
           {
@@ -954,18 +1134,59 @@
           {
             "components": [
               {
-                "internalType": "uint256",
-                "name": "encodedAssetAddr",
-                "type": "uint256"
+                "components": [
+                  {
+                    "internalType": "uint256",
+                    "name": "encodedAssetAddr",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "encodedAssetId",
+                    "type": "uint256"
+                  }
+                ],
+                "internalType": "struct EncodedAsset",
+                "name": "encodedAsset",
+                "type": "tuple"
               },
               {
                 "internalType": "uint256",
-                "name": "encodedAssetId",
+                "name": "minRefundValue",
                 "type": "uint256"
               }
             ],
-            "internalType": "struct EncodedAsset[]",
-            "name": "encodedRefundAssets",
+            "internalType": "struct TrackedAsset[]",
+            "name": "trackedJoinSplitAssets",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "components": [
+                  {
+                    "internalType": "uint256",
+                    "name": "encodedAssetAddr",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "encodedAssetId",
+                    "type": "uint256"
+                  }
+                ],
+                "internalType": "struct EncodedAsset",
+                "name": "encodedAsset",
+                "type": "tuple"
+              },
+              {
+                "internalType": "uint256",
+                "name": "minRefundValue",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct TrackedAsset[]",
+            "name": "trackedRefundAssets",
             "type": "tuple[]"
           },
           {
@@ -1014,17 +1235,7 @@
           },
           {
             "internalType": "uint256",
-            "name": "maxNumRefunds",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
             "name": "gasPrice",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "chainId",
             "type": "uint256"
           },
           {
@@ -1230,6 +1441,24 @@
     "inputs": [
       {
         "internalType": "address",
+        "name": "contractAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "bool",
+        "name": "permission",
+        "type": "bool"
+      }
+    ],
+    "name": "setContractPermission",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
         "name": "filler",
         "type": "address"
       },
@@ -1253,24 +1482,6 @@
       }
     ],
     "name": "setTeller",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      },
-      {
-        "internalType": "bool",
-        "name": "permission",
-        "type": "bool"
-      }
-    ],
-    "name": "setTokenPermission",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
