@@ -1,5 +1,5 @@
 import { describe, test, assert } from "matchstick-as/assembly/index"
-import { poseidonBN } from "../src/poseidonBN4";
+import { poseidonBN } from "../src/poseidonBN";
 import { hexStringToBigIntBE } from "../src/utils";
 
 const TEST_VECTORS_4_INPUTS = [
