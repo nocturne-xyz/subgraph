@@ -1,4 +1,4 @@
-import { BigInt, ethereum } from "@graphprotocol/graph-ts";
+import { BigInt, ByteArray, ethereum } from "@graphprotocol/graph-ts";
 
 // assumption: blockNumber is less than 2^160. In practice this is a pretty safe assumption, as that's still a huge number.
 //   for perspective, at a 1ms block time, it would take ~4.6 * 10^37 years to produce that many blocks.
@@ -30,4 +30,10 @@ export function toPaddedHexString(id: BigInt): string {
   // pad the resulting ID out to 64 nibbles, or 256 bits
   // this leaves 160 bits for `blockNumber`, which is plenty
   return "0x" + without0x.padStart(64, "0");
+}
+
+export function hexStringToBigIntBE(hexString: string): BigInt {
+  return BigInt.fromUnsignedBytes(
+    changetype<ByteArray>(ByteArray.fromHexString(hexString).reverse())
+  );
 }

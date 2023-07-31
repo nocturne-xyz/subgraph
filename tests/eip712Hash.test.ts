@@ -27,4 +27,4 @@ describe("eip712Hash", () => {
     );
     assert.bytesEquals(expected, actual);
   })
-})
+});
