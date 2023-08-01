@@ -1,5 +1,5 @@
 import { EncodedNote, TreeFrontier } from "../generated/schema";
-import { BigInt } from "@graphprotocol/graph-ts";
+import { BigInt, log } from "@graphprotocol/graph-ts";
 import { poseidonBN } from "./poseidonBN";
 import { decompressPoint } from "./pointCompression";
 
@@ -34,31 +34,42 @@ export function updateTreeFrontier(newLeaves: Array<BigInt>): void {
     // init new tree frontier
     frontier = new TreeFrontier(TREE_FRONTIER_ID);
     frontier.merkleIndex = BigInt.fromI32(0);
-    frontier.rightmostPath = [ZERO_HASHES, ZERO_HASHES, ZERO_HASHES, ZERO_HASHES];
+    frontier.root = EMPTY_TREE_ROOT;
+
+    const initialRightmostPath: Array<Array<BigInt>> = [];
+    for (let i = 0; i < DEPTH; i++) {
+      initialRightmostPath.push([ZERO_HASHES[i], ZERO_HASHES[i], ZERO_HASHES[i], ZERO_HASHES[i]]);
+    }
+
+    frontier.rightmostPath = initialRightmostPath;
   }
 
+  const rightmostPath = frontier.rightmostPath;
   let merkleIndex = frontier.merkleIndex.toI64();
+  let root = frontier.root;
   for (let i = 0; i < newLeaves.length; i++) {
     let pathMask = merkleIndex;
     let curr = newLeaves[i];
-    for (let j = 0; j < DEPTH - 1; j++) {
+    for (let j = 0; j < DEPTH; j++) {
       // get path index
       const pathIndex = i32(pathMask & 0b11);
       pathMask >>= 2;
 
       // if it's a left child, all the sblings at this level to 0
       if (pathIndex == 0) {
-        frontier.rightmostPath[j] = ZERO_HASHES;
+        rightmostPath[j] = [ZERO_HASHES[j], ZERO_HASHES[j], ZERO_HASHES[j], ZERO_HASHES[j]];
       }
       
-      frontier.rightmostPath[j][pathIndex] = curr;
-      curr = poseidonBN(frontier.rightmostPath[j]);
+      rightmostPath[j][pathIndex] = curr;
+      curr = poseidonBN(rightmostPath[j]);
     }
-
+    root = curr;
     merkleIndex += 1;
   }
 
+  frontier.rightmostPath = rightmostPath;
   frontier.merkleIndex = BigInt.fromI64(merkleIndex);
+  frontier.root = root;
   frontier.save();
 }
 

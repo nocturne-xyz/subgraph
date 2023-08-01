@@ -1084,6 +1084,19 @@ export class TreeFrontier extends Entity {
     this.set("merkleIndex", Value.fromBigInt(value));
   }
 
+  get root(): BigInt {
+    let value = this.get("root");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set root(value: BigInt) {
+    this.set("root", Value.fromBigInt(value));
+  }
+
   get rightmostPath(): Array<Array<BigInt>> {
     let value = this.get("rightmostPath");
     if (!value || value.kind == ValueKind.NULL) {
