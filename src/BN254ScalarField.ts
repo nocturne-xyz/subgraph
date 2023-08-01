@@ -30,7 +30,7 @@ export function FSub(a: BigInt, b: BigInt): BigInt {
 }
 
 export function FNeg(x: BigInt): BigInt {
-  return BN254_SCALAR_FIELD_MODULUS.minus(x);
+  return x.isZero() ? x : BN254_SCALAR_FIELD_MODULUS.minus(x);
 }
 
 export function FMul(a: BigInt, b: BigInt): BigInt {
@@ -128,8 +128,8 @@ export function FSqrt(x: BigInt): BigInt | null {
 
       // i is guaranteed to be < m if lhs is a quadratic residue.
       // since we already chcked legende symbol, it's guaranteed to be one
-      if (i.lt(m)) {
-        throw new Error("unreachable - i < m");
+      if (i.ge(m)) {
+        throw new Error("unreachable - i >= m");
       }
 
       const b = FPow(c, FPow(TWO, FSub(FSub(m, i), ONE)));

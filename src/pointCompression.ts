@@ -42,18 +42,16 @@ export function decompressPoint(
     FSub(A, FMul(D, ySquared))
   );
   
-  if (xSquared === null) return null;
-
   // get X by computing square root
   // circuit-utils sqrt returns undefined if sqrt DNE (i.e. legendre symbol is -1)
   let x = FSqrt(xSquared);
 
   // if sqrt does not exist, the encoding is invalid
   // if sqrt is 0 and sign is nonzero, the encoding is invalid
-  if (x === null || (sign && x.isZero())) return null;
+  if (x === null || (!sign.isZero() && x.isZero())) return null;
 
   // select the root whose sign matches the sign bit
-  if (x.gt(P_MINUS_1_OVER_2) !== (sign.notEqual(ZERO))) {
+  if (x.gt(P_MINUS_1_OVER_2) !== (!sign.isZero())) {
     x = FNeg(x);
   }
 
