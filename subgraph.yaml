@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: Handler
-    network: sepolia
+    network: mainnet
     source:
       abi: Handler
-      address: "0x86356407e7412721B582517F06e1793eC82Fb748"
-      startBlock: 3678402
+      address: "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6"
+      startBlock: 0
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -38,11 +38,11 @@ dataSources:
       file: ./src/handler.ts
   - kind: ethereum
     name: DepositManager
-    network: sepolia
+    network: mainnet
     source:
       abi: DepositManager
-      address: "0x75C01A4359C98df2cB602313bb989fdf4aC45e5e"
-      startBlock: 3678402
+      address: "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82"
+      startBlock: 0
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
