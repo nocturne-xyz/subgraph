@@ -60,9 +60,11 @@ describe("decompressPoint", () => {
       const input = TEST_VECTORS_INPUTS[i];
       const expected = TEST_VECTORS_OUTPUTS[i];
       const actual = decompressPoint(input);
-      assert.assertNotNull(actual);
-      assert.bigIntEquals(expected.x, actual!.x);
-      assert.bigIntEquals(expected.y, actual!.y);
+      // assert.assertNonNull doesn't seem to compile for some reason
+      if (actual === null) throw new Error("result should not be null!");
+
+      assert.bigIntEquals(expected.x, actual.x);
+      assert.bigIntEquals(expected.y, actual.y);
     }
   });
 });

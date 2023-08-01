@@ -44,8 +44,10 @@ describe("sqrt", () => {
       const input = TEST_VECTORS_INPUTS[i];
       const expected = TEST_VECTORS_OUTPUTS[i];
       const actual = FSqrt(input);
-      assert.assertNotNull(actual);
-      assert.bigIntEquals(expected, actual!);
+      // assert.assertNonNull doesn't seem to compile for some reason
+      if (actual === null) throw new Error("result should not be null!");
+
+      assert.bigIntEquals(expected, actual);
     }
   });
 });
