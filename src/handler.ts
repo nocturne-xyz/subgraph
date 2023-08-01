@@ -14,6 +14,8 @@ import {
   TreeInsertionEvent,
   SDKEvent,
 } from "../generated/schema";
+import { BigInt } from "@graphprotocol/graph-ts";
+import { ZERO_VALUE, computeNoteCommitment, updateTreeFrontier } from "./tree";
 import {
   getTotalLogIndex,
   getTotalEntityIndex,
@@ -114,6 +116,8 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
     sdkEvent.encodedOrEncryptedNote = id;
     sdkEvent.save();
   }
+
+  updateTreeFrontier([encryptedNoteA.commitment, encryptedNoteB.commitment]);
 }
 
 export function handleRefund(event: RefundProcessed): void {
@@ -147,6 +151,10 @@ export function handleRefund(event: RefundProcessed): void {
   const sdkEvent = new SDKEvent(id);
   sdkEvent.encodedOrEncryptedNote = id;
   sdkEvent.save();
+
+  // update tree frontier
+  const noteCommitment = computeNoteCommitment(encodedNote);
+  updateTreeFrontier([noteCommitment]);
 }
 
 export function handleSubtreeUpdate(event: SubtreeUpdate): void {
@@ -176,4 +184,9 @@ export function handleFilledBatchWithZeros(event: FilledBatchWithZeros): void {
   const insertionEvent = new TreeInsertionEvent(id);
   insertionEvent.filledBatchWithZerosEvent = id;
   insertionEvent.save();
+
+  // update tree frontier
+  const zeros: Array<BigInt> = new Array(event.params.numZeros.toI32());
+  zeros.fill(ZERO_VALUE);
+  updateTreeFrontier(zeros)
 }

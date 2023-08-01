@@ -92,3 +92,9 @@ type SDKEvent @entity(immutable: true) {
   encodedOrEncryptedNote: EncodedOrEncryptedNote
   nullifier: Nullifier
 }
+
+type TreeFrontier @entity(immutable: false) {
+  id: ID!
+  merkleIndex: BigInt!
+  rightmostPath: [[BigInt!]!]!
+}

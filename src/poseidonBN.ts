@@ -1,5 +1,5 @@
 import { BigInt } from "@graphprotocol/graph-ts";
-import { Fadd, Fmul, FSquare } from "./BN254ScalarField";
+import { FAdd, FMul, FSquare } from "./BN254ScalarField";
 import { getCi, getMi, getPi, getSi } from "./poseidonBNConstants";
 
 const N_ROUNDS_F = 8;
@@ -10,10 +10,10 @@ const ZERO = BigInt.fromI32(0);
 
 function pow5(a: BigInt): BigInt {
   let aSquare: BigInt = FSquare(a);
-  return Fmul(a, FSquare(aSquare));
+  return FMul(a, FSquare(aSquare));
 }
 
-export function poseidonBN(inputs: StaticArray<BigInt>): BigInt {
+export function poseidonBN(inputs: Array<BigInt>): BigInt {
   const stateWidth = inputs.length + 1;
   const nRoundsP = N_ROUNDS_P[stateWidth - 2];
 
@@ -23,27 +23,27 @@ export function poseidonBN(inputs: StaticArray<BigInt>): BigInt {
   const S = getSi(stateWidth - 2);
 
 
-  let state: StaticArray<BigInt> = new StaticArray(stateWidth);
+  let state: Array<BigInt> = new Array(stateWidth);
   state[0] = ZERO;
   for (let i = 0; i < inputs.length; i++) {
     state[i + 1] = inputs[i];
   }
 
   for (let i = 0; i < stateWidth; i++) {
-    state[i] = Fadd(state[i], C[i]);
+    state[i] = FAdd(state[i], C[i]);
   }
 
   for (let r = 0; r < N_ROUNDS_F / 2 - 1; r++) {
     for (let i = 0; i < stateWidth; i++) {
       state[i] = pow5(state[i]);
-      state[i] = Fadd(state[i], C[(r + 1) * stateWidth + i]);
+      state[i] = FAdd(state[i], C[(r + 1) * stateWidth + i]);
     }
 
-    let newState: StaticArray<BigInt> = new StaticArray(stateWidth);
+    let newState: Array<BigInt> = new Array(stateWidth);
     for (let i = 0; i < stateWidth; i++) {
       newState[i] = ZERO;
       for (let j = 0; j < stateWidth; j++) {
-        newState[i] = Fadd(newState[i], Fmul(M[j][i], state[j]));
+        newState[i] = FAdd(newState[i], FMul(M[j][i], state[j]));
       }
     }
     state = newState;
@@ -51,31 +51,31 @@ export function poseidonBN(inputs: StaticArray<BigInt>): BigInt {
 
   for (let i = 0; i < stateWidth; i++) {
     state[i] = pow5(state[i]);
-    state[i] = Fadd(state[i], C[(N_ROUNDS_F / 2 - 1 + 1) * stateWidth + i]);
+    state[i] = FAdd(state[i], C[(N_ROUNDS_F / 2 - 1 + 1) * stateWidth + i]);
   }
 
-  let newState: StaticArray<BigInt> = new StaticArray(stateWidth);
+  let newState: Array<BigInt> = new Array(stateWidth);
   for (let i = 0; i < stateWidth; i++) {
     newState[i] = ZERO;
     for (let j = 0; j < stateWidth; j++) {
-      newState[i] = Fadd(newState[i], Fmul(P[j][i], state[j]));
+      newState[i] = FAdd(newState[i], FMul(P[j][i], state[j]));
     }
   }
   state = newState;
 
   for (let r = 0; r < nRoundsP; r++) {
     state[0] = pow5(state[0]);
-    state[0] = Fadd(state[0], C[(N_ROUNDS_F / 2 + 1) * stateWidth + r]);
+    state[0] = FAdd(state[0], C[(N_ROUNDS_F / 2 + 1) * stateWidth + r]);
 
     let s0 = ZERO;
     for (let j = 0; j < stateWidth; j++) {
-      s0 = Fadd(s0, Fmul(S[(stateWidth * 2 - 1) * r + j], state[j]));
+      s0 = FAdd(s0, FMul(S[(stateWidth * 2 - 1) * r + j], state[j]));
     }
 
     for (let k = 1; k < stateWidth; k++) {
-      state[k] = Fadd(
+      state[k] = FAdd(
         state[k],
-        Fmul(state[0], S[(stateWidth * 2 - 1) * r + stateWidth + k - 1])
+        FMul(state[0], S[(stateWidth * 2 - 1) * r + stateWidth + k - 1])
       );
     }
     state[0] = s0;
@@ -84,17 +84,17 @@ export function poseidonBN(inputs: StaticArray<BigInt>): BigInt {
   for (let r = 0; r < N_ROUNDS_F / 2 - 1; r++) {
     for (let i = 0; i < stateWidth; i++) {
       state[i] = pow5(state[i]);
-      state[i] = Fadd(
+      state[i] = FAdd(
         state[i],
         C[(N_ROUNDS_F / 2 + 1) * stateWidth + nRoundsP + r * stateWidth + i]
       );
     }
 
-    let newState: StaticArray<BigInt> = new StaticArray(stateWidth);
+    let newState: Array<BigInt> = new Array(stateWidth);
     for (let i = 0; i < stateWidth; i++) {
       newState[i] = ZERO;
       for (let j = 0; j < stateWidth; j++) {
-        newState[i] = Fadd(newState[i], Fmul(M[j][i], state[j]));
+        newState[i] = FAdd(newState[i], FMul(M[j][i], state[j]));
       }
     }
     state = newState;
@@ -106,7 +106,7 @@ export function poseidonBN(inputs: StaticArray<BigInt>): BigInt {
 
   let res = ZERO;
   for (let j = 0; j < stateWidth; j++) {
-    res = Fadd(res, Fmul(M[j][0], state[j]));
+    res = FAdd(res, FMul(M[j][0], state[j]));
   }
   return res;
 }

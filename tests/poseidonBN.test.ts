@@ -46,7 +46,7 @@ const TEST_VECTORS_4_OUTPUTS = [
 describe("poseidonBN4", () => {
   test("matches crypto-utils test cases for 4 inputs", () => {
     for (let i = 0; i < TEST_VECTORS_4_INPUTS.length; i++) {
-      const inputs = StaticArray.fromArray(TEST_VECTORS_4_INPUTS[i]);
+      const inputs = TEST_VECTORS_4_INPUTS[i];
       const expected = TEST_VECTORS_4_OUTPUTS[i];
       const actual = poseidonBN(inputs);
       assert.bigIntEquals(expected, actual);
