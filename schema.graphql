@@ -97,5 +97,12 @@ type TreeFrontier @entity(immutable: false) {
   id: ID!
   merkleIndex: BigInt!
   root: BigInt!
-  rightmostPath: [[BigInt!]!]!
+
+  # subgraph doesn't like 2D arrays.
+  # instead, `rightmostPathi` represents the the array of the ith siblings at every level of the tree.
+  # that is, `rightmostPathi[j]` is the ith sibling at level j.
+  rightmostPath0: [BigInt!]!
+  rightmostPath1: [BigInt!]!
+  rightmostPath2: [BigInt!]!
+  rightmostPath3: [BigInt!]!
 }

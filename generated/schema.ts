@@ -1097,16 +1097,55 @@ export class TreeFrontier extends Entity {
     this.set("root", Value.fromBigInt(value));
   }
 
-  get rightmostPath(): Array<Array<BigInt>> {
-    let value = this.get("rightmostPath");
+  get rightmostPath0(): Array<BigInt> {
+    let value = this.get("rightmostPath0");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
-      return value.toBigIntMatrix();
+      return value.toBigIntArray();
     }
   }
 
-  set rightmostPath(value: Array<Array<BigInt>>) {
-    this.set("rightmostPath", Value.fromBigIntMatrix(value));
+  set rightmostPath0(value: Array<BigInt>) {
+    this.set("rightmostPath0", Value.fromBigIntArray(value));
+  }
+
+  get rightmostPath1(): Array<BigInt> {
+    let value = this.get("rightmostPath1");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigIntArray();
+    }
+  }
+
+  set rightmostPath1(value: Array<BigInt>) {
+    this.set("rightmostPath1", Value.fromBigIntArray(value));
+  }
+
+  get rightmostPath2(): Array<BigInt> {
+    let value = this.get("rightmostPath2");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigIntArray();
+    }
+  }
+
+  set rightmostPath2(value: Array<BigInt>) {
+    this.set("rightmostPath2", Value.fromBigIntArray(value));
+  }
+
+  get rightmostPath3(): Array<BigInt> {
+    let value = this.get("rightmostPath3");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigIntArray();
+    }
+  }
+
+  set rightmostPath3(value: Array<BigInt>) {
+    this.set("rightmostPath3", Value.fromBigIntArray(value));
   }
 }

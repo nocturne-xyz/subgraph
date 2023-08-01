@@ -23,7 +23,6 @@ export const ZERO_HASHES = [
   BigInt.fromString("5970040816423495949297578095020641893587423755969281895631256844665627025314"),
   BigInt.fromString("12214409165609378712954248716397495697308954530150884765212305631602621194502"),
   BigInt.fromString("6257585344230574057676148678208895789918718212055778708819622723184718397468"),
-  EMPTY_TREE_ROOT
 ]
 const DEPTH = 16;
 
@@ -35,16 +34,18 @@ export function updateTreeFrontier(newLeaves: Array<BigInt>): void {
     frontier = new TreeFrontier(TREE_FRONTIER_ID);
     frontier.merkleIndex = BigInt.fromI32(0);
     frontier.root = EMPTY_TREE_ROOT;
-
-    const initialRightmostPath: Array<Array<BigInt>> = [];
-    for (let i = 0; i < DEPTH; i++) {
-      initialRightmostPath.push([ZERO_HASHES[i], ZERO_HASHES[i], ZERO_HASHES[i], ZERO_HASHES[i]]);
-    }
-
-    frontier.rightmostPath = initialRightmostPath;
+    frontier.rightmostPath0 = ZERO_HASHES;
+    frontier.rightmostPath1 = ZERO_HASHES;
+    frontier.rightmostPath2 = ZERO_HASHES;
+    frontier.rightmostPath3 = ZERO_HASHES;
   }
 
-  const rightmostPath = frontier.rightmostPath;
+  const rightmostPath = [
+    frontier.rightmostPath0,
+    frontier.rightmostPath1,
+    frontier.rightmostPath2,
+    frontier.rightmostPath3
+  ];
   let merkleIndex = frontier.merkleIndex.toI64();
   let root = frontier.root;
   for (let i = 0; i < newLeaves.length; i++) {
@@ -57,17 +58,23 @@ export function updateTreeFrontier(newLeaves: Array<BigInt>): void {
 
       // if it's a left child, all the sblings at this level to 0
       if (pathIndex == 0) {
-        rightmostPath[j] = [ZERO_HASHES[j], ZERO_HASHES[j], ZERO_HASHES[j], ZERO_HASHES[j]];
+        rightmostPath[0][j] = ZERO_HASHES[j];
+        rightmostPath[1][j] = ZERO_HASHES[j];
+        rightmostPath[2][j] = ZERO_HASHES[j];
+        rightmostPath[3][j] = ZERO_HASHES[j]; 
       }
       
-      rightmostPath[j][pathIndex] = curr;
-      curr = poseidonBN(rightmostPath[j]);
+      rightmostPath[pathIndex][j] = curr;
+      curr = poseidonBN([rightmostPath[0][j], rightmostPath[1][j], rightmostPath[2][j], rightmostPath[3][j]]);
     }
     root = curr;
     merkleIndex += 1;
   }
 
-  frontier.rightmostPath = rightmostPath;
+  frontier.rightmostPath0 = rightmostPath[0];
+  frontier.rightmostPath1 = rightmostPath[1];
+  frontier.rightmostPath2 = rightmostPath[2];
+  frontier.rightmostPath3 = rightmostPath[3];
   frontier.merkleIndex = BigInt.fromI64(merkleIndex);
   frontier.root = root;
   frontier.save();
