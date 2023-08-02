@@ -95,6 +95,7 @@ type SDKEvent @entity(immutable: true) {
 
 type TreeFrontier @entity(immutable: false) {
   id: ID!
+  latestTotalEntityIndex: BigInt!
   merkleIndex: BigInt!
   root: BigInt!
 

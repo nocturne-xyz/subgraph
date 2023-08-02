@@ -117,7 +117,7 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
     sdkEvent.save();
   }
 
-  updateTreeFrontier([encryptedNoteA.commitment, encryptedNoteB.commitment]);
+  updateTreeFrontier([encryptedNoteA.commitment, encryptedNoteB.commitment], idx);
 }
 
 export function handleRefund(event: RefundProcessed): void {
@@ -154,7 +154,7 @@ export function handleRefund(event: RefundProcessed): void {
 
   // update tree frontier
   const noteCommitment = computeNoteCommitment(encodedNote);
-  updateTreeFrontier([noteCommitment]);
+  updateTreeFrontier([noteCommitment], idx);
 }
 
 export function handleSubtreeUpdate(event: SubtreeUpdate): void {
@@ -188,5 +188,5 @@ export function handleFilledBatchWithZeros(event: FilledBatchWithZeros): void {
   // update tree frontier
   const zeros: Array<BigInt> = new Array(event.params.numZeros.toI32());
   zeros.fill(ZERO_VALUE);
-  updateTreeFrontier(zeros)
+  updateTreeFrontier(zeros, idx)
 }

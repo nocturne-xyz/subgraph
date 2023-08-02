@@ -1071,6 +1071,19 @@ export class TreeFrontier extends Entity {
     this.set("id", Value.fromString(value));
   }
 
+  get latestTotalEntityIndex(): BigInt {
+    let value = this.get("latestTotalEntityIndex");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set latestTotalEntityIndex(value: BigInt) {
+    this.set("latestTotalEntityIndex", Value.fromBigInt(value));
+  }
+
   get merkleIndex(): BigInt {
     let value = this.get("merkleIndex");
     if (!value || value.kind == ValueKind.NULL) {

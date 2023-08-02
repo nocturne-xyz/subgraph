@@ -2,6 +2,7 @@ import { EncodedNote, TreeFrontier } from "../generated/schema";
 import { BigInt, log } from "@graphprotocol/graph-ts";
 import { poseidonBN } from "./poseidonBN";
 import { decompressPoint } from "./pointCompression";
+import { ZERO } from "./BN254ScalarField";
 
 export const TREE_FRONTIER_ID = "TREE_FRONTIER";
 export const EMPTY_TREE_ROOT = BigInt.fromString("14425423529089750832921210739722026857026797579827942712639385657619324990872");
@@ -26,7 +27,7 @@ export const ZERO_HASHES = [
 ]
 const DEPTH = 16;
 
-export function updateTreeFrontier(newLeaves: Array<BigInt>): void {
+export function updateTreeFrontier(newLeaves: Array<BigInt>, latestTEI: BigInt): void {
   let frontier = TreeFrontier.load(TREE_FRONTIER_ID);
 
   if (frontier == null) {
@@ -38,6 +39,7 @@ export function updateTreeFrontier(newLeaves: Array<BigInt>): void {
     frontier.rightmostPath1 = ZERO_HASHES;
     frontier.rightmostPath2 = ZERO_HASHES;
     frontier.rightmostPath3 = ZERO_HASHES;
+    frontier.latestTotalEntityIndex = ZERO;
   }
 
   const rightmostPath = [
@@ -77,6 +79,7 @@ export function updateTreeFrontier(newLeaves: Array<BigInt>): void {
   frontier.rightmostPath3 = rightmostPath[3];
   frontier.merkleIndex = BigInt.fromI64(merkleIndex);
   frontier.root = root;
+  frontier.latestTotalEntityIndex = latestTEI;
   frontier.save();
 }
 
