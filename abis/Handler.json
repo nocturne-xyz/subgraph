@@ -259,7 +259,7 @@
       {
         "indexed": false,
         "internalType": "uint8",
-        "name": "refundType",
+        "name": "noteSource",
         "type": "uint8"
       }
     ],

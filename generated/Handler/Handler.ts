@@ -269,7 +269,7 @@ export class RefundProcessed__Params {
     return this._event.parameters[4].value.toBigInt();
   }
 
-  get refundType(): i32 {
+  get noteSource(): i32 {
     return this._event.parameters[5].value.toI32();
   }
 }

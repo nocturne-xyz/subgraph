@@ -54,7 +54,7 @@ type EncodedNote @entity(immutable: true) {
   encodedAssetAddr: BigInt!
   encodedAssetId: BigInt!
   value: BigInt!
-  refundType: BigInt!
+  noteSource: BigInt!
 }
 
 type EncryptedNote @entity(immutable: true) {

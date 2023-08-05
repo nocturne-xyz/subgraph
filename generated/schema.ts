@@ -589,8 +589,8 @@ export class EncodedNote extends Entity {
     this.set("value", Value.fromBigInt(value));
   }
 
-  get refundType(): BigInt {
-    let value = this.get("refundType");
+  get noteSource(): BigInt {
+    let value = this.get("noteSource");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -598,8 +598,8 @@ export class EncodedNote extends Entity {
     }
   }
 
-  set refundType(value: BigInt) {
-    this.set("refundType", Value.fromBigInt(value));
+  set noteSource(value: BigInt) {
+    this.set("noteSource", Value.fromBigInt(value));
   }
 }
 

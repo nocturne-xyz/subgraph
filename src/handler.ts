@@ -132,7 +132,7 @@ export function handleRefund(event: RefundProcessed): void {
   encodedNote.encodedAssetAddr = event.params.encodedAssetAddr;
   encodedNote.encodedAssetId = event.params.encodedAssetId;
   encodedNote.value = event.params.value;
-  encodedNote.refundType = new BigInt(event.params.refundType);
+  encodedNote.noteSource = new BigInt(event.params.noteSource);
   encodedNote.save();
 
   newNote.merkleIndex = event.params.merkleIndex;
