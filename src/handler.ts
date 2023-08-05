@@ -1,3 +1,4 @@
+import { BigInt } from "@graphprotocol/graph-ts";
 import {
   FilledBatchWithZeros,
   JoinSplitProcessed,
@@ -132,6 +133,7 @@ export function handleRefund(event: RefundProcessed): void {
   encodedNote.encodedAssetId = event.params.encodedAssetId;
   encodedNote.value = event.params.value;
   encodedNote.merkleIndex = event.params.merkleIndex;
+  encodedNote.refundType = new BigInt(event.params.refundType);
   encodedNote.save();
 
   newNote.merkleIndex = event.params.merkleIndex;

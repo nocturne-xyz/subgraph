@@ -55,6 +55,7 @@ type EncodedNote @entity(immutable: true) {
   encodedAssetId: BigInt!
   value: BigInt!
   merkleIndex: BigInt!
+  refundType: BigInt!
 }
 
 type EncryptedNote @entity(immutable: true) {
