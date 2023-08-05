@@ -589,19 +589,6 @@ export class EncodedNote extends Entity {
     this.set("value", Value.fromBigInt(value));
   }
 
-  get merkleIndex(): BigInt {
-    let value = this.get("merkleIndex");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set merkleIndex(value: BigInt) {
-    this.set("merkleIndex", Value.fromBigInt(value));
-  }
-
   get refundType(): BigInt {
     let value = this.get("refundType");
     if (!value || value.kind == ValueKind.NULL) {
