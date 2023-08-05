@@ -128,10 +128,10 @@ export function handleRefund(event: RefundProcessed): void {
 
   encodedNote.ownerH1 = refundAddr.h1;
   encodedNote.ownerH2 = refundAddr.h2;
-  encodedNote.nonce = event.params.nonce;
   encodedNote.encodedAssetAddr = event.params.encodedAssetAddr;
   encodedNote.encodedAssetId = event.params.encodedAssetId;
   encodedNote.value = event.params.value;
+  encodedNote.merkleIndex = event.params.merkleIndex;
   encodedNote.save();
 
   newNote.merkleIndex = event.params.merkleIndex;
