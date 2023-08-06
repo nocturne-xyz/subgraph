@@ -168,6 +168,23 @@ export class DepositEvent extends Entity {
   set gasCompensation(value: BigInt) {
     this.set("gasCompensation", Value.fromBigInt(value));
   }
+
+  get noteMerkleIndex(): BigInt | null {
+    let value = this.get("noteMerkleIndex");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set noteMerkleIndex(value: BigInt | null) {
+    if (!value) {
+      this.unset("noteMerkleIndex");
+    } else {
+      this.set("noteMerkleIndex", Value.fromBigInt(<BigInt>value));
+    }
+  }
 }
 
 export class DepositRequest extends Entity {
@@ -386,6 +403,23 @@ export class DepositRequest extends Entity {
 
   set gasCompensation(value: BigInt) {
     this.set("gasCompensation", Value.fromBigInt(value));
+  }
+
+  get noteMerkleIndex(): BigInt | null {
+    let value = this.get("noteMerkleIndex");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set noteMerkleIndex(value: BigInt | null) {
+    if (!value) {
+      this.unset("noteMerkleIndex");
+    } else {
+      this.set("noteMerkleIndex", Value.fromBigInt(<BigInt>value));
+    }
   }
 }
 
