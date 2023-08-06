@@ -61,12 +61,6 @@
         "internalType": "uint256",
         "name": "gasCompensation",
         "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint128",
-        "name": "merkleIndex",
-        "type": "uint128"
       }
     ],
     "name": "DepositCompleted",

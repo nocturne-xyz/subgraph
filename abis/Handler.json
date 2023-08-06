@@ -30,7 +30,7 @@
       {
         "indexed": false,
         "internalType": "address",
-        "name": "contractAddress",
+        "name": "token",
         "type": "address"
       },
       {
@@ -235,6 +235,12 @@
       {
         "indexed": false,
         "internalType": "uint256",
+        "name": "nonce",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
         "name": "encodedAssetAddr",
         "type": "uint256"
       },
@@ -255,12 +261,6 @@
         "internalType": "uint128",
         "name": "merkleIndex",
         "type": "uint128"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint8",
-        "name": "noteSource",
-        "type": "uint8"
       }
     ],
     "name": "RefundProcessed",
@@ -757,7 +757,36 @@
               }
             ],
             "internalType": "struct TrackedAsset[]",
-            "name": "trackedAssets",
+            "name": "trackedJoinSplitAssets",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "components": [
+                  {
+                    "internalType": "uint256",
+                    "name": "encodedAssetAddr",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "encodedAssetId",
+                    "type": "uint256"
+                  }
+                ],
+                "internalType": "struct EncodedAsset",
+                "name": "encodedAsset",
+                "type": "tuple"
+              },
+              {
+                "internalType": "uint256",
+                "name": "minRefundValue",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct TrackedAsset[]",
+            "name": "trackedRefundAssets",
             "type": "tuple[]"
           },
           {
@@ -908,13 +937,7 @@
       }
     ],
     "name": "handleDeposit",
-    "outputs": [
-      {
-        "internalType": "uint128",
-        "name": "merkleIndex",
-        "type": "uint128"
-      }
-    ],
+    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -1134,7 +1157,36 @@
               }
             ],
             "internalType": "struct TrackedAsset[]",
-            "name": "trackedAssets",
+            "name": "trackedJoinSplitAssets",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "components": [
+                  {
+                    "internalType": "uint256",
+                    "name": "encodedAssetAddr",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "encodedAssetId",
+                    "type": "uint256"
+                  }
+                ],
+                "internalType": "struct EncodedAsset",
+                "name": "encodedAsset",
+                "type": "tuple"
+              },
+              {
+                "internalType": "uint256",
+                "name": "minRefundValue",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct TrackedAsset[]",
+            "name": "trackedRefundAssets",
             "type": "tuple[]"
           },
           {
@@ -1255,16 +1307,6 @@
             "internalType": "uint256",
             "name": "numRefunds",
             "type": "uint256"
-          },
-          {
-            "internalType": "uint128",
-            "name": "preOpMerkleCount",
-            "type": "uint128"
-          },
-          {
-            "internalType": "uint128",
-            "name": "postOpMerkleCount",
-            "type": "uint128"
           }
         ],
         "internalType": "struct OperationResult",
@@ -1449,9 +1491,9 @@
     "name": "totalCount",
     "outputs": [
       {
-        "internalType": "uint128",
+        "internalType": "uint256",
         "name": "",
-        "type": "uint128"
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
