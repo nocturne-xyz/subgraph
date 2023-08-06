@@ -550,19 +550,6 @@ export class EncodedNote extends Entity {
     this.set("ownerH2", Value.fromBigInt(value));
   }
 
-  get nonce(): BigInt {
-    let value = this.get("nonce");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set nonce(value: BigInt) {
-    this.set("nonce", Value.fromBigInt(value));
-  }
-
   get encodedAssetAddr(): BigInt {
     let value = this.get("encodedAssetAddr");
     if (!value || value.kind == ValueKind.NULL) {
@@ -600,6 +587,19 @@ export class EncodedNote extends Entity {
 
   set value(value: BigInt) {
     this.set("value", Value.fromBigInt(value));
+  }
+
+  get noteSource(): BigInt {
+    let value = this.get("noteSource");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set noteSource(value: BigInt) {
+    this.set("noteSource", Value.fromBigInt(value));
   }
 }
 
