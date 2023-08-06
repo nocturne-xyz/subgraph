@@ -253,20 +253,24 @@ export class RefundProcessed__Params {
     );
   }
 
-  get encodedAssetAddr(): BigInt {
+  get nonce(): BigInt {
     return this._event.parameters[1].value.toBigInt();
   }
 
-  get encodedAssetId(): BigInt {
+  get encodedAssetAddr(): BigInt {
     return this._event.parameters[2].value.toBigInt();
   }
 
-  get value(): BigInt {
+  get encodedAssetId(): BigInt {
     return this._event.parameters[3].value.toBigInt();
   }
 
-  get merkleIndex(): BigInt {
+  get value(): BigInt {
     return this._event.parameters[4].value.toBigInt();
+  }
+
+  get merkleIndex(): BigInt {
+    return this._event.parameters[5].value.toBigInt();
   }
 }
 
@@ -1226,13 +1230,13 @@ export class Handler extends ethereum.SmartContract {
   }
 
   count(): BigInt {
-    let result = super.call("count", "count():(uint256)", []);
+    let result = super.call("count", "count():(uint128)", []);
 
     return result[0].toBigInt();
   }
 
   try_count(): ethereum.CallResult<BigInt> {
-    let result = super.tryCall("count", "count():(uint256)", []);
+    let result = super.tryCall("count", "count():(uint128)", []);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
