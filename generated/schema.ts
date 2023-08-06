@@ -588,19 +588,6 @@ export class EncodedNote extends Entity {
   set value(value: BigInt) {
     this.set("value", Value.fromBigInt(value));
   }
-
-  get noteSource(): BigInt {
-    let value = this.get("noteSource");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set noteSource(value: BigInt) {
-    this.set("noteSource", Value.fromBigInt(value));
-  }
 }
 
 export class EncryptedNote extends Entity {

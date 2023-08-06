@@ -268,10 +268,6 @@ export class RefundProcessed__Params {
   get merkleIndex(): BigInt {
     return this._event.parameters[4].value.toBigInt();
   }
-
-  get noteSource(): i32 {
-    return this._event.parameters[5].value.toI32();
-  }
 }
 
 export class RefundProcessedRefundAddrStruct extends ethereum.Tuple {

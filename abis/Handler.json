@@ -255,12 +255,6 @@
         "internalType": "uint128",
         "name": "merkleIndex",
         "type": "uint128"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint8",
-        "name": "noteSource",
-        "type": "uint8"
       }
     ],
     "name": "RefundProcessed",
