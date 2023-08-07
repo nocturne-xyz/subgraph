@@ -30,7 +30,7 @@
       {
         "indexed": false,
         "internalType": "address",
-        "name": "token",
+        "name": "contractAddress",
         "type": "address"
       },
       {
@@ -533,9 +533,9 @@
     "name": "count",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "uint128",
         "name": "",
-        "type": "uint256"
+        "type": "uint128"
       }
     ],
     "stateMutability": "view",
@@ -757,36 +757,7 @@
               }
             ],
             "internalType": "struct TrackedAsset[]",
-            "name": "trackedJoinSplitAssets",
-            "type": "tuple[]"
-          },
-          {
-            "components": [
-              {
-                "components": [
-                  {
-                    "internalType": "uint256",
-                    "name": "encodedAssetAddr",
-                    "type": "uint256"
-                  },
-                  {
-                    "internalType": "uint256",
-                    "name": "encodedAssetId",
-                    "type": "uint256"
-                  }
-                ],
-                "internalType": "struct EncodedAsset",
-                "name": "encodedAsset",
-                "type": "tuple"
-              },
-              {
-                "internalType": "uint256",
-                "name": "minRefundValue",
-                "type": "uint256"
-              }
-            ],
-            "internalType": "struct TrackedAsset[]",
-            "name": "trackedRefundAssets",
+            "name": "trackedAssets",
             "type": "tuple[]"
           },
           {
@@ -937,7 +908,13 @@
       }
     ],
     "name": "handleDeposit",
-    "outputs": [],
+    "outputs": [
+      {
+        "internalType": "uint128",
+        "name": "merkleIndex",
+        "type": "uint128"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -1157,36 +1134,7 @@
               }
             ],
             "internalType": "struct TrackedAsset[]",
-            "name": "trackedJoinSplitAssets",
-            "type": "tuple[]"
-          },
-          {
-            "components": [
-              {
-                "components": [
-                  {
-                    "internalType": "uint256",
-                    "name": "encodedAssetAddr",
-                    "type": "uint256"
-                  },
-                  {
-                    "internalType": "uint256",
-                    "name": "encodedAssetId",
-                    "type": "uint256"
-                  }
-                ],
-                "internalType": "struct EncodedAsset",
-                "name": "encodedAsset",
-                "type": "tuple"
-              },
-              {
-                "internalType": "uint256",
-                "name": "minRefundValue",
-                "type": "uint256"
-              }
-            ],
-            "internalType": "struct TrackedAsset[]",
-            "name": "trackedRefundAssets",
+            "name": "trackedAssets",
             "type": "tuple[]"
           },
           {
@@ -1307,6 +1255,16 @@
             "internalType": "uint256",
             "name": "numRefunds",
             "type": "uint256"
+          },
+          {
+            "internalType": "uint128",
+            "name": "preOpMerkleCount",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint128",
+            "name": "postOpMerkleCount",
+            "type": "uint128"
           }
         ],
         "internalType": "struct OperationResult",
@@ -1491,9 +1449,9 @@
     "name": "totalCount",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "uint128",
         "name": "",
-        "type": "uint256"
+        "type": "uint128"
       }
     ],
     "stateMutability": "view",

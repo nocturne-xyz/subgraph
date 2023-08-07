@@ -50,6 +50,10 @@ export class DepositCompleted__Params {
   get gasCompensation(): BigInt {
     return this._event.parameters[5].value.toBigInt();
   }
+
+  get merkleIndex(): BigInt {
+    return this._event.parameters[6].value.toBigInt();
+  }
 }
 
 export class DepositCompletedEncodedAssetStruct extends ethereum.Tuple {

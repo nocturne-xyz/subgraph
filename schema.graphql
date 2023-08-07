@@ -15,6 +15,8 @@ type DepositEvent @entity(immutable: true) {
   depositAddrH2: BigInt!
   nonce: BigInt!
   gasCompensation: BigInt!
+  # undefined unless completed
+  noteMerkleIndex: BigInt
 }
 
 enum DepositRequestStatus {
@@ -38,6 +40,8 @@ type DepositRequest @entity(immutable: false) {
   depositAddrH2: BigInt!
   nonce: BigInt!
   gasCompensation: BigInt!
+  # undefined unless completed
+  noteMerkleIndex: BigInt
 }
 
 type EncodedOrEncryptedNote @entity(immutable: true) {

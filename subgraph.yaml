@@ -58,7 +58,7 @@ dataSources:
             address,(uint256,uint256),uint256,(uint256,uint256),uint256,uint256)
           handler: handleDepositInstantiated
         - event: DepositCompleted(indexed
-            address,(uint256,uint256),uint256,(uint256,uint256),uint256,uint256)
+            address,(uint256,uint256),uint256,(uint256,uint256),uint256,uint256,uint128)
           handler: handleDepositCompleted
         - event: DepositRetrieved(indexed
             address,(uint256,uint256),uint256,(uint256,uint256),uint256,uint256)

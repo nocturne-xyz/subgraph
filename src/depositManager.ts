@@ -54,6 +54,7 @@ export function handleDepositInstantiated(event: DepositInstantiated): void {
   depositRequest.depositAddrH2 = event.params.depositAddr.h2;
   depositRequest.nonce = event.params.nonce;
   depositRequest.gasCompensation = event.params.gasCompensation;
+  depositRequest.noteMerkleIndex = null;
   depositRequest.save();
 }
 
@@ -73,6 +74,7 @@ export function handleDepositCompleted(event: DepositCompleted): void {
 
   depositRequest.status = "Completed";
   depositRequest.completionTxHash = event.transaction.hash;
+  depositRequest.noteMerkleIndex = event.params.merkleIndex;
   depositRequest.save();
 }
 
