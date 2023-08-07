@@ -20,7 +20,7 @@ type DepositEvent @entity(immutable: true) {
 enum DepositRequestStatus {
   Pending
   Completed
-  Retrievied
+  Retrieved
 }
 
 type DepositRequest @entity(immutable: false) {
