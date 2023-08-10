@@ -11,12 +11,12 @@
   },
   "sepolia": {
     "Handler": {
-      "address": "0x86356407e7412721B582517F06e1793eC82Fb748",
-      "startBlock": 3678402
+      "address": "0x102DbB232998C4441a0614AB757aa5100244f146",
+      "startBlock": 4050870
     },
     "DepositManager": {
-      "address": "0x75C01A4359C98df2cB602313bb989fdf4aC45e5e",
-      "startBlock": 3678402
+      "address": "0x2163E111fbD849C6c2F735a64981f13162BB672E",
+      "startBlock": 4050870
     }
   }
 }

@@ -14,6 +14,7 @@ import {
   TreeInsertionEvent,
   SDKEvent,
 } from "../generated/schema";
+import { BigInt } from "@graphprotocol/graph-ts";
 import {
   getTotalLogIndex,
   getTotalEntityIndex,
@@ -168,12 +169,20 @@ export function handleFilledBatchWithZeros(event: FilledBatchWithZeros): void {
   const id = toPaddedHexString(idx);
   const commit = new FilledBatchWithZerosEvent(id);
 
-  commit.startIndex = event.params.startIndex;
-  commit.numZeros = event.params.numZeros;
+  const startIndex = event.params.startIndex;
+  const numZeros = event.params.numZeros;
+
+  commit.startIndex = startIndex;
+  commit.numZeros = numZeros;
   commit.save();
 
   // make insertion for filled batch with zeros
   const insertionEvent = new TreeInsertionEvent(id);
   insertionEvent.filledBatchWithZerosEvent = id;
   insertionEvent.save();
+
+  // make SDK event for filled batch with zeros
+  const sdkEvent = new SDKEvent(id);
+  sdkEvent.filledBatchWithZerosUpToMerkleIndex = startIndex.plus(numZeros).minus(BigInt.fromI32(1));
+  sdkEvent.save();
 }
