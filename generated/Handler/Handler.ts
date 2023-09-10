@@ -481,20 +481,24 @@ export class Handler__executeActionsInputOpPubJoinSplitsJoinSplitStruct extends 
     return this[5].toBigInt();
   }
 
+  get joinSplitInfoCommitment(): BigInt {
+    return this[6].toBigInt();
+  }
+
   get proof(): Array<BigInt> {
-    return this[6].toBigIntArray();
+    return this[7].toBigIntArray();
   }
 
   get newNoteAEncrypted(): Handler__executeActionsInputOpPubJoinSplitsJoinSplitNewNoteAEncryptedStruct {
     return changetype<
       Handler__executeActionsInputOpPubJoinSplitsJoinSplitNewNoteAEncryptedStruct
-    >(this[7].toTuple());
+    >(this[8].toTuple());
   }
 
   get newNoteBEncrypted(): Handler__executeActionsInputOpPubJoinSplitsJoinSplitNewNoteBEncryptedStruct {
     return changetype<
       Handler__executeActionsInputOpPubJoinSplitsJoinSplitNewNoteBEncryptedStruct
-    >(this[8].toTuple());
+    >(this[9].toTuple());
   }
 }
 
@@ -543,20 +547,24 @@ export class Handler__executeActionsInputOpConfJoinSplitsStruct extends ethereum
     return this[5].toBigInt();
   }
 
+  get joinSplitInfoCommitment(): BigInt {
+    return this[6].toBigInt();
+  }
+
   get proof(): Array<BigInt> {
-    return this[6].toBigIntArray();
+    return this[7].toBigIntArray();
   }
 
   get newNoteAEncrypted(): Handler__executeActionsInputOpConfJoinSplitsNewNoteAEncryptedStruct {
     return changetype<
       Handler__executeActionsInputOpConfJoinSplitsNewNoteAEncryptedStruct
-    >(this[7].toTuple());
+    >(this[8].toTuple());
   }
 
   get newNoteBEncrypted(): Handler__executeActionsInputOpConfJoinSplitsNewNoteBEncryptedStruct {
     return changetype<
       Handler__executeActionsInputOpConfJoinSplitsNewNoteBEncryptedStruct
-    >(this[8].toTuple());
+    >(this[9].toTuple());
   }
 }
 
@@ -819,20 +827,24 @@ export class Handler__handleOperationInputOpPubJoinSplitsJoinSplitStruct extends
     return this[5].toBigInt();
   }
 
+  get joinSplitInfoCommitment(): BigInt {
+    return this[6].toBigInt();
+  }
+
   get proof(): Array<BigInt> {
-    return this[6].toBigIntArray();
+    return this[7].toBigIntArray();
   }
 
   get newNoteAEncrypted(): Handler__handleOperationInputOpPubJoinSplitsJoinSplitNewNoteAEncryptedStruct {
     return changetype<
       Handler__handleOperationInputOpPubJoinSplitsJoinSplitNewNoteAEncryptedStruct
-    >(this[7].toTuple());
+    >(this[8].toTuple());
   }
 
   get newNoteBEncrypted(): Handler__handleOperationInputOpPubJoinSplitsJoinSplitNewNoteBEncryptedStruct {
     return changetype<
       Handler__handleOperationInputOpPubJoinSplitsJoinSplitNewNoteBEncryptedStruct
-    >(this[8].toTuple());
+    >(this[9].toTuple());
   }
 }
 
@@ -881,20 +893,24 @@ export class Handler__handleOperationInputOpConfJoinSplitsStruct extends ethereu
     return this[5].toBigInt();
   }
 
+  get joinSplitInfoCommitment(): BigInt {
+    return this[6].toBigInt();
+  }
+
   get proof(): Array<BigInt> {
-    return this[6].toBigIntArray();
+    return this[7].toBigIntArray();
   }
 
   get newNoteAEncrypted(): Handler__handleOperationInputOpConfJoinSplitsNewNoteAEncryptedStruct {
     return changetype<
       Handler__handleOperationInputOpConfJoinSplitsNewNoteAEncryptedStruct
-    >(this[7].toTuple());
+    >(this[8].toTuple());
   }
 
   get newNoteBEncrypted(): Handler__handleOperationInputOpConfJoinSplitsNewNoteBEncryptedStruct {
     return changetype<
       Handler__handleOperationInputOpConfJoinSplitsNewNoteBEncryptedStruct
-    >(this[8].toTuple());
+    >(this[9].toTuple());
   }
 }
 
@@ -1249,7 +1265,7 @@ export class Handler extends ethereum.SmartContract {
   ): Handler__executeActionsResult {
     let result = super.call(
       "executeActions",
-      "executeActions((((uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(bytes,bytes),(bytes,bytes)),uint8,uint256)[],(uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(bytes,bytes),(bytes,bytes))[],(uint256,uint256),((uint256,uint256),uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,bool)):(bool[],bytes[],uint256)",
+      "executeActions((((uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(bytes,bytes),(bytes,bytes)),uint8,uint256)[],(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(bytes,bytes),(bytes,bytes))[],(uint256,uint256),((uint256,uint256),uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,bool)):(bool[],bytes[],uint256)",
       [ethereum.Value.fromTuple(op)]
     );
 
@@ -1265,7 +1281,7 @@ export class Handler extends ethereum.SmartContract {
   ): ethereum.CallResult<Handler__executeActionsResult> {
     let result = super.tryCall(
       "executeActions",
-      "executeActions((((uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(bytes,bytes),(bytes,bytes)),uint8,uint256)[],(uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(bytes,bytes),(bytes,bytes))[],(uint256,uint256),((uint256,uint256),uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,bool)):(bool[],bytes[],uint256)",
+      "executeActions((((uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(bytes,bytes),(bytes,bytes)),uint8,uint256)[],(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(bytes,bytes),(bytes,bytes))[],(uint256,uint256),((uint256,uint256),uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,bool)):(bool[],bytes[],uint256)",
       [ethereum.Value.fromTuple(op)]
     );
     if (result.reverted) {
@@ -1313,7 +1329,7 @@ export class Handler extends ethereum.SmartContract {
   ): Handler__handleOperationResultOpResultStruct {
     let result = super.call(
       "handleOperation",
-      "handleOperation((((uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(bytes,bytes),(bytes,bytes)),uint8,uint256)[],(uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(bytes,bytes),(bytes,bytes))[],(uint256,uint256),((uint256,uint256),uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,bool),uint256,address):((bool,bool,string,bool[],bytes[],uint256,uint256,uint256,uint128,uint128))",
+      "handleOperation((((uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(bytes,bytes),(bytes,bytes)),uint8,uint256)[],(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(bytes,bytes),(bytes,bytes))[],(uint256,uint256),((uint256,uint256),uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,bool),uint256,address):((bool,bool,string,bool[],bytes[],uint256,uint256,uint256,uint128,uint128))",
       [
         ethereum.Value.fromTuple(op),
         ethereum.Value.fromUnsignedBigInt(perJoinSplitVerifyGas),
@@ -1333,7 +1349,7 @@ export class Handler extends ethereum.SmartContract {
   ): ethereum.CallResult<Handler__handleOperationResultOpResultStruct> {
     let result = super.tryCall(
       "handleOperation",
-      "handleOperation((((uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(bytes,bytes),(bytes,bytes)),uint8,uint256)[],(uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(bytes,bytes),(bytes,bytes))[],(uint256,uint256),((uint256,uint256),uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,bool),uint256,address):((bool,bool,string,bool[],bytes[],uint256,uint256,uint256,uint128,uint128))",
+      "handleOperation((((uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(bytes,bytes),(bytes,bytes)),uint8,uint256)[],(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256[8],(bytes,bytes),(bytes,bytes))[],(uint256,uint256),((uint256,uint256),uint256)[],(address,bytes)[],(uint256,uint256),uint256,uint256,uint256,uint256,bool),uint256,address):((bool,bool,string,bool[],bytes[],uint256,uint256,uint256,uint128,uint128))",
       [
         ethereum.Value.fromTuple(op),
         ethereum.Value.fromUnsignedBigInt(perJoinSplitVerifyGas),
@@ -1643,20 +1659,24 @@ export class ExecuteActionsCallOpPubJoinSplitsJoinSplitStruct extends ethereum.T
     return this[5].toBigInt();
   }
 
+  get joinSplitInfoCommitment(): BigInt {
+    return this[6].toBigInt();
+  }
+
   get proof(): Array<BigInt> {
-    return this[6].toBigIntArray();
+    return this[7].toBigIntArray();
   }
 
   get newNoteAEncrypted(): ExecuteActionsCallOpPubJoinSplitsJoinSplitNewNoteAEncryptedStruct {
     return changetype<
       ExecuteActionsCallOpPubJoinSplitsJoinSplitNewNoteAEncryptedStruct
-    >(this[7].toTuple());
+    >(this[8].toTuple());
   }
 
   get newNoteBEncrypted(): ExecuteActionsCallOpPubJoinSplitsJoinSplitNewNoteBEncryptedStruct {
     return changetype<
       ExecuteActionsCallOpPubJoinSplitsJoinSplitNewNoteBEncryptedStruct
-    >(this[8].toTuple());
+    >(this[9].toTuple());
   }
 }
 
@@ -1705,20 +1725,24 @@ export class ExecuteActionsCallOpConfJoinSplitsStruct extends ethereum.Tuple {
     return this[5].toBigInt();
   }
 
+  get joinSplitInfoCommitment(): BigInt {
+    return this[6].toBigInt();
+  }
+
   get proof(): Array<BigInt> {
-    return this[6].toBigIntArray();
+    return this[7].toBigIntArray();
   }
 
   get newNoteAEncrypted(): ExecuteActionsCallOpConfJoinSplitsNewNoteAEncryptedStruct {
     return changetype<
       ExecuteActionsCallOpConfJoinSplitsNewNoteAEncryptedStruct
-    >(this[7].toTuple());
+    >(this[8].toTuple());
   }
 
   get newNoteBEncrypted(): ExecuteActionsCallOpConfJoinSplitsNewNoteBEncryptedStruct {
     return changetype<
       ExecuteActionsCallOpConfJoinSplitsNewNoteBEncryptedStruct
-    >(this[8].toTuple());
+    >(this[9].toTuple());
   }
 }
 
@@ -2033,20 +2057,24 @@ export class HandleOperationCallOpPubJoinSplitsJoinSplitStruct extends ethereum.
     return this[5].toBigInt();
   }
 
+  get joinSplitInfoCommitment(): BigInt {
+    return this[6].toBigInt();
+  }
+
   get proof(): Array<BigInt> {
-    return this[6].toBigIntArray();
+    return this[7].toBigIntArray();
   }
 
   get newNoteAEncrypted(): HandleOperationCallOpPubJoinSplitsJoinSplitNewNoteAEncryptedStruct {
     return changetype<
       HandleOperationCallOpPubJoinSplitsJoinSplitNewNoteAEncryptedStruct
-    >(this[7].toTuple());
+    >(this[8].toTuple());
   }
 
   get newNoteBEncrypted(): HandleOperationCallOpPubJoinSplitsJoinSplitNewNoteBEncryptedStruct {
     return changetype<
       HandleOperationCallOpPubJoinSplitsJoinSplitNewNoteBEncryptedStruct
-    >(this[8].toTuple());
+    >(this[9].toTuple());
   }
 }
 
@@ -2095,20 +2123,24 @@ export class HandleOperationCallOpConfJoinSplitsStruct extends ethereum.Tuple {
     return this[5].toBigInt();
   }
 
+  get joinSplitInfoCommitment(): BigInt {
+    return this[6].toBigInt();
+  }
+
   get proof(): Array<BigInt> {
-    return this[6].toBigIntArray();
+    return this[7].toBigIntArray();
   }
 
   get newNoteAEncrypted(): HandleOperationCallOpConfJoinSplitsNewNoteAEncryptedStruct {
     return changetype<
       HandleOperationCallOpConfJoinSplitsNewNoteAEncryptedStruct
-    >(this[7].toTuple());
+    >(this[8].toTuple());
   }
 
   get newNoteBEncrypted(): HandleOperationCallOpConfJoinSplitsNewNoteBEncryptedStruct {
     return changetype<
       HandleOperationCallOpConfJoinSplitsNewNoteBEncryptedStruct
-    >(this[8].toTuple());
+    >(this[9].toTuple());
   }
 }
 

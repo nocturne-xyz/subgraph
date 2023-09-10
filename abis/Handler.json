@@ -580,6 +580,11 @@
                     "type": "uint256"
                   },
                   {
+                    "internalType": "uint256",
+                    "name": "joinSplitInfoCommitment",
+                    "type": "uint256"
+                  },
+                  {
                     "internalType": "uint256[8]",
                     "name": "proof",
                     "type": "uint256[8]"
@@ -668,6 +673,11 @@
               {
                 "internalType": "uint256",
                 "name": "senderCommitment",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "joinSplitInfoCommitment",
                 "type": "uint256"
               },
               {
@@ -957,6 +967,11 @@
                     "type": "uint256"
                   },
                   {
+                    "internalType": "uint256",
+                    "name": "joinSplitInfoCommitment",
+                    "type": "uint256"
+                  },
+                  {
                     "internalType": "uint256[8]",
                     "name": "proof",
                     "type": "uint256[8]"
@@ -1045,6 +1060,11 @@
               {
                 "internalType": "uint256",
                 "name": "senderCommitment",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "joinSplitInfoCommitment",
                 "type": "uint256"
               },
               {
