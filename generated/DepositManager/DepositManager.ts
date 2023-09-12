@@ -354,19 +354,22 @@ export class DepositManager___erc20CapsResult {
   value2: BigInt;
   value3: BigInt;
   value4: i32;
+  value5: i32;
 
   constructor(
     value0: BigInt,
     value1: BigInt,
     value2: BigInt,
     value3: BigInt,
-    value4: i32
+    value4: i32,
+    value5: i32
   ) {
     this.value0 = value0;
     this.value1 = value1;
     this.value2 = value2;
     this.value3 = value3;
     this.value4 = value4;
+    this.value5 = value5;
   }
 
   toMap(): TypedMap<string, ethereum.Value> {
@@ -378,6 +381,10 @@ export class DepositManager___erc20CapsResult {
     map.set(
       "value4",
       ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(this.value4))
+    );
+    map.set(
+      "value5",
+      ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(this.value5))
     );
     return map;
   }
@@ -398,8 +405,12 @@ export class DepositManager___erc20CapsResult {
     return this.value3;
   }
 
-  getPrecision(): i32 {
+  getResetWindowHours(): i32 {
     return this.value4;
+  }
+
+  getPrecision(): i32 {
+    return this.value5;
   }
 }
 
@@ -573,7 +584,7 @@ export class DepositManager extends ethereum.SmartContract {
   _erc20Caps(param0: Address): DepositManager___erc20CapsResult {
     let result = super.call(
       "_erc20Caps",
-      "_erc20Caps(address):(uint128,uint32,uint32,uint32,uint8)",
+      "_erc20Caps(address):(uint128,uint32,uint32,uint32,uint8,uint8)",
       [ethereum.Value.fromAddress(param0)]
     );
 
@@ -582,7 +593,8 @@ export class DepositManager extends ethereum.SmartContract {
       result[1].toBigInt(),
       result[2].toBigInt(),
       result[3].toBigInt(),
-      result[4].toI32()
+      result[4].toI32(),
+      result[5].toI32()
     );
   }
 
@@ -591,7 +603,7 @@ export class DepositManager extends ethereum.SmartContract {
   ): ethereum.CallResult<DepositManager___erc20CapsResult> {
     let result = super.tryCall(
       "_erc20Caps",
-      "_erc20Caps(address):(uint128,uint32,uint32,uint32,uint8)",
+      "_erc20Caps(address):(uint128,uint32,uint32,uint32,uint8,uint8)",
       [ethereum.Value.fromAddress(param0)]
     );
     if (result.reverted) {
@@ -604,7 +616,8 @@ export class DepositManager extends ethereum.SmartContract {
         value[1].toBigInt(),
         value[2].toBigInt(),
         value[3].toBigInt(),
-        value[4].toI32()
+        value[4].toI32(),
+        value[5].toI32()
       )
     );
   }
@@ -1155,8 +1168,12 @@ export class SetErc20CapCall__Inputs {
     return this._call.inputValues[2].value.toBigInt();
   }
 
-  get precision(): i32 {
+  get resetWindowHours(): i32 {
     return this._call.inputValues[3].value.toI32();
+  }
+
+  get precision(): i32 {
+    return this._call.inputValues[4].value.toI32();
   }
 }
 
