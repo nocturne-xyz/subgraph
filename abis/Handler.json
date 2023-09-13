@@ -121,6 +121,12 @@
         "type": "uint256"
       },
       {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "joinSplitInfoCommitment",
+        "type": "uint256"
+      },
+      {
         "components": [
           {
             "internalType": "bytes",
