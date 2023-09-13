@@ -139,15 +139,19 @@ export class JoinSplitProcessed__Params {
     return this._event.parameters[6].value.toBigInt();
   }
 
+  get joinSplitInfoCommitment(): BigInt {
+    return this._event.parameters[7].value.toBigInt();
+  }
+
   get newNoteAEncrypted(): JoinSplitProcessedNewNoteAEncryptedStruct {
     return changetype<JoinSplitProcessedNewNoteAEncryptedStruct>(
-      this._event.parameters[7].value.toTuple()
+      this._event.parameters[8].value.toTuple()
     );
   }
 
   get newNoteBEncrypted(): JoinSplitProcessedNewNoteBEncryptedStruct {
     return changetype<JoinSplitProcessedNewNoteBEncryptedStruct>(
-      this._event.parameters[8].value.toTuple()
+      this._event.parameters[9].value.toTuple()
     );
   }
 }
