@@ -9,6 +9,16 @@
       "startBlock": 0
     }
   },
+  "sepolia": {
+    "Handler": {
+      "address": "0x102DbB232998C4441a0614AB757aa5100244f146",
+      "startBlock": 4050870
+    },
+    "DepositManager": {
+      "address": "0x2163E111fbD849C6c2F735a64981f13162BB672E",
+      "startBlock": 4050870
+    }
+  },
   "goerli": {
     "Handler": {
       "address": "0x9e76C19c591446d01d868dB464948F785408c1f4",
