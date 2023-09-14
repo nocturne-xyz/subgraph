@@ -18,5 +18,15 @@
       "address": "0x2163E111fbD849C6c2F735a64981f13162BB672E",
       "startBlock": 4050870
     }
+  },
+  "goerli": {
+    "Handler": {
+      "address": "0x9e76C19c591446d01d868dB464948F785408c1f4",
+      "startBlock": 9694596
+    },
+    "DepositManager": {
+      "address": "0xF136D2Ce4013e3068881A1F218f718fE7487fC17",
+      "startBlock": 9694596
+    }
   }
 }

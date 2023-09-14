@@ -2,6 +2,7 @@
 
 ### Unreleased
 
+- replace sepolia addresses with goerli redeploy
 - update addresses after tob-16 changes
 - index `DepositCompleted` and `DepositRetrieved` events, and use them to update `DepositRequest` `status`.
 - add `DepositRequest` entity
