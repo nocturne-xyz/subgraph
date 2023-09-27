@@ -85,15 +85,48 @@ type FilledBatchWithZerosEvent @entity(immutable: true) {
   numZeros: BigInt!
 }
 
+# "flattened" event over all tree insertions for easier linear scans
 type TreeInsertionEvent @entity(immutable: true) {
   id: ID!
-  encodedOrEncryptedNote: EncodedOrEncryptedNote
-  filledBatchWithZerosEvent: FilledBatchWithZerosEvent
+
+  # plaintext note insertion (from a deposit or refund)
+  encodedNoteOwnerH1: BigInt
+  encodedNoteOwnerH2: BigInt
+  encodedNoteNonce: BigInt
+  encodedNoteEncodedAssetAddr: BigInt
+  encodedNoteEncodedAssetId: BigInt
+  encodedNoteValue: BigInt
+
+  # encrypted note insertion (from a joinsplit)
+  encryptedNoteCiphertextBytes: Bytes
+  encryptedNoteEncapsulatedSecretBytes: Bytes
+  encryptedNoteCommitment: BigInt
+
+  # tree batch filled with zeros
+  filledBatchWithZerosStartIndex: BigInt
+  filledBatchWithZerosNumZeros: BigInt
 }
 
+# "flattened" event over everything SDK needs for easier linear scans
 type SDKEvent @entity(immutable: true) {
   id: ID!
-  encodedOrEncryptedNote: EncodedOrEncryptedNote
-  nullifier: Nullifier
+
+  # plaintext note insertion (i.e. a refund)
+  encodedNoteOwnerH1: BigInt
+  encodedNoteOwnerH2: BigInt
+  encodedNoteEncodedAssetAddr: BigInt
+  encodedNoteEncodedAssetId: BigInt
+  encodedNoteValue: BigInt
+  encodedNoteNonce: BigInt
+
+  # encrypted note insertion (from a joinsplit)
+  encryptedNoteCiphertextBytes: Bytes
+  encryptedNoteEncapsulatedSecretBytes: Bytes
+  encryptedNoteCommitment: BigInt
+
+  # nullifier
+  nullifier: BigInt
+
+  # tree batch filled with zeros
   filledBatchWithZerosUpToMerkleIndex: BigInt
 }

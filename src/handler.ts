@@ -34,7 +34,7 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
   // make SDK event for old note A's nullifier
   {
     const sdkEvent = new SDKEvent(id);
-    sdkEvent.nullifier = id;
+    sdkEvent.nullifier = nullifierA.nullifier;
     sdkEvent.save();
   }
 
@@ -48,7 +48,7 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
   // make SDK event for old note B's nullifier
   {
     const sdkEvent = new SDKEvent(id);
-    sdkEvent.nullifier = id;
+    sdkEvent.nullifier = nullifierB.nullifier;
     sdkEvent.save();
   }
 
@@ -73,14 +73,21 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
   // make insertion event for new note A
   {
     const insertionEvent = new TreeInsertionEvent(id);
-    insertionEvent.encodedOrEncryptedNote = id;
+    insertionEvent.encryptedNoteCiphertextBytes =
+      encryptedNoteA.ciphertextBytes;
+    insertionEvent.encryptedNoteEncapsulatedSecretBytes =
+      encryptedNoteA.encapsulatedSecretBytes;
+    insertionEvent.encryptedNoteCommitment = encryptedNoteA.commitment;
     insertionEvent.save();
   }
 
   // make SDK event for new note A
   {
     const sdkEvent = new SDKEvent(id);
-    sdkEvent.encodedOrEncryptedNote = id;
+    sdkEvent.encryptedNoteCiphertextBytes = encryptedNoteA.ciphertextBytes;
+    sdkEvent.encryptedNoteEncapsulatedSecretBytes =
+      encryptedNoteA.encapsulatedSecretBytes;
+    sdkEvent.encryptedNoteCommitment = encryptedNoteA.commitment;
     sdkEvent.save();
   }
 
@@ -105,14 +112,21 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
   // make insertion event for new note B
   {
     const insertionEvent = new TreeInsertionEvent(id);
-    insertionEvent.encodedOrEncryptedNote = id;
+    insertionEvent.encryptedNoteCiphertextBytes =
+      encryptedNoteB.ciphertextBytes;
+    insertionEvent.encryptedNoteEncapsulatedSecretBytes =
+      encryptedNoteB.encapsulatedSecretBytes;
+    insertionEvent.encryptedNoteCommitment = encryptedNoteB.commitment;
     insertionEvent.save();
   }
 
   // make SDK event for new note B
   {
     const sdkEvent = new SDKEvent(id);
-    sdkEvent.encodedOrEncryptedNote = id;
+    sdkEvent.encryptedNoteCiphertextBytes = encryptedNoteB.ciphertextBytes;
+    sdkEvent.encryptedNoteEncapsulatedSecretBytes =
+      encryptedNoteB.encapsulatedSecretBytes;
+    sdkEvent.encryptedNoteCommitment = encryptedNoteB.commitment;
     sdkEvent.save();
   }
 }
@@ -141,12 +155,22 @@ export function handleRefund(event: RefundProcessed): void {
 
   // make insertion for refund note
   const insertionEvent = new TreeInsertionEvent(id);
-  insertionEvent.encodedOrEncryptedNote = id;
+  insertionEvent.encodedNoteOwnerH1 = encodedNote.ownerH1;
+  insertionEvent.encodedNoteOwnerH2 = encodedNote.ownerH2;
+  insertionEvent.encodedNoteEncodedAssetAddr = encodedNote.encodedAssetAddr;
+  insertionEvent.encodedNoteEncodedAssetId = encodedNote.encodedAssetId;
+  insertionEvent.encodedNoteValue = encodedNote.value;
+  insertionEvent.encodedNoteNonce = encodedNote.nonce;
   insertionEvent.save();
 
   // make SDK event for refund note
   const sdkEvent = new SDKEvent(id);
-  sdkEvent.encodedOrEncryptedNote = id;
+  sdkEvent.encodedNoteOwnerH1 = encodedNote.ownerH1;
+  sdkEvent.encodedNoteOwnerH2 = encodedNote.ownerH2;
+  sdkEvent.encodedNoteEncodedAssetAddr = encodedNote.encodedAssetAddr;
+  sdkEvent.encodedNoteEncodedAssetId = encodedNote.encodedAssetId;
+  sdkEvent.encodedNoteValue = encodedNote.value;
+  sdkEvent.encodedNoteNonce = encodedNote.nonce;
   sdkEvent.save();
 }
 
@@ -178,7 +202,8 @@ export function handleFilledBatchWithZeros(event: FilledBatchWithZeros): void {
 
   // make insertion for filled batch with zeros
   const insertionEvent = new TreeInsertionEvent(id);
-  insertionEvent.filledBatchWithZerosEvent = id;
+  insertionEvent.filledBatchWithZerosStartIndex = startIndex;
+  insertionEvent.filledBatchWithZerosNumZeros = numZeros;
   insertionEvent.save();
 
   // make SDK event for filled batch with zeros
