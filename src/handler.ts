@@ -78,6 +78,7 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
     insertionEvent.encryptedNoteEncapsulatedSecretBytes =
       encryptedNoteA.encapsulatedSecretBytes;
     insertionEvent.encryptedNoteCommitment = encryptedNoteA.commitment;
+    insertionEvent.merkleIndex = newNoteA.merkleIndex;
     insertionEvent.save();
   }
 
@@ -88,6 +89,7 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
     sdkEvent.encryptedNoteEncapsulatedSecretBytes =
       encryptedNoteA.encapsulatedSecretBytes;
     sdkEvent.encryptedNoteCommitment = encryptedNoteA.commitment;
+    sdkEvent.merkleIndex = newNoteA.merkleIndex;
     sdkEvent.save();
   }
 
@@ -117,6 +119,7 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
     insertionEvent.encryptedNoteEncapsulatedSecretBytes =
       encryptedNoteB.encapsulatedSecretBytes;
     insertionEvent.encryptedNoteCommitment = encryptedNoteB.commitment;
+    insertionEvent.merkleIndex = newNoteB.merkleIndex;
     insertionEvent.save();
   }
 
@@ -127,6 +130,7 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
     sdkEvent.encryptedNoteEncapsulatedSecretBytes =
       encryptedNoteB.encapsulatedSecretBytes;
     sdkEvent.encryptedNoteCommitment = encryptedNoteB.commitment;
+    sdkEvent.merkleIndex = newNoteB.merkleIndex;
     sdkEvent.save();
   }
 }
@@ -161,6 +165,7 @@ export function handleRefund(event: RefundProcessed): void {
   insertionEvent.encodedNoteEncodedAssetId = encodedNote.encodedAssetId;
   insertionEvent.encodedNoteValue = encodedNote.value;
   insertionEvent.encodedNoteNonce = encodedNote.nonce;
+  insertionEvent.merkleIndex = newNote.merkleIndex;
   insertionEvent.save();
 
   // make SDK event for refund note
@@ -171,6 +176,7 @@ export function handleRefund(event: RefundProcessed): void {
   sdkEvent.encodedNoteEncodedAssetId = encodedNote.encodedAssetId;
   sdkEvent.encodedNoteValue = encodedNote.value;
   sdkEvent.encodedNoteNonce = encodedNote.nonce;
+  sdkEvent.merkleIndex = newNote.merkleIndex;
   sdkEvent.save();
 }
 
@@ -202,14 +208,12 @@ export function handleFilledBatchWithZeros(event: FilledBatchWithZeros): void {
 
   // make insertion for filled batch with zeros
   const insertionEvent = new TreeInsertionEvent(id);
-  insertionEvent.filledBatchWithZerosStartIndex = startIndex;
+  insertionEvent.merkleIndex = startIndex;
   insertionEvent.filledBatchWithZerosNumZeros = numZeros;
   insertionEvent.save();
 
   // make SDK event for filled batch with zeros
   const sdkEvent = new SDKEvent(id);
-  sdkEvent.filledBatchWithZerosUpToMerkleIndex = startIndex
-    .plus(numZeros)
-    .minus(BigInt.fromI32(1));
+  sdkEvent.merkleIndex = startIndex.plus(numZeros).minus(BigInt.fromI32(1));
   sdkEvent.save();
 }

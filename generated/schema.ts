@@ -955,6 +955,23 @@ export class TreeInsertionEvent extends Entity {
     this.set("id", Value.fromString(value));
   }
 
+  get merkleIndex(): BigInt | null {
+    let value = this.get("merkleIndex");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set merkleIndex(value: BigInt | null) {
+    if (!value) {
+      this.unset("merkleIndex");
+    } else {
+      this.set("merkleIndex", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
   get encodedNoteOwnerH1(): BigInt | null {
     let value = this.get("encodedNoteOwnerH1");
     if (!value || value.kind == ValueKind.NULL) {
@@ -1111,26 +1128,6 @@ export class TreeInsertionEvent extends Entity {
     }
   }
 
-  get filledBatchWithZerosStartIndex(): BigInt | null {
-    let value = this.get("filledBatchWithZerosStartIndex");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set filledBatchWithZerosStartIndex(value: BigInt | null) {
-    if (!value) {
-      this.unset("filledBatchWithZerosStartIndex");
-    } else {
-      this.set(
-        "filledBatchWithZerosStartIndex",
-        Value.fromBigInt(<BigInt>value)
-      );
-    }
-  }
-
   get filledBatchWithZerosNumZeros(): BigInt | null {
     let value = this.get("filledBatchWithZerosNumZeros");
     if (!value || value.kind == ValueKind.NULL) {
@@ -1186,6 +1183,23 @@ export class SDKEvent extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
+  }
+
+  get merkleIndex(): BigInt | null {
+    let value = this.get("merkleIndex");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set merkleIndex(value: BigInt | null) {
+    if (!value) {
+      this.unset("merkleIndex");
+    } else {
+      this.set("merkleIndex", Value.fromBigInt(<BigInt>value));
+    }
   }
 
   get encodedNoteOwnerH1(): BigInt | null {
@@ -1358,26 +1372,6 @@ export class SDKEvent extends Entity {
       this.unset("nullifier");
     } else {
       this.set("nullifier", Value.fromBigInt(<BigInt>value));
-    }
-  }
-
-  get filledBatchWithZerosUpToMerkleIndex(): BigInt | null {
-    let value = this.get("filledBatchWithZerosUpToMerkleIndex");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set filledBatchWithZerosUpToMerkleIndex(value: BigInt | null) {
-    if (!value) {
-      this.unset("filledBatchWithZerosUpToMerkleIndex");
-    } else {
-      this.set(
-        "filledBatchWithZerosUpToMerkleIndex",
-        Value.fromBigInt(<BigInt>value)
-      );
     }
   }
 }

@@ -89,6 +89,11 @@ type FilledBatchWithZerosEvent @entity(immutable: true) {
 type TreeInsertionEvent @entity(immutable: true) {
   id: ID!
 
+  # merkle index of the insertion
+  # in the case of a note, this is the merkle index for the note
+  # in the case of a tree batch being filled with zeros, this is the first index of the batch
+  merkleIndex: BigInt
+
   # plaintext note insertion (from a deposit or refund)
   encodedNoteOwnerH1: BigInt
   encodedNoteOwnerH2: BigInt
@@ -103,13 +108,17 @@ type TreeInsertionEvent @entity(immutable: true) {
   encryptedNoteCommitment: BigInt
 
   # tree batch filled with zeros
-  filledBatchWithZerosStartIndex: BigInt
   filledBatchWithZerosNumZeros: BigInt
 }
 
 # "flattened" event over everything SDK needs for easier linear scans
 type SDKEvent @entity(immutable: true) {
   id: ID!
+
+  # if it's a note, merkle index of the note
+  # if it's a tree batch filled with zeros, the merkle index immediately after the end of the batch
+  # if it's a nullifier, null
+  merkleIndex: BigInt
 
   # plaintext note insertion (i.e. a refund)
   encodedNoteOwnerH1: BigInt
@@ -126,7 +135,4 @@ type SDKEvent @entity(immutable: true) {
 
   # nullifier
   nullifier: BigInt
-
-  # tree batch filled with zeros
-  filledBatchWithZerosUpToMerkleIndex: BigInt
 }
