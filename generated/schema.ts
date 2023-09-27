@@ -1222,23 +1222,6 @@ export class SDKEvent extends Entity {
     }
   }
 
-  get encodedNoteNonce(): BigInt | null {
-    let value = this.get("encodedNoteNonce");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set encodedNoteNonce(value: BigInt | null) {
-    if (!value) {
-      this.unset("encodedNoteNonce");
-    } else {
-      this.set("encodedNoteNonce", Value.fromBigInt(<BigInt>value));
-    }
-  }
-
   get encodedNoteEncodedAssetAddr(): BigInt | null {
     let value = this.get("encodedNoteEncodedAssetAddr");
     if (!value || value.kind == ValueKind.NULL) {
@@ -1287,6 +1270,23 @@ export class SDKEvent extends Entity {
       this.unset("encodedNoteValue");
     } else {
       this.set("encodedNoteValue", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
+  get encodedNoteNonce(): BigInt | null {
+    let value = this.get("encodedNoteNonce");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set encodedNoteNonce(value: BigInt | null) {
+    if (!value) {
+      this.unset("encodedNoteNonce");
+    } else {
+      this.set("encodedNoteNonce", Value.fromBigInt(<BigInt>value));
     }
   }
 
