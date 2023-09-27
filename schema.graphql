@@ -86,13 +86,16 @@ type FilledBatchWithZerosEvent @entity(immutable: true) {
 }
 
 # "flattened" event over all tree insertions for easier linear scans
+# it's a plaintext note iff only those fields and merkleIndex are non-null
+# it's an encrypted note iff only those fields and merkleIndex are non-null
+# it's a tree batch fill iff only `merkleIndex` is non-null
 type TreeInsertionEvent @entity(immutable: true) {
   id: ID!
 
   # merkle index of the insertion
   # in the case of a note, this is the merkle index for the note
   # in the case of a tree batch being filled with zeros, this is the first index of the batch
-  merkleIndex: BigInt
+  merkleIndex: BigInt!
 
   # plaintext note insertion (from a deposit or refund)
   encodedNoteOwnerH1: BigInt

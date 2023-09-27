@@ -955,21 +955,17 @@ export class TreeInsertionEvent extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get merkleIndex(): BigInt | null {
+  get merkleIndex(): BigInt {
     let value = this.get("merkleIndex");
     if (!value || value.kind == ValueKind.NULL) {
-      return null;
+      throw new Error("Cannot return null for a required field.");
     } else {
       return value.toBigInt();
     }
   }
 
-  set merkleIndex(value: BigInt | null) {
-    if (!value) {
-      this.unset("merkleIndex");
-    } else {
-      this.set("merkleIndex", Value.fromBigInt(<BigInt>value));
-    }
+  set merkleIndex(value: BigInt) {
+    this.set("merkleIndex", Value.fromBigInt(value));
   }
 
   get encodedNoteOwnerH1(): BigInt | null {
