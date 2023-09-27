@@ -48,7 +48,7 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
   // make SDK event for old note B's nullifier
   {
     const sdkEvent = new SDKEvent(id);
-    sdkEvent.nullifier = nullifierB.nullifier;
+    sdkEvent.nullifier = event.params.oldNoteBNullifier;
     sdkEvent.save();
   }
 
@@ -74,22 +74,22 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
   {
     const insertionEvent = new TreeInsertionEvent(id);
     insertionEvent.encryptedNoteCiphertextBytes =
-      encryptedNoteA.ciphertextBytes;
+      newNoteAEncrypted.ciphertextBytes;
     insertionEvent.encryptedNoteEncapsulatedSecretBytes =
-      encryptedNoteA.encapsulatedSecretBytes;
-    insertionEvent.encryptedNoteCommitment = encryptedNoteA.commitment;
-    insertionEvent.merkleIndex = newNoteA.merkleIndex;
+      newNoteAEncrypted.encapsulatedSecretBytes;
+    insertionEvent.encryptedNoteCommitment = event.params.newNoteACommitment;
+    insertionEvent.merkleIndex = event.params.newNoteAIndex;
     insertionEvent.save();
   }
 
   // make SDK event for new note A
   {
     const sdkEvent = new SDKEvent(id);
-    sdkEvent.encryptedNoteCiphertextBytes = encryptedNoteA.ciphertextBytes;
+    sdkEvent.encryptedNoteCiphertextBytes = newNoteAEncrypted.ciphertextBytes;
     sdkEvent.encryptedNoteEncapsulatedSecretBytes =
-      encryptedNoteA.encapsulatedSecretBytes;
-    sdkEvent.encryptedNoteCommitment = encryptedNoteA.commitment;
-    sdkEvent.merkleIndex = newNoteA.merkleIndex;
+      newNoteAEncrypted.encapsulatedSecretBytes;
+    sdkEvent.encryptedNoteCommitment = event.params.newNoteACommitment;
+    sdkEvent.merkleIndex = event.params.newNoteAIndex;
     sdkEvent.save();
   }
 
@@ -115,22 +115,20 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
   {
     const insertionEvent = new TreeInsertionEvent(id);
     insertionEvent.encryptedNoteCiphertextBytes =
-      encryptedNoteB.ciphertextBytes;
-    insertionEvent.encryptedNoteEncapsulatedSecretBytes =
-      encryptedNoteB.encapsulatedSecretBytes;
-    insertionEvent.encryptedNoteCommitment = encryptedNoteB.commitment;
-    insertionEvent.merkleIndex = newNoteB.merkleIndex;
+      newNoteBEncrypted.ciphertextBytes;
+    insertionEvent.encryptedNoteEncapsulatedSecretBytes = newNoteBEncrypted.encapsulatedSecretBytes;
+    insertionEvent.encryptedNoteCommitment = event.params.newNoteBCommitment;
+    insertionEvent.merkleIndex = event.params.newNoteBIndex;
     insertionEvent.save();
   }
 
   // make SDK event for new note B
   {
     const sdkEvent = new SDKEvent(id);
-    sdkEvent.encryptedNoteCiphertextBytes = encryptedNoteB.ciphertextBytes;
-    sdkEvent.encryptedNoteEncapsulatedSecretBytes =
-      encryptedNoteB.encapsulatedSecretBytes;
-    sdkEvent.encryptedNoteCommitment = encryptedNoteB.commitment;
-    sdkEvent.merkleIndex = newNoteB.merkleIndex;
+    sdkEvent.encryptedNoteCiphertextBytes = newNoteBEncrypted.ciphertextBytes;
+    sdkEvent.encryptedNoteEncapsulatedSecretBytes = newNoteBEncrypted.encapsulatedSecretBytes;
+    sdkEvent.encryptedNoteCommitment = event.params.newNoteBCommitment;
+    sdkEvent.merkleIndex = event.params.newNoteBIndex;
     sdkEvent.save();
   }
 }
@@ -159,24 +157,24 @@ export function handleRefund(event: RefundProcessed): void {
 
   // make insertion for refund note
   const insertionEvent = new TreeInsertionEvent(id);
-  insertionEvent.encodedNoteOwnerH1 = encodedNote.ownerH1;
-  insertionEvent.encodedNoteOwnerH2 = encodedNote.ownerH2;
-  insertionEvent.encodedNoteEncodedAssetAddr = encodedNote.encodedAssetAddr;
-  insertionEvent.encodedNoteEncodedAssetId = encodedNote.encodedAssetId;
-  insertionEvent.encodedNoteValue = encodedNote.value;
-  insertionEvent.encodedNoteNonce = encodedNote.nonce;
-  insertionEvent.merkleIndex = newNote.merkleIndex;
+  insertionEvent.encodedNoteOwnerH1 = refundAddr.h1
+  insertionEvent.encodedNoteOwnerH2 = refundAddr.h2;
+  insertionEvent.encodedNoteEncodedAssetAddr = event.params.encodedAssetAddr;
+  insertionEvent.encodedNoteEncodedAssetId = event.params.encodedAssetId;
+  insertionEvent.encodedNoteValue = event.params.value;
+  insertionEvent.encodedNoteNonce = event.params.nonce;
+  insertionEvent.merkleIndex = event.params.merkleIndex;
   insertionEvent.save();
 
   // make SDK event for refund note
   const sdkEvent = new SDKEvent(id);
-  sdkEvent.encodedNoteOwnerH1 = encodedNote.ownerH1;
-  sdkEvent.encodedNoteOwnerH2 = encodedNote.ownerH2;
-  sdkEvent.encodedNoteEncodedAssetAddr = encodedNote.encodedAssetAddr;
-  sdkEvent.encodedNoteEncodedAssetId = encodedNote.encodedAssetId;
-  sdkEvent.encodedNoteValue = encodedNote.value;
-  sdkEvent.encodedNoteNonce = encodedNote.nonce;
-  sdkEvent.merkleIndex = newNote.merkleIndex;
+  sdkEvent.encodedNoteOwnerH1 = refundAddr.h1;
+  sdkEvent.encodedNoteOwnerH2 = refundAddr.h2;
+  sdkEvent.encodedNoteEncodedAssetAddr = event.params.encodedAssetAddr;
+  sdkEvent.encodedNoteEncodedAssetId = event.params.encodedAssetId;
+  sdkEvent.encodedNoteValue = event.params.value;
+  sdkEvent.encodedNoteNonce = event.params.nonce;
+  sdkEvent.merkleIndex = event.params.merkleIndex;
   sdkEvent.save();
 }
 
