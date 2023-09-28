@@ -955,189 +955,37 @@ export class TreeInsertionEvent extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get merkleIndex(): BigInt {
-    let value = this.get("merkleIndex");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set merkleIndex(value: BigInt) {
-    this.set("merkleIndex", Value.fromBigInt(value));
-  }
-
-  get encodedNoteOwnerH1(): BigInt | null {
-    let value = this.get("encodedNoteOwnerH1");
+  get encodedOrEncryptedNote(): string | null {
+    let value = this.get("encodedOrEncryptedNote");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBigInt();
+      return value.toString();
     }
   }
 
-  set encodedNoteOwnerH1(value: BigInt | null) {
+  set encodedOrEncryptedNote(value: string | null) {
     if (!value) {
-      this.unset("encodedNoteOwnerH1");
+      this.unset("encodedOrEncryptedNote");
     } else {
-      this.set("encodedNoteOwnerH1", Value.fromBigInt(<BigInt>value));
+      this.set("encodedOrEncryptedNote", Value.fromString(<string>value));
     }
   }
 
-  get encodedNoteOwnerH2(): BigInt | null {
-    let value = this.get("encodedNoteOwnerH2");
+  get filledBatchWithZerosEvent(): string | null {
+    let value = this.get("filledBatchWithZerosEvent");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBigInt();
+      return value.toString();
     }
   }
 
-  set encodedNoteOwnerH2(value: BigInt | null) {
+  set filledBatchWithZerosEvent(value: string | null) {
     if (!value) {
-      this.unset("encodedNoteOwnerH2");
+      this.unset("filledBatchWithZerosEvent");
     } else {
-      this.set("encodedNoteOwnerH2", Value.fromBigInt(<BigInt>value));
-    }
-  }
-
-  get encodedNoteNonce(): BigInt | null {
-    let value = this.get("encodedNoteNonce");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set encodedNoteNonce(value: BigInt | null) {
-    if (!value) {
-      this.unset("encodedNoteNonce");
-    } else {
-      this.set("encodedNoteNonce", Value.fromBigInt(<BigInt>value));
-    }
-  }
-
-  get encodedNoteEncodedAssetAddr(): BigInt | null {
-    let value = this.get("encodedNoteEncodedAssetAddr");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set encodedNoteEncodedAssetAddr(value: BigInt | null) {
-    if (!value) {
-      this.unset("encodedNoteEncodedAssetAddr");
-    } else {
-      this.set("encodedNoteEncodedAssetAddr", Value.fromBigInt(<BigInt>value));
-    }
-  }
-
-  get encodedNoteEncodedAssetId(): BigInt | null {
-    let value = this.get("encodedNoteEncodedAssetId");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set encodedNoteEncodedAssetId(value: BigInt | null) {
-    if (!value) {
-      this.unset("encodedNoteEncodedAssetId");
-    } else {
-      this.set("encodedNoteEncodedAssetId", Value.fromBigInt(<BigInt>value));
-    }
-  }
-
-  get encodedNoteValue(): BigInt | null {
-    let value = this.get("encodedNoteValue");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set encodedNoteValue(value: BigInt | null) {
-    if (!value) {
-      this.unset("encodedNoteValue");
-    } else {
-      this.set("encodedNoteValue", Value.fromBigInt(<BigInt>value));
-    }
-  }
-
-  get encryptedNoteCiphertextBytes(): Bytes | null {
-    let value = this.get("encryptedNoteCiphertextBytes");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBytes();
-    }
-  }
-
-  set encryptedNoteCiphertextBytes(value: Bytes | null) {
-    if (!value) {
-      this.unset("encryptedNoteCiphertextBytes");
-    } else {
-      this.set("encryptedNoteCiphertextBytes", Value.fromBytes(<Bytes>value));
-    }
-  }
-
-  get encryptedNoteEncapsulatedSecretBytes(): Bytes | null {
-    let value = this.get("encryptedNoteEncapsulatedSecretBytes");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBytes();
-    }
-  }
-
-  set encryptedNoteEncapsulatedSecretBytes(value: Bytes | null) {
-    if (!value) {
-      this.unset("encryptedNoteEncapsulatedSecretBytes");
-    } else {
-      this.set(
-        "encryptedNoteEncapsulatedSecretBytes",
-        Value.fromBytes(<Bytes>value)
-      );
-    }
-  }
-
-  get encryptedNoteCommitment(): BigInt | null {
-    let value = this.get("encryptedNoteCommitment");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set encryptedNoteCommitment(value: BigInt | null) {
-    if (!value) {
-      this.unset("encryptedNoteCommitment");
-    } else {
-      this.set("encryptedNoteCommitment", Value.fromBigInt(<BigInt>value));
-    }
-  }
-
-  get filledBatchWithZerosNumZeros(): BigInt | null {
-    let value = this.get("filledBatchWithZerosNumZeros");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set filledBatchWithZerosNumZeros(value: BigInt | null) {
-    if (!value) {
-      this.unset("filledBatchWithZerosNumZeros");
-    } else {
-      this.set("filledBatchWithZerosNumZeros", Value.fromBigInt(<BigInt>value));
+      this.set("filledBatchWithZerosEvent", Value.fromString(<string>value));
     }
   }
 }
@@ -1181,193 +1029,57 @@ export class SDKEvent extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get merkleIndex(): BigInt | null {
-    let value = this.get("merkleIndex");
+  get encodedOrEncryptedNote(): string | null {
+    let value = this.get("encodedOrEncryptedNote");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBigInt();
+      return value.toString();
     }
   }
 
-  set merkleIndex(value: BigInt | null) {
+  set encodedOrEncryptedNote(value: string | null) {
     if (!value) {
-      this.unset("merkleIndex");
+      this.unset("encodedOrEncryptedNote");
     } else {
-      this.set("merkleIndex", Value.fromBigInt(<BigInt>value));
+      this.set("encodedOrEncryptedNote", Value.fromString(<string>value));
     }
   }
 
-  get encodedNoteOwnerH1(): BigInt | null {
-    let value = this.get("encodedNoteOwnerH1");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set encodedNoteOwnerH1(value: BigInt | null) {
-    if (!value) {
-      this.unset("encodedNoteOwnerH1");
-    } else {
-      this.set("encodedNoteOwnerH1", Value.fromBigInt(<BigInt>value));
-    }
-  }
-
-  get encodedNoteOwnerH2(): BigInt | null {
-    let value = this.get("encodedNoteOwnerH2");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set encodedNoteOwnerH2(value: BigInt | null) {
-    if (!value) {
-      this.unset("encodedNoteOwnerH2");
-    } else {
-      this.set("encodedNoteOwnerH2", Value.fromBigInt(<BigInt>value));
-    }
-  }
-
-  get encodedNoteEncodedAssetAddr(): BigInt | null {
-    let value = this.get("encodedNoteEncodedAssetAddr");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set encodedNoteEncodedAssetAddr(value: BigInt | null) {
-    if (!value) {
-      this.unset("encodedNoteEncodedAssetAddr");
-    } else {
-      this.set("encodedNoteEncodedAssetAddr", Value.fromBigInt(<BigInt>value));
-    }
-  }
-
-  get encodedNoteEncodedAssetId(): BigInt | null {
-    let value = this.get("encodedNoteEncodedAssetId");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set encodedNoteEncodedAssetId(value: BigInt | null) {
-    if (!value) {
-      this.unset("encodedNoteEncodedAssetId");
-    } else {
-      this.set("encodedNoteEncodedAssetId", Value.fromBigInt(<BigInt>value));
-    }
-  }
-
-  get encodedNoteValue(): BigInt | null {
-    let value = this.get("encodedNoteValue");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set encodedNoteValue(value: BigInt | null) {
-    if (!value) {
-      this.unset("encodedNoteValue");
-    } else {
-      this.set("encodedNoteValue", Value.fromBigInt(<BigInt>value));
-    }
-  }
-
-  get encodedNoteNonce(): BigInt | null {
-    let value = this.get("encodedNoteNonce");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set encodedNoteNonce(value: BigInt | null) {
-    if (!value) {
-      this.unset("encodedNoteNonce");
-    } else {
-      this.set("encodedNoteNonce", Value.fromBigInt(<BigInt>value));
-    }
-  }
-
-  get encryptedNoteCiphertextBytes(): Bytes | null {
-    let value = this.get("encryptedNoteCiphertextBytes");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBytes();
-    }
-  }
-
-  set encryptedNoteCiphertextBytes(value: Bytes | null) {
-    if (!value) {
-      this.unset("encryptedNoteCiphertextBytes");
-    } else {
-      this.set("encryptedNoteCiphertextBytes", Value.fromBytes(<Bytes>value));
-    }
-  }
-
-  get encryptedNoteEncapsulatedSecretBytes(): Bytes | null {
-    let value = this.get("encryptedNoteEncapsulatedSecretBytes");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBytes();
-    }
-  }
-
-  set encryptedNoteEncapsulatedSecretBytes(value: Bytes | null) {
-    if (!value) {
-      this.unset("encryptedNoteEncapsulatedSecretBytes");
-    } else {
-      this.set(
-        "encryptedNoteEncapsulatedSecretBytes",
-        Value.fromBytes(<Bytes>value)
-      );
-    }
-  }
-
-  get encryptedNoteCommitment(): BigInt | null {
-    let value = this.get("encryptedNoteCommitment");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set encryptedNoteCommitment(value: BigInt | null) {
-    if (!value) {
-      this.unset("encryptedNoteCommitment");
-    } else {
-      this.set("encryptedNoteCommitment", Value.fromBigInt(<BigInt>value));
-    }
-  }
-
-  get nullifier(): BigInt | null {
+  get nullifier(): string | null {
     let value = this.get("nullifier");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
+      return value.toString();
+    }
+  }
+
+  set nullifier(value: string | null) {
+    if (!value) {
+      this.unset("nullifier");
+    } else {
+      this.set("nullifier", Value.fromString(<string>value));
+    }
+  }
+
+  get filledBatchWithZerosUpToMerkleIndex(): BigInt | null {
+    let value = this.get("filledBatchWithZerosUpToMerkleIndex");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
       return value.toBigInt();
     }
   }
 
-  set nullifier(value: BigInt | null) {
+  set filledBatchWithZerosUpToMerkleIndex(value: BigInt | null) {
     if (!value) {
-      this.unset("nullifier");
+      this.unset("filledBatchWithZerosUpToMerkleIndex");
     } else {
-      this.set("nullifier", Value.fromBigInt(<BigInt>value));
+      this.set(
+        "filledBatchWithZerosUpToMerkleIndex",
+        Value.fromBigInt(<BigInt>value)
+      );
     }
   }
 }

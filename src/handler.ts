@@ -34,7 +34,7 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
   // make SDK event for old note A's nullifier
   {
     const sdkEvent = new SDKEvent(id);
-    sdkEvent.nullifier = nullifierA.nullifier;
+    sdkEvent.nullifier = id;
     sdkEvent.save();
   }
 
@@ -48,7 +48,7 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
   // make SDK event for old note B's nullifier
   {
     const sdkEvent = new SDKEvent(id);
-    sdkEvent.nullifier = event.params.oldNoteBNullifier;
+    sdkEvent.nullifier = id;
     sdkEvent.save();
   }
 
@@ -73,23 +73,14 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
   // make insertion event for new note A
   {
     const insertionEvent = new TreeInsertionEvent(id);
-    insertionEvent.encryptedNoteCiphertextBytes =
-      newNoteAEncrypted.ciphertextBytes;
-    insertionEvent.encryptedNoteEncapsulatedSecretBytes =
-      newNoteAEncrypted.encapsulatedSecretBytes;
-    insertionEvent.encryptedNoteCommitment = event.params.newNoteACommitment;
-    insertionEvent.merkleIndex = event.params.newNoteAIndex;
+    insertionEvent.encodedOrEncryptedNote = id;
     insertionEvent.save();
   }
 
   // make SDK event for new note A
   {
     const sdkEvent = new SDKEvent(id);
-    sdkEvent.encryptedNoteCiphertextBytes = newNoteAEncrypted.ciphertextBytes;
-    sdkEvent.encryptedNoteEncapsulatedSecretBytes =
-      newNoteAEncrypted.encapsulatedSecretBytes;
-    sdkEvent.encryptedNoteCommitment = event.params.newNoteACommitment;
-    sdkEvent.merkleIndex = event.params.newNoteAIndex;
+    sdkEvent.encodedOrEncryptedNote = id;
     sdkEvent.save();
   }
 
@@ -114,21 +105,14 @@ export function handleJoinSplit(event: JoinSplitProcessed): void {
   // make insertion event for new note B
   {
     const insertionEvent = new TreeInsertionEvent(id);
-    insertionEvent.encryptedNoteCiphertextBytes =
-      newNoteBEncrypted.ciphertextBytes;
-    insertionEvent.encryptedNoteEncapsulatedSecretBytes = newNoteBEncrypted.encapsulatedSecretBytes;
-    insertionEvent.encryptedNoteCommitment = event.params.newNoteBCommitment;
-    insertionEvent.merkleIndex = event.params.newNoteBIndex;
+    insertionEvent.encodedOrEncryptedNote = id;
     insertionEvent.save();
   }
 
   // make SDK event for new note B
   {
     const sdkEvent = new SDKEvent(id);
-    sdkEvent.encryptedNoteCiphertextBytes = newNoteBEncrypted.ciphertextBytes;
-    sdkEvent.encryptedNoteEncapsulatedSecretBytes = newNoteBEncrypted.encapsulatedSecretBytes;
-    sdkEvent.encryptedNoteCommitment = event.params.newNoteBCommitment;
-    sdkEvent.merkleIndex = event.params.newNoteBIndex;
+    sdkEvent.encodedOrEncryptedNote = id;
     sdkEvent.save();
   }
 }
@@ -157,24 +141,12 @@ export function handleRefund(event: RefundProcessed): void {
 
   // make insertion for refund note
   const insertionEvent = new TreeInsertionEvent(id);
-  insertionEvent.encodedNoteOwnerH1 = refundAddr.h1
-  insertionEvent.encodedNoteOwnerH2 = refundAddr.h2;
-  insertionEvent.encodedNoteEncodedAssetAddr = event.params.encodedAssetAddr;
-  insertionEvent.encodedNoteEncodedAssetId = event.params.encodedAssetId;
-  insertionEvent.encodedNoteValue = event.params.value;
-  insertionEvent.encodedNoteNonce = event.params.nonce;
-  insertionEvent.merkleIndex = event.params.merkleIndex;
+  insertionEvent.encodedOrEncryptedNote = id;
   insertionEvent.save();
 
   // make SDK event for refund note
   const sdkEvent = new SDKEvent(id);
-  sdkEvent.encodedNoteOwnerH1 = refundAddr.h1;
-  sdkEvent.encodedNoteOwnerH2 = refundAddr.h2;
-  sdkEvent.encodedNoteEncodedAssetAddr = event.params.encodedAssetAddr;
-  sdkEvent.encodedNoteEncodedAssetId = event.params.encodedAssetId;
-  sdkEvent.encodedNoteValue = event.params.value;
-  sdkEvent.encodedNoteNonce = event.params.nonce;
-  sdkEvent.merkleIndex = event.params.merkleIndex;
+  sdkEvent.encodedOrEncryptedNote = id;
   sdkEvent.save();
 }
 
@@ -206,12 +178,13 @@ export function handleFilledBatchWithZeros(event: FilledBatchWithZeros): void {
 
   // make insertion for filled batch with zeros
   const insertionEvent = new TreeInsertionEvent(id);
-  insertionEvent.merkleIndex = startIndex;
-  insertionEvent.filledBatchWithZerosNumZeros = numZeros;
+  insertionEvent.filledBatchWithZerosEvent = id;
   insertionEvent.save();
 
   // make SDK event for filled batch with zeros
   const sdkEvent = new SDKEvent(id);
-  sdkEvent.merkleIndex = startIndex.plus(numZeros).minus(BigInt.fromI32(1));
+  sdkEvent.filledBatchWithZerosUpToMerkleIndex = startIndex
+    .plus(numZeros)
+    .minus(BigInt.fromI32(1));
   sdkEvent.save();
 }

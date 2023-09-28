@@ -85,61 +85,15 @@ type FilledBatchWithZerosEvent @entity(immutable: true) {
   numZeros: BigInt!
 }
 
-# "flattened" event over all tree insertions for easier linear scans
-# it's a plaintext note iff only those fields and merkleIndex are non-null
-# it's an encrypted note iff only those fields and merkleIndex are non-null
-# it's a tree batch fill iff only `merkleIndex` is non-null
 type TreeInsertionEvent @entity(immutable: true) {
   id: ID!
-
-  # merkle index of the insertion
-  # in the case of a note, this is the merkle index for the note
-  # in the case of a tree batch being filled with zeros, this is the first index of the batch
-  merkleIndex: BigInt!
-
-  # plaintext note insertion (from a deposit or refund)
-  encodedNoteOwnerH1: BigInt
-  encodedNoteOwnerH2: BigInt
-  encodedNoteNonce: BigInt
-  encodedNoteEncodedAssetAddr: BigInt
-  encodedNoteEncodedAssetId: BigInt
-  encodedNoteValue: BigInt
-
-  # encrypted note insertion (from a joinsplit)
-  encryptedNoteCiphertextBytes: Bytes
-  encryptedNoteEncapsulatedSecretBytes: Bytes
-  encryptedNoteCommitment: BigInt
-
-  # tree batch filled with zeros
-  filledBatchWithZerosNumZeros: BigInt
+  encodedOrEncryptedNote: EncodedOrEncryptedNote
+  filledBatchWithZerosEvent: FilledBatchWithZerosEvent
 }
 
-# "flattened" event over everything SDK needs for easier linear scans
-# it's a plaintext note iff only those fields and merkleIndex are non-null
-# it's an encrypted note iff only those fields and merkleIndex are non-null
-# it's a nullifier iff only that field and merkleIndex are non-null
-# it's a "filled batch with zeros up to" iff only `merkleIndex` is non-null
 type SDKEvent @entity(immutable: true) {
   id: ID!
-
-  # if it's a note, merkle index of the note
-  # if it's a tree batch filled with zeros, the merkle index immediately after the end of the batch.
-  # if it's a nullifier, null
-  merkleIndex: BigInt
-
-  # plaintext note insertion (i.e. a refund)
-  encodedNoteOwnerH1: BigInt
-  encodedNoteOwnerH2: BigInt
-  encodedNoteEncodedAssetAddr: BigInt
-  encodedNoteEncodedAssetId: BigInt
-  encodedNoteValue: BigInt
-  encodedNoteNonce: BigInt
-
-  # encrypted note insertion (from a joinsplit)
-  encryptedNoteCiphertextBytes: Bytes
-  encryptedNoteEncapsulatedSecretBytes: Bytes
-  encryptedNoteCommitment: BigInt
-
-  # nullifier
-  nullifier: BigInt
+  encodedOrEncryptedNote: EncodedOrEncryptedNote
+  nullifier: Nullifier
+  filledBatchWithZerosUpToMerkleIndex: BigInt
 }

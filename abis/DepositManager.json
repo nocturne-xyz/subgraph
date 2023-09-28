@@ -839,75 +839,6 @@
   {
     "inputs": [
       {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "spender",
-            "type": "address"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint256",
-                "name": "encodedAssetAddr",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "encodedAssetId",
-                "type": "uint256"
-              }
-            ],
-            "internalType": "struct EncodedAsset",
-            "name": "encodedAsset",
-            "type": "tuple"
-          },
-          {
-            "internalType": "uint256",
-            "name": "value",
-            "type": "uint256"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint256",
-                "name": "h1",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "h2",
-                "type": "uint256"
-              }
-            ],
-            "internalType": "struct CompressedStealthAddress",
-            "name": "depositAddr",
-            "type": "tuple"
-          },
-          {
-            "internalType": "uint256",
-            "name": "nonce",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "gasCompensation",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct DepositRequest",
-        "name": "req",
-        "type": "tuple"
-      }
-    ],
-    "name": "retrieveETHDeposit",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "address",
         "name": "token",
         "type": "address"
@@ -968,9 +899,5 @@
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
-  },
-  {
-    "stateMutability": "payable",
-    "type": "receive"
   }
 ]
