@@ -1139,6 +1139,88 @@ export class RetrieveDepositCallReqDepositAddrStruct extends ethereum.Tuple {
   }
 }
 
+export class RetrieveETHDepositCall extends ethereum.Call {
+  get inputs(): RetrieveETHDepositCall__Inputs {
+    return new RetrieveETHDepositCall__Inputs(this);
+  }
+
+  get outputs(): RetrieveETHDepositCall__Outputs {
+    return new RetrieveETHDepositCall__Outputs(this);
+  }
+}
+
+export class RetrieveETHDepositCall__Inputs {
+  _call: RetrieveETHDepositCall;
+
+  constructor(call: RetrieveETHDepositCall) {
+    this._call = call;
+  }
+
+  get req(): RetrieveETHDepositCallReqStruct {
+    return changetype<RetrieveETHDepositCallReqStruct>(
+      this._call.inputValues[0].value.toTuple()
+    );
+  }
+}
+
+export class RetrieveETHDepositCall__Outputs {
+  _call: RetrieveETHDepositCall;
+
+  constructor(call: RetrieveETHDepositCall) {
+    this._call = call;
+  }
+}
+
+export class RetrieveETHDepositCallReqStruct extends ethereum.Tuple {
+  get spender(): Address {
+    return this[0].toAddress();
+  }
+
+  get encodedAsset(): RetrieveETHDepositCallReqEncodedAssetStruct {
+    return changetype<RetrieveETHDepositCallReqEncodedAssetStruct>(
+      this[1].toTuple()
+    );
+  }
+
+  get value(): BigInt {
+    return this[2].toBigInt();
+  }
+
+  get depositAddr(): RetrieveETHDepositCallReqDepositAddrStruct {
+    return changetype<RetrieveETHDepositCallReqDepositAddrStruct>(
+      this[3].toTuple()
+    );
+  }
+
+  get nonce(): BigInt {
+    return this[4].toBigInt();
+  }
+
+  get gasCompensation(): BigInt {
+    return this[5].toBigInt();
+  }
+}
+
+export class RetrieveETHDepositCallReqEncodedAssetStruct extends ethereum.Tuple {
+  get encodedAssetAddr(): BigInt {
+    return this[0].toBigInt();
+  }
+
+  get encodedAssetId(): BigInt {
+    return this[1].toBigInt();
+  }
+}
+
+export class RetrieveETHDepositCallReqDepositAddrStruct extends ethereum.Tuple {
+  get h1(): BigInt {
+    return this[0].toBigInt();
+  }
+
+  get h2(): BigInt {
+    return this[1].toBigInt();
+  }
+}
+
 export class SetErc20CapCall extends ethereum.Call {
   get inputs(): SetErc20CapCall__Inputs {
     return new SetErc20CapCall__Inputs(this);
