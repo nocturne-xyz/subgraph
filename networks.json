@@ -21,12 +21,12 @@
   },
   "goerli": {
     "Handler": {
-      "address": "0x9e76C19c591446d01d868dB464948F785408c1f4",
-      "startBlock": 9694596
+      "address": "0xC23a1525F71Bb58d6161C54Db54714148BeD4d8b",
+      "startBlock": 9843396
     },
     "DepositManager": {
-      "address": "0xF136D2Ce4013e3068881A1F218f718fE7487fC17",
-      "startBlock": 9694596
+      "address": "0x55315794F0F10897B00dC69C6aab626FcE2a910a",
+      "startBlock": 9843396
     }
   }
 }
