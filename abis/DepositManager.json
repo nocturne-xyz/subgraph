@@ -4,62 +4,14 @@
     "inputs": [
       {
         "indexed": true,
-        "internalType": "address",
-        "name": "spender",
-        "type": "address"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "encodedAssetAddr",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "encodedAssetId",
-            "type": "uint256"
-          }
-        ],
-        "indexed": false,
-        "internalType": "struct EncodedAsset",
-        "name": "encodedAsset",
-        "type": "tuple"
+        "internalType": "bytes32",
+        "name": "depositHash",
+        "type": "bytes32"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "value",
-        "type": "uint256"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "h1",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "h2",
-            "type": "uint256"
-          }
-        ],
-        "indexed": false,
-        "internalType": "struct CompressedStealthAddress",
-        "name": "depositAddr",
-        "type": "tuple"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "nonce",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "gasCompensation",
+        "name": "gasPaid",
         "type": "uint256"
       },
       {
@@ -144,63 +96,9 @@
     "inputs": [
       {
         "indexed": true,
-        "internalType": "address",
-        "name": "spender",
-        "type": "address"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "encodedAssetAddr",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "encodedAssetId",
-            "type": "uint256"
-          }
-        ],
-        "indexed": false,
-        "internalType": "struct EncodedAsset",
-        "name": "encodedAsset",
-        "type": "tuple"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "value",
-        "type": "uint256"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "h1",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "h2",
-            "type": "uint256"
-          }
-        ],
-        "indexed": false,
-        "internalType": "struct CompressedStealthAddress",
-        "name": "depositAddr",
-        "type": "tuple"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "nonce",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "gasCompensation",
-        "type": "uint256"
+        "internalType": "bytes32",
+        "name": "depositHash",
+        "type": "bytes32"
       }
     ],
     "name": "DepositRetrieved",

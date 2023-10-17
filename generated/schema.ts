@@ -421,6 +421,23 @@ export class DepositRequest extends Entity {
       this.set("noteMerkleIndex", Value.fromBigInt(<BigInt>value));
     }
   }
+
+  get actualGasPaid(): BigInt | null {
+    let value = this.get("actualGasPaid");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set actualGasPaid(value: BigInt | null) {
+    if (!value) {
+      this.unset("actualGasPaid");
+    } else {
+      this.set("actualGasPaid", Value.fromBigInt(<BigInt>value));
+    }
+  }
 }
 
 export class EncodedOrEncryptedNote extends Entity {
