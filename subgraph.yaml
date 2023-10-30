@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: Handler
-    network: mainnet
+    network: goerli
     source:
       abi: Handler
-      address: "0x0165878A594ca255338adfa4d48449f69242Eb8F"
-      startBlock: 0
+      address: "0xa3649095A431a8D4f0ce8ee12928C1E1e6d05E7F"
+      startBlock: 9947170
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -38,11 +38,11 @@ dataSources:
       file: ./src/handler.ts
   - kind: ethereum
     name: DepositManager
-    network: mainnet
+    network: goerli
     source:
       abi: DepositManager
-      address: "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0"
-      startBlock: 0
+      address: "0xf197d92673cCf028bfB0CA121F7E7eB016D6E485"
+      startBlock: 9947170
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
