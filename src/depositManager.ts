@@ -59,38 +59,17 @@ export function handleDepositInstantiated(event: DepositInstantiated): void {
 }
 
 export function handleDepositCompleted(event: DepositCompleted): void {
-  const hash = hashDepositRequest(
-    event.params.spender,
-    event.params.encodedAsset.encodedAssetAddr,
-    event.params.encodedAsset.encodedAssetId,
-    event.params.value,
-    event.params.depositAddr.h1,
-    event.params.depositAddr.h2,
-    event.params.nonce,
-    event.params.gasCompensation
-  );
-
-  const depositRequest = DepositRequest.load(hash.toHexString())!;
+  const depositRequest = DepositRequest.load(event.params.depositHash.toHexString())!;
 
   depositRequest.status = "Completed";
   depositRequest.completionTxHash = event.transaction.hash;
   depositRequest.noteMerkleIndex = event.params.merkleIndex;
+  depositRequest.actualGasPaid = event.params.gasPaid;
   depositRequest.save();
 }
 
 export function handleDepositRetrieved(event: DepositRetrieved): void {
-  const hash = hashDepositRequest(
-    event.params.spender,
-    event.params.encodedAsset.encodedAssetAddr,
-    event.params.encodedAsset.encodedAssetId,
-    event.params.value,
-    event.params.depositAddr.h1,
-    event.params.depositAddr.h2,
-    event.params.nonce,
-    event.params.gasCompensation
-  );
-
-  const depositRequest = DepositRequest.load(hash.toHexString())!;
+  const depositRequest = DepositRequest.load(event.params.depositHash.toHexString())!;
   depositRequest.status = "Retrieved";
   depositRequest.retrievalTxHash = event.transaction.hash;
   depositRequest.save();

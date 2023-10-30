@@ -40,8 +40,10 @@ type DepositRequest @entity(immutable: false) {
   depositAddrH2: BigInt!
   nonce: BigInt!
   gasCompensation: BigInt!
-  # undefined unless completed
+
+  # these are undefined unless completed
   noteMerkleIndex: BigInt
+  actualGasPaid: BigInt
 }
 
 type EncodedOrEncryptedNote @entity(immutable: true) {
