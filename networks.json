@@ -1,12 +1,12 @@
 {
   "mainnet": {
     "Handler": {
-      "address": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
-      "startBlock": 0
+      "address": "0x33ab3ceC16B6640945E669a86C897A8e03f019CD",
+      "startBlock": 18524516
     },
     "DepositManager": {
-      "address": "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
-      "startBlock": 0
+      "address": "0x1B33B8499EB6D681CDcF19c79dF8A3Dec9c652C3",
+      "startBlock": 18524516
     }
   },
   "sepolia": {
