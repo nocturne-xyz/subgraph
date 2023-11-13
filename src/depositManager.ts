@@ -20,6 +20,7 @@ export function handleDepositInstantiated(event: DepositInstantiated): void {
 
   const depositEvent = new DepositEvent(id);
   depositEvent.txHash = event.transaction.hash;
+  depositEvent.timestamp = event.block.timestamp;
   depositEvent.type = "Instantiated";
   depositEvent.spender = event.params.spender;
   depositEvent.encodedAssetAddr = event.params.encodedAsset.encodedAssetAddr;
