@@ -19,6 +19,8 @@ export function handleDepositInstantiated(event: DepositInstantiated): void {
   // make DepositEvent entity (for syncing SDK and offchain actors)
 
   const depositEvent = new DepositEvent(id);
+  depositEvent.txHash = event.transaction.hash;
+  depositEvent.timestamp = event.block.timestamp;
   depositEvent.type = "Instantiated";
   depositEvent.spender = event.params.spender;
   depositEvent.encodedAssetAddr = event.params.encodedAsset.encodedAssetAddr;
@@ -59,7 +61,9 @@ export function handleDepositInstantiated(event: DepositInstantiated): void {
 }
 
 export function handleDepositCompleted(event: DepositCompleted): void {
-  const depositRequest = DepositRequest.load(event.params.depositHash.toHexString())!;
+  const depositRequest = DepositRequest.load(
+    event.params.depositHash.toHexString()
+  )!;
 
   depositRequest.status = "Completed";
   depositRequest.completionTxHash = event.transaction.hash;
@@ -69,7 +73,9 @@ export function handleDepositCompleted(event: DepositCompleted): void {
 }
 
 export function handleDepositRetrieved(event: DepositRetrieved): void {
-  const depositRequest = DepositRequest.load(event.params.depositHash.toHexString())!;
+  const depositRequest = DepositRequest.load(
+    event.params.depositHash.toHexString()
+  )!;
   depositRequest.status = "Retrieved";
   depositRequest.retrievalTxHash = event.transaction.hash;
   depositRequest.save();
