@@ -188,6 +188,11 @@ export function handleSubtreeUpdate(event: SubtreeUpdate): void {
   commit.newRoot = event.params.newRoot;
   commit.subtreeBatchOffset = event.params.subtreeBatchOffset;
   commit.save();
+
+  const sdkEvent = new SDKEvent(id);
+  sdkEvent.merkleIndex = event.params.subtreeBatchOffset;
+  sdkEvent.subtreeCommitNewRoot = event.params.newRoot;
+  sdkEvent.save();
 }
 
 export function handleFilledBatchWithZeros(event: FilledBatchWithZeros): void {
