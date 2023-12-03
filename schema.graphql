@@ -121,13 +121,15 @@ type TreeInsertionEvent @entity(immutable: true) {
 # "flattened" event over everything SDK needs for easier linear scans
 # it's a plaintext note iff only those fields and merkleIndex are non-null
 # it's an encrypted note iff only those fields and merkleIndex are non-null
-# it's a nullifier iff only that field and merkleIndex are non-null
+# it's a subtree commit iff only that field and merkleIndex are non-null
+# it's a nullifier iff only that field is non-null and merkle index is null
 # it's a "filled batch with zeros up to" iff only `merkleIndex` is non-null
 type SDKEvent @entity(immutable: true) {
   id: ID!
 
   # if it's a note, merkle index of the note
   # if it's a tree batch filled with zeros, the merkle index immediately after the end of the batch.
+  # if it's a subtree commit, "batch offset" - that is, the index of the first note in the committed batch 
   # if it's a nullifier, null
   merkleIndex: BigInt
 
@@ -146,4 +148,7 @@ type SDKEvent @entity(immutable: true) {
 
   # nullifier
   nullifier: BigInt
+
+  # subtree commit
+  subtreeCommitNewRoot: BigInt 
 }

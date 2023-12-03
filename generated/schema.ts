@@ -1413,4 +1413,21 @@ export class SDKEvent extends Entity {
       this.set("nullifier", Value.fromBigInt(<BigInt>value));
     }
   }
+
+  get subtreeCommitNewRoot(): BigInt | null {
+    let value = this.get("subtreeCommitNewRoot");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set subtreeCommitNewRoot(value: BigInt | null) {
+    if (!value) {
+      this.unset("subtreeCommitNewRoot");
+    } else {
+      this.set("subtreeCommitNewRoot", Value.fromBigInt(<BigInt>value));
+    }
+  }
 }
